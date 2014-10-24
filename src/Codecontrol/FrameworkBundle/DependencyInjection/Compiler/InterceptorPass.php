@@ -13,6 +13,10 @@ class InterceptorPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        if (!$container->hasDefinition('codecontrol_framework.interceptor.manager')) {
+            return;
+        }
+
         $interceptors = [];
 
         $managerDefinition = $container->getDefinition(
