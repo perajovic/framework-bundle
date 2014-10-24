@@ -26,5 +26,8 @@
     },
     "autoload": {
         "psr-0": { "": "src/" }
+    },
+    "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "0.*"
     }
 }

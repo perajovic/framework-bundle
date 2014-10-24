@@ -18,8 +18,7 @@ class InterceptorPass implements CompilerPassInterface
         }
 
         $interceptors = [];
-
-        $managerDefinition = $container->getDefinition(
+        $definition = $container->getDefinition(
             'codecontrol_framework.interceptor.manager'
         );
         $services = $container->findTaggedServiceIds(
@@ -32,6 +31,6 @@ class InterceptorPass implements CompilerPassInterface
             }
         }
 
-        $managerDefinition->addMethodCall('setInterceptors', [$interceptors]);
+        $definition->addMethodCall('setInterceptors', [$interceptors]);
     }
 }
