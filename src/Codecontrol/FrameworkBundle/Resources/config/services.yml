@@ -14,7 +14,7 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.response }
     codecontrol_framework.listener.route_app:
-        class: Codecontrol\FrameworkBundle\EventListener\RouteCodecontrolListener
+        class: Codecontrol\FrameworkBundle\EventListener\RouteAppListener
         arguments:
             - %codecontrol_framework.app%
         tags:
