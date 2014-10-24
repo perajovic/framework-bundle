@@ -1,0 +1,33 @@
+services:
+    codecontrol_framework.listener.interceptor:
+        class: Codecontrol\FrameworkBundle\EventListener\InterceptorListener
+        arguments:
+            - @codecontrol_framework.interceptor.manager
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, priority: 150 }
+    codecontrol_framework.listener.request_format:
+        class: Codecontrol\FrameworkBundle\EventListener\RequestFormatListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 150 }
+    codecontrol_framework.listener.response_decorator:
+        class: Codecontrol\FrameworkBundle\EventListener\ResponseDecoratorListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.response }
+    codecontrol_framework.listener.route_app:
+        class: Codecontrol\FrameworkBundle\EventListener\RouteCodecontrolListener
+        arguments:
+            - %codecontrol_framework.app%
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, priority: 230 }
+    codecontrol_framework.listener.view_renderer:
+        class: Codecontrol\FrameworkBundle\EventListener\ViewRendererListener
+        arguments:
+            - @templating
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, priority: 200 }
+    codecontrol_framework.interceptor.manager:
+        class: Codecontrol\FrameworkBundle\Interceptor\InterceptorManager
+    codecontrol_framework.validator.adapter:
+        class: Codecontrol\FrameworkBundle\Validator\ValidatorAdapter
+        arguments:
+            - @validator
