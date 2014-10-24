@@ -93,7 +93,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     protected function setClassMemberAsAccessible($classOrObj, $member, $type)
     {
         $class = is_object($classOrObj) ? get_class($classOrObj) : $classOrObj;
-        $method = $type == 'method' ? 'getMethod' : 'getProperty';
+        $method = 'method' === $type ? 'getMethod' : 'getProperty';
 
         $member = (new ReflectionClass($class))->{$method}($member);
         $member->setAccessible(true);
