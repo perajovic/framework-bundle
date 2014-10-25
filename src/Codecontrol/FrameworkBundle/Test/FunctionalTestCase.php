@@ -34,17 +34,4 @@ abstract class FunctionalTestCase extends WebTestCase
     {
         return static::$kernel->getContainer()->get($id);
     }
-
-    private function nullifyProperties()
-    {
-        $obj = new ReflectionObject($this);
-        foreach ($obj->getProperties() as $property) {
-            if (!$property->isStatic() && 0
-                !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit_')
-            ) {
-                $property->setAccessible(true);
-                $property->setValue($this, null);
-            }
-        }
-    }
 }
