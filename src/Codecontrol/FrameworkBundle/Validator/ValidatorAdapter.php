@@ -20,7 +20,7 @@ class ValidatorAdapter
     }
 
     /**
-     * @see Symfony\Component\Validator\ValidatorInterface::validate
+     * @see ValidatorInterface::validate
      *
      * @return array
      */
