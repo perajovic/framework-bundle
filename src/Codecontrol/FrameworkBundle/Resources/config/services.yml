@@ -1,4 +1,7 @@
 services:
+    codecontrol_framework.controller.exception:
+        class: Codecontrol\FrameworkBundle\Controller\ExceptionController
+        parent: twig.controller.exception
     codecontrol_framework.listener.interceptor:
         class: Codecontrol\FrameworkBundle\EventListener\InterceptorListener
         arguments:
