@@ -1,7 +1,7 @@
 {
     "name": "codecontrol/framework-bundle",
     "type": "symfony-bundle",
-    "description": "Code Control FrameworkBundle",
+    "description": "FrameworkBundle for Symfony2 web apps",
     "keywords": ["symfony","bundle","framework"],
     "homepage": "https://github.com/codecontrol/framework-bundle",
     "license": "MIT",
@@ -28,6 +28,7 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
+    "minimum-stability": "dev",
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "0.*"
     }
