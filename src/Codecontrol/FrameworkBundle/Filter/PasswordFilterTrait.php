@@ -14,8 +14,8 @@ trait PasswordFilterTrait
      */
     protected function filterPassword(Request $request, $field)
     {
-        $password = $request->request->filter($field);
+        $filtered = $request->request->filter($field);
 
-        return is_array($password) ? false : $password;
+        return is_array($filtered) ? false : $filtered;
     }
 }
