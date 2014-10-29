@@ -22,6 +22,10 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->prototype('variable')->end()
                 ->end()
+                ->booleanNode('truncate_tables_between_tests')
+                    ->defaultValue(false)
+                    ->info('Should tables be truncated between tests. This operation requires kernel environment test mode and doctrine service')
+                ->end()
             ->end()
         ->end();
 

@@ -4,37 +4,42 @@ namespace Codecontrol\FrameworkBundle\Tests\Functional\DependencyInjection;
 
 use Codecontrol\FrameworkBundle\DependencyInjection\Configuration;
 use Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase;
+use \stdClass as stdClass;
 
 class ConfigurationTest extends AbstractConfigurationTestCase
 {
     /**
      * @test
-     * @dataProvider provideInvalidAppParams
+     * @dataProvider provideInvalidConfiguration
      */
-    public function appParamsAreInvalid($params)
+    public function configurationIsInvalid($params)
     {
         $this->assertConfigurationIsInvalid([$params]);
     }
 
     /**
      * @test
-     * @dataProvider provideValidAppParams
+     * @dataProvider provideValidConfiguration
      */
-    public function appParamsAreValid($params, $expected)
+    public function configurationIsValid($params, $expected)
     {
         $this->assertProcessedConfigurationEquals($params, $expected);
     }
 
-    public function provideInvalidAppParams()
+    public function provideInvalidConfiguration()
     {
         return [
-            [[5]],
-            [['app123' => '123']],
-            [['app' => '']],
+            [[5, 'truncate_tables_between_tests' => false]],
+            [['app123' => '123', 'truncate_tables_between_tests' => false]],
+            [['app' => '', 'truncate_tables_between_tests' => false]],
+            [['app' => ['foo'], 'truncate_tables_between_tests' => 123]],
+            [['app' => ['foo'], 'truncate_tables_between_tests' => 'foo']],
+            [['app' => ['foo'], 'truncate_tables_between_tests' => ['foo']]],
+            [['app' => ['foo'], 'truncate_tables_between_tests' => new stdClass()]],
         ];
     }
 
-    public function provideValidAppParams()
+    public function provideValidConfiguration()
     {
         return [
             [
@@ -42,13 +47,30 @@ class ConfigurationTest extends AbstractConfigurationTestCase
                     ['app' => ['foo']],
                     ['app' => ['bar']],
                 ],
-                ['app' => ['foo', 'bar']],
+                [
+                    'app' => ['foo', 'bar'],
+                    'truncate_tables_between_tests' => false,
+                ],
             ],
             [
                 [
                     ['app' => ['foo' => 'bar']],
+                    ['truncate_tables_between_tests' => false],
                 ],
-                ['app' => ['foo' => 'bar']],
+                [
+                    'app' => ['foo' => 'bar'],
+                    'truncate_tables_between_tests' => false,
+                ],
+            ],
+            [
+                [
+                    ['app' => ['foo' => 'bar']],
+                    ['truncate_tables_between_tests' => true],
+                ],
+                [
+                    'app' => ['foo' => 'bar'],
+                    'truncate_tables_between_tests' => true,
+                ],
             ],
         ];
     }
