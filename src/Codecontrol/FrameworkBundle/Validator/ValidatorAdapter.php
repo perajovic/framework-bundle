@@ -2,7 +2,7 @@
 
 namespace Codecontrol\FrameworkBundle\Validator;
 
-use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ValidatorAdapter
 {
@@ -22,34 +22,15 @@ class ValidatorAdapter
     /**
      * @see ValidatorInterface::validate
      *
-     * @return array
-     */
-    public function validate(
-        $value,
-        $groups = null,
-        $traverse = false,
-        $deep = false
-    ) {
-        $errors = [];
-        $result = $this->validator->validate($value, $groups, $traverse, $deep);
-
-        $cnt = count($result);
-        for ($i = 0; $i < $cnt; $i++) {
-            $errors[$result[$i]->getPropertyPath()] = $result[$i]->getMessage();
-        }
-
-        return $errors;
-    }
-
-    /**
-     * @param string $value
-     * @param array  $constraints
+     * @param mixed                   $value
+     * @param Constraint|Constraint[] $constraints
+     * @param array|null              $groups
      *
      * @return string|null
      */
-    public function validateValue($value, array $constraints)
+    public function validate($value, $constraints = null, $groups = null)
     {
-        $result = $this->validator->validateValue($value, $constraints);
+        $result = $this->validator->validate($value, $constraints, $groups);
 
         return 0 === count($result) ? null : $result[0]->getMessage();
     }
