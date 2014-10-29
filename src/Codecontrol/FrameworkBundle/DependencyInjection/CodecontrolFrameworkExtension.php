@@ -44,9 +44,7 @@ class CodecontrolFrameworkExtension extends Extension
      */
     private function registerTruncatableTablesService(ContainerBuilder $container)
     {
-        if (!$container->hasParameter('kernel.environment')
-            || !$container->has('doctrine')
-        ) {
+        if (!$container->hasParameter('kernel.environment')) {
             return;
         }
 

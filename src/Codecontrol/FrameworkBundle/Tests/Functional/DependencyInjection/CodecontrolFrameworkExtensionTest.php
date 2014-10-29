@@ -4,7 +4,6 @@ namespace Codecontrol\FrameworkBundle\Tests\Functional\DependencyInjection;
 
 use Codecontrol\FrameworkBundle\DependencyInjection\CodecontrolFrameworkExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Symfony\Component\DependencyInjection\Definition;
 
 class CodecontrolFrameworkExtensionTest extends AbstractExtensionTestCase
 {
@@ -41,7 +40,6 @@ class CodecontrolFrameworkExtensionTest extends AbstractExtensionTestCase
     public function truncatableTablesServiceIsNotRegisteredForNonTestKernelEnvironment()
     {
         $this->setParameter('kernel.environment', 'dev');
-        $this->setDefinition('doctrine', new Definition('stdClass'));
         $this->load(['truncate_tables_between_tests' => true]);
 
         $this->assertContainerBuilderNotHasService(
@@ -55,7 +53,6 @@ class CodecontrolFrameworkExtensionTest extends AbstractExtensionTestCase
     public function truncatableTablesServiceIsRegistered()
     {
         $this->setParameter('kernel.environment', 'test');
-        $this->setDefinition('doctrine', new Definition('stdClass'));
         $this->load(['truncate_tables_between_tests' => true]);
 
         $this->assertContainerBuilderHasService(
