@@ -30,6 +30,11 @@ services:
             - { name: kernel.event_listener, event: kernel.view, priority: 200 }
     codecontrol_framework.interceptor.manager:
         class: Codecontrol\FrameworkBundle\Interceptor\InterceptorManager
+    codecontrol_framework.request.app_request:
+        class: Codecontrol\FrameworkBundle\Request\AppRequest
+        abstract: true
+        arguments:
+            - @codecontrol_framework.validator.adapter
     codecontrol_framework.validator.adapter:
         class: Codecontrol\FrameworkBundle\Validator\ValidatorAdapter
         arguments:
