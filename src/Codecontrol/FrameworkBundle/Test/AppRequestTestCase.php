@@ -60,7 +60,7 @@ abstract class AppRequestTestCase extends FunctionalTestCase
         $this->assertSame('', $this->appRequest->getFlattenErrors());
     }
 
-    private function populateFields(array $params)
+    protected function populateFields(array $params)
     {
         $this->appRequest->populateFields(
             Request::create('/_app_request_test', $this->httpMethod, $params)
