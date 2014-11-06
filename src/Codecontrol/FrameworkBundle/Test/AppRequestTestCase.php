@@ -39,14 +39,15 @@ abstract class AppRequestTestCase extends FunctionalTestCase
      * @test
      * @dataProvider provideDataForValidRequest
      */
-    public function requestIsValid(
-        array $requestParams = [],
-        array $expected = []
-    ) {
+    public function requestIsValid(array $requestParams = [], array $expected = [])
+    {
         $this->populateFields($requestParams);
 
         foreach ($expected as $field => $value) {
             $getterMethod = sprintf('get%s', ucfirst($field));
+            if (!method_exists($this, $getterMethod)) {
+                $getterMethod = sprintf('has%s', ucfirst($field));
+            }
             $assertMethod = is_object($expected[$field])
                 ? 'assertEquals'
                 : 'assertSame';
