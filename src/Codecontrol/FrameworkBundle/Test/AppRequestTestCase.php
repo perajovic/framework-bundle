@@ -6,9 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract class AppRequestTestCase extends FunctionalTestCase
 {
-    protected $appRequest;
+    const HTTP_METHOD = 'POST';
 
-    protected $httpMethod = 'POST';
+    protected $appRequest;
 
     /**
      * @test
@@ -71,7 +71,7 @@ abstract class AppRequestTestCase extends FunctionalTestCase
     protected function populateFields(array $params)
     {
         $this->appRequest->populateFields(
-            Request::create('/_app_request_test', $this->httpMethod, $params)
+            Request::create('/_app_request_test', static::HTTP_METHOD, $params)
         );
     }
 }
