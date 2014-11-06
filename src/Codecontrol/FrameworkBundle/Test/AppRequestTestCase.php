@@ -45,7 +45,7 @@ abstract class AppRequestTestCase extends FunctionalTestCase
 
         foreach ($expected as $field => $value) {
             $getterMethod = sprintf('get%s', ucfirst($field));
-            if (!method_exists($this, $getterMethod)) {
+            if (!method_exists($this->appRequest, $getterMethod)) {
                 $getterMethod = sprintf('has%s', ucfirst($field));
             }
             $assertMethod = is_object($expected[$field])
