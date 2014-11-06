@@ -49,7 +49,10 @@ abstract class AppRequestTestCase extends FunctionalTestCase
 
         foreach ($expected as $field => $value) {
             $getterMethod = sprintf('get%s', ucfirst($field));
-            $this->assertSame(
+            $assertMethod = is_object($expected[$field])
+                ? 'assertEquals'
+                : 'assertSame';
+            $this->{$assertMethod}(
                 $expected[$field],
                 $this->appRequest->{$getterMethod}()
             );
