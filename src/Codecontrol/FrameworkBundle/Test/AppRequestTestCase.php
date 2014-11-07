@@ -44,17 +44,16 @@ abstract class AppRequestTestCase extends FunctionalTestCase
         $this->populateFields($requestParams);
 
         foreach ($expected as $field => $value) {
-            $getterMethod = sprintf('get%s', ucfirst($field));
-            if (!method_exists($this->appRequest, $getterMethod)) {
-                $getterMethod = sprintf('has%s', ucfirst($field));
+            $method = sprintf('get%s', ucfirst($field));
+            if (!method_exists($this->appRequest, $method)) {
+                $method = sprintf('has%s', ucfirst($field));
+                if (!method_exists($this->appRequest, $method)) {
+                    $method = sprintf('is%s', ucfirst($field));
+                }
             }
-            $assertMethod = is_object($expected[$field])
-                ? 'assertEquals'
-                : 'assertSame';
-            $this->{$assertMethod}(
-                $expected[$field],
-                $this->appRequest->{$getterMethod}()
-            );
+
+            $assert = is_object($expected[$field]) ? 'assertEquals' : 'assertSame';
+            $this->{$assert}($expected[$field], $this->appRequest->{$method}());
         }
 
         $this->assertTrue($this->appRequest->isValid());
