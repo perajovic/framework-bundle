@@ -43,6 +43,10 @@ abstract class AppRequestTestCase extends FunctionalTestCase
     {
         $this->populateFields($requestParams);
 
+        $this->assertTrue($this->appRequest->isValid());
+        $this->assertSame([], $this->appRequest->getErrors());
+        $this->assertSame('', $this->appRequest->getFlattenErrors());
+
         foreach ($expected as $field => $value) {
             $method = sprintf('get%s', ucfirst($field));
             if (!method_exists($this->appRequest, $method)) {
@@ -55,10 +59,6 @@ abstract class AppRequestTestCase extends FunctionalTestCase
             $assert = is_object($expected[$field]) ? 'assertEquals' : 'assertSame';
             $this->{$assert}($expected[$field], $this->appRequest->{$method}());
         }
-
-        $this->assertTrue($this->appRequest->isValid());
-        $this->assertSame([], $this->appRequest->getErrors());
-        $this->assertSame('', $this->appRequest->getFlattenErrors());
     }
 
     protected function assertAppRequestIsNotValid(array $errors, $flattenErrors)
