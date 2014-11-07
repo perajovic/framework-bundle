@@ -71,8 +71,20 @@ abstract class AppRequestTestCase extends FunctionalTestCase
 
     protected function populateFields(array $params)
     {
-        $this->appRequest->populateFields(
-            Request::create('/_app_request_test', static::HTTP_METHOD, $params)
-        );
+        if (isset($params['_multiFields']) && $params['_multiFields']) {
+            unset($params['_multiFields']);
+            $request = Request::create('/_app_request_test', static::HTTP_METHOD);
+            foreach ($params as $key => $value) {
+                $request->{$key}->replace($value);
+            }
+        } else {
+            $request = Request::create(
+                '/_app_request_test',
+                static::HTTP_METHOD,
+                $params
+            );
+        }
+
+        $this->appRequest->populateFields($request);
     }
 }
