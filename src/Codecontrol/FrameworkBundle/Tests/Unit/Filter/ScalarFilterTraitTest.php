@@ -29,6 +29,8 @@ class ScalarFilterTraitTest extends FilterTraitTestCase
         return [
             [['value'], false],
             ['value', 'value'],
+            ['<div>value</div>', '<div>value</div>'],
+            ['<a href="/">value</a>', '<a href="/">value</a>'],
         ];
     }
 
