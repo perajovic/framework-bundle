@@ -31,6 +31,12 @@ class ScalarFilterTraitTest extends FilterTraitTestCase
             ['value', 'value'],
             ['<div>value</div>', '<div>value</div>'],
             ['<a href="/">value</a>', '<a href="/">value</a>'],
+            ['&', '&'],
+            ['>', '>'],
+            ['<', '<'],
+            ['"', '"'],
+            ["'", "'"],
+            ['<script>alert("xss")</script>', '<script>alert("xss")</script>'],
         ];
     }
 
