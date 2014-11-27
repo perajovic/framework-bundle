@@ -60,7 +60,20 @@ abstract class AppRequest implements AppRequestInterface
      */
     public function getFlattenErrors()
     {
-        return implode(PHP_EOL, array_values($this->errors));
+        $result = [];
+
+        foreach (array_values($this->errors) as $error) {
+            if (!is_array($error)) {
+                $result[] = $error;
+                continue;
+            }
+
+            foreach (array_values($error) as $value) {
+                $result[] = $value;
+            }
+        }
+
+        return implode(PHP_EOL, $result);
     }
 
     protected function validateFields()

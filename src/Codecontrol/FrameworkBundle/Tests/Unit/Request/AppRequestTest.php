@@ -59,13 +59,33 @@ class AppRequestTest extends TestCase
         $this->ensureValueIsValidated('foo', 'foo-val', 'foo-error', 0);
         $this->ensureValueIsValidated('bar', 'bar-val', null, 1);
         $this->ensureValueIsValidated('baz', 'baz-val', 'baz-error', 2);
+        $this->ensureValueIsValidated('zaz', 1, null, 3);
+        $this->ensureValueIsValidated('zaz', '', 'zaz-1-error', 4);
+        $this->ensureValueIsValidated('zaz', 'my_value', null, 5);
+        $this->ensureValueIsValidated('zaz', null, 'zaz-2-error', 6);
+        $this->ensureValueIsValidated('vaz', '', 'vaz-1-error', 7);
+        $this->ensureValueIsValidated('vaz', 12, null, 8);
+        $this->ensureValueIsValidated('vaz', null, 'vaz-2-error', 9);
 
         $this->assertFalse($appRequest->isValid());
         $this->assertEquals(
-            ['foo' => 'foo-error', 'baz' => 'baz-error'],
+            [
+                'foo' => 'foo-error',
+                'baz' => 'baz-error',
+                'zaz' => [1 => 'zaz-1-error', 3 => 'zaz-2-error'],
+                'vaz' => [0 => 'vaz-1-error', 2 => 'vaz-2-error'],
+            ],
             $appRequest->getErrors()
         );
-        $this->assertSame("foo-error\nbaz-error", $appRequest->getFlattenErrors());
+        $this->assertSame(
+            'foo-error'
+                .PHP_EOL.'baz-error'
+                .PHP_EOL.'zaz-1-error'
+                .PHP_EOL.'zaz-2-error'
+                .PHP_EOL.'vaz-1-error'
+                .PHP_EOL.'vaz-2-error',
+            $appRequest->getFlattenErrors()
+        );
     }
 
     /**
@@ -74,6 +94,17 @@ class AppRequestTest extends TestCase
     public function validationPassed()
     {
         $appRequest = new ValidAppRequest($this->adapter);
+
+        $this->ensureValueIsValidated('foo', 'foo-val', null, 0);
+        $this->ensureValueIsValidated('bar', 'bar-val', null, 1);
+        $this->ensureValueIsValidated('baz', 'baz-val', null, 2);
+        $this->ensureValueIsValidated('zaz', 1, null, 3);
+        $this->ensureValueIsValidated('zaz', '', null, 4);
+        $this->ensureValueIsValidated('zaz', 'my_value', null, 5);
+        $this->ensureValueIsValidated('zaz', null, null, 6);
+        $this->ensureValueIsValidated('vaz', '', null, 7);
+        $this->ensureValueIsValidated('vaz', 12, null, 8);
+        $this->ensureValueIsValidated('vaz', null, null, 9);
 
         $this->assertTrue($appRequest->isValid());
         $this->assertEmpty($appRequest->getErrors());
