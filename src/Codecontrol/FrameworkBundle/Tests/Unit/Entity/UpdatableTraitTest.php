@@ -3,7 +3,7 @@
 namespace Codecontrol\FrameworkBundle\Tests\Unit\Entity;
 
 use Codecontrol\FrameworkBundle\Test\TestCase;
-use \DateTime as DateTime;
+use DateTime;
 
 class UpdatableTraitTest extends TestCase
 {

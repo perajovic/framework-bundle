@@ -3,7 +3,7 @@
 namespace Codecontrol\FrameworkBundle\Interceptor;
 
 use Symfony\Component\HttpFoundation\Request;
-use \RuntimeException as RuntimeException;
+use RuntimeException;
 
 class InterceptorManager
 {

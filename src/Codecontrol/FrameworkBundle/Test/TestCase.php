@@ -2,7 +2,7 @@
 
 namespace Codecontrol\FrameworkBundle\Test;
 
-use \PHPUnit_Framework_TestCase as PHPUnit_Framework_TestCase;
+use PHPUnit_Framework_TestCase;
 
 abstract class TestCase extends PHPUnit_Framework_TestCase
 {

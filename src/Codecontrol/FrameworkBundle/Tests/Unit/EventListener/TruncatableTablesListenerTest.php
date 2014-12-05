@@ -5,7 +5,7 @@ namespace Codecontrol\FrameworkBundle\Tests\Unit\EventListener;
 use Codecontrol\FrameworkBundle\EventListener\TruncatableTablesListener;
 use Codecontrol\FrameworkBundle\Tests\Fixtures\TruncatableTableEntity;
 use Codecontrol\FrameworkBundle\Test\EventListenerTestCase;
-use \stdClass as stdClass;
+use stdClass;
 
 class TruncatableTablesListenerTest extends EventListenerTestCase
 {
@@ -91,7 +91,7 @@ class TruncatableTablesListenerTest extends EventListenerTestCase
     {
         return $this->createMockFor(
             'Doctrine\ORM\Event\LifecycleEventArgs',
-            ['getEntityManager','getEntity']
+            ['getEntityManager', 'getEntity']
         );
     }
 

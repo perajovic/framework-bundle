@@ -2,8 +2,8 @@
 
 namespace Codecontrol\FrameworkBundle\Test;
 
-use \ReflectionClass as ReflectionClass;
-use \ReflectionObject as ReflectionObject;
+use ReflectionClass;
+use ReflectionObject;
 
 trait TestCaseTrait
 {

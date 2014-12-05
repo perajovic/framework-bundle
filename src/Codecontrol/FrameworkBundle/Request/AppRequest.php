@@ -8,7 +8,7 @@ use Codecontrol\FrameworkBundle\Filter\PasswordFilterTrait;
 use Codecontrol\FrameworkBundle\Filter\ScalarFilterTrait;
 use Codecontrol\FrameworkBundle\Filter\StringFilterTrait;
 use Codecontrol\FrameworkBundle\Validator\ValidatorAdapter;
-use \RuntimeException as RuntimeException;
+use RuntimeException;
 
 abstract class AppRequest implements AppRequestInterface
 {

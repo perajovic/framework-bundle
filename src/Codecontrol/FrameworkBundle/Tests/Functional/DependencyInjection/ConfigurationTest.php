@@ -4,7 +4,7 @@ namespace Codecontrol\FrameworkBundle\Tests\Functional\DependencyInjection;
 
 use Codecontrol\FrameworkBundle\DependencyInjection\Configuration;
 use Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase;
-use \stdClass as stdClass;
+use stdClass;
 
 class ConfigurationTest extends AbstractConfigurationTestCase
 {

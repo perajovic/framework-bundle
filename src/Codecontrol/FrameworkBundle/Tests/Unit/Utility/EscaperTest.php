@@ -4,7 +4,7 @@ namespace Codecontrol\FrameworkBundle\Tests\Unit\Utility;
 
 use Codecontrol\FrameworkBundle\Test\TestCase;
 use Codecontrol\FrameworkBundle\Utility\Escaper;
-use \stdClass as stdClass;
+use stdClass;
 
 class EscaperTest extends TestCase
 {

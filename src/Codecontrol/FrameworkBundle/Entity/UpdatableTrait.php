@@ -2,7 +2,7 @@
 
 namespace Codecontrol\FrameworkBundle\Entity;
 
-use \DateTime as DateTime;
+use DateTime;
 
 trait UpdatableTrait
 {

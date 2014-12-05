@@ -3,8 +3,8 @@
 namespace Codecontrol\FrameworkBundle\Test;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use \LogicException as LogicException;
-use \RuntimeException as RuntimeException;
+use LogicException;
+use RuntimeException;
 
 abstract class FunctionalTestCase extends WebTestCase
 {
