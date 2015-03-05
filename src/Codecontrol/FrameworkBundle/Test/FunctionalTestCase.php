@@ -4,7 +4,6 @@ namespace Codecontrol\FrameworkBundle\Test;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use LogicException;
-use RuntimeException;
 
 abstract class FunctionalTestCase extends WebTestCase
 {
@@ -42,7 +41,6 @@ abstract class FunctionalTestCase extends WebTestCase
      * @return Doctrine\ORM\EntityManagerInterface
      *
      * @throws LogicException
-     * @throws RuntimeException
      */
     protected function getEntityManager()
     {
@@ -52,14 +50,9 @@ abstract class FunctionalTestCase extends WebTestCase
             );
         }
 
-        if (!defined('static::EM_ID')) {
-            throw new RuntimeException(sprintf(
-                'Constant %s::EM_ID is not defined.',
-                get_class($this)
-            ));
-        }
+        $emId = !defined('static::EM_ID') ? 'default' : static::EM_ID;
 
-        return $this->getService('doctrine')->getManager(static::EM_ID);
+        return $this->getService('doctrine')->getManager($emId);
     }
 
     private function truncateTables()
