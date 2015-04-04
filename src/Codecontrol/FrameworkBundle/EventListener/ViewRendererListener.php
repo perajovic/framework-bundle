@@ -40,7 +40,9 @@ class ViewRendererListener
         $content = '';
         $template = $result->app->get('page_template');
         if ($template) {
-            $content = $this->templating->render($template, $result->view->all());
+            $content = trim(
+                $this->templating->render($template, $result->view->all())
+            );
         }
 
         $event->setResponse(new Response($content));
