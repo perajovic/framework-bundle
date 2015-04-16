@@ -12,7 +12,7 @@ interface AppRequestInterface
     public function populateFields(Request $request);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isValid();
 

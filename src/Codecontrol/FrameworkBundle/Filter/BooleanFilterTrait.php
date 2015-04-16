@@ -11,7 +11,7 @@ trait BooleanFilterTrait
      * @param string  $field
      * @param string  $attribute
      *
-     * @return boolean
+     * @return bool
      */
     protected function filterBoolean(
         Request $request,

@@ -81,10 +81,10 @@ abstract class AppRequest implements AppRequestInterface
     }
 
     /**
-     * @param string  $field
-     * @param array   $constraints
-     * @param boolean $isBatchField
-     * @param string  $valueKey
+     * @param string $field
+     * @param array  $constraints
+     * @param bool   $isBatchField
+     * @param string $valueKey
      *
      * @throws RuntimeException
      */

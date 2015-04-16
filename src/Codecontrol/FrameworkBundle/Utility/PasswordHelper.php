@@ -18,7 +18,7 @@ class PasswordHelper
      * @param string $password
      * @param string $hash
      *
-     * @return boolean
+     * @return bool
      */
     public static function verify($password, $hash)
     {
