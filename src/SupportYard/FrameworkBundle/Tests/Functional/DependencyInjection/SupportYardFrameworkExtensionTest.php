@@ -5,7 +5,7 @@ namespace SupportYard\FrameworkBundle\Tests\Functional\DependencyInjection;
 use SupportYard\FrameworkBundle\DependencyInjection\SupportYardFrameworkExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 
-class CodecontrolFrameworkExtensionTest extends AbstractExtensionTestCase
+class SupportYardFrameworkExtensionTest extends AbstractExtensionTestCase
 {
     /**
      * @test
