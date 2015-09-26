@@ -14,16 +14,16 @@ class AppRequestPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('supportyard_framework.interceptor.manager')) {
+        if (!$container->hasDefinition('support_yard_framework.interceptor.manager')) {
             return;
         }
 
         $interceptors = [];
 
         $definition = $container->getDefinition(
-            'supportyard_framework.interceptor.manager'
+            'support_yard_framework.interceptor.manager'
         );
-        $services = $container->findTaggedServiceIds('supportyard_framework.request');
+        $services = $container->findTaggedServiceIds('support_yard_framework.request');
 
         foreach ($services as $appRequestId => $tags) {
             foreach ($tags as $attributes) {
@@ -74,7 +74,7 @@ class AppRequestPass implements CompilerPassInterface
         $definition = new Definition($class, [new Reference($appRequestId)]);
         $definition
             ->setLazy(true)
-            ->addTag('supportyard_framework.interceptor', ['alias' => $alias]);
+            ->addTag('support_yard_framework.interceptor', ['alias' => $alias]);
         $container->setDefinition($interceptorId, $definition);
     }
 }

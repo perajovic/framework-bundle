@@ -17,27 +17,27 @@ class AppRequestPassTest extends AbstractCompilerPassTestCase
     {
         $collectingService = new Definition();
         $this->setDefinition(
-            'supportyard_framework.interceptor.manager',
+            'support_yard_framework.interceptor.manager',
             $collectingService
         );
 
         $collectedService1 = new Definition();
         $collectedService1->addTag(
-            'supportyard_framework.request',
+            'support_yard_framework.request',
             ['alias' => 'app_bundle.service_1']
         );
         $this->setDefinition('collected_service_1', $collectedService1);
 
         $collectedService2 = new Definition();
         $collectedService2->addTag(
-            'supportyard_framework.request',
+            'support_yard_framework.request',
             ['alias' => 'app_bundle.service_2']
         );
         $this->setDefinition('collected_service_2', $collectedService2);
 
         $collectedService3 = new Definition();
         $collectedService3->addTag(
-            'supportyard_framework.request',
+            'support_yard_framework.request',
             ['alias' => 'app_bundle.service_3']
         );
         $this->setDefinition('collected_service_3', $collectedService3);
@@ -51,7 +51,7 @@ class AppRequestPassTest extends AbstractCompilerPassTestCase
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'supportyard_framework.interceptor.manager',
+            'support_yard_framework.interceptor.manager',
             'setInterceptors',
             [[
                 'app_bundle.service_1_request' => new Reference('app_bundle.interceptor.service_1_request'),

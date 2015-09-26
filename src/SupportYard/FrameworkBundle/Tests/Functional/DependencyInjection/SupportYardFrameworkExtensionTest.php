@@ -17,7 +17,7 @@ class SupportYardFrameworkExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderHasParameter(
-            'supportyard_framework.app',
+            'support_yard_framework.app',
             $appParam
         );
     }
@@ -30,7 +30,7 @@ class SupportYardFrameworkExtensionTest extends AbstractExtensionTestCase
         $this->load(['truncate_tables_between_tests' => true]);
 
         $this->assertContainerBuilderNotHasService(
-            'supportyard_framework.listener.truncatable_tables'
+            'support_yard_framework.listener.truncatable_tables'
         );
     }
 
@@ -43,7 +43,7 @@ class SupportYardFrameworkExtensionTest extends AbstractExtensionTestCase
         $this->load(['truncate_tables_between_tests' => true]);
 
         $this->assertContainerBuilderNotHasService(
-            'supportyard_framework.listener.truncatable_tables'
+            'support_yard_framework.listener.truncatable_tables'
         );
     }
 
@@ -56,11 +56,11 @@ class SupportYardFrameworkExtensionTest extends AbstractExtensionTestCase
         $this->load(['truncate_tables_between_tests' => true]);
 
         $this->assertContainerBuilderHasService(
-            'supportyard_framework.listener.truncatable_tables',
+            'support_yard_framework.listener.truncatable_tables',
             'SupportYard\FrameworkBundle\EventListener\TruncatableTablesListener'
         );
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'supportyard_framework.listener.truncatable_tables',
+            'support_yard_framework.listener.truncatable_tables',
             'doctrine.event_listener',
             ['event' => 'postPersist']
         );

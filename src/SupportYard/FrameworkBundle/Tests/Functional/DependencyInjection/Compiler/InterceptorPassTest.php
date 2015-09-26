@@ -17,20 +17,20 @@ class InterceptorPassTest extends AbstractCompilerPassTestCase
     {
         $collectingService = new Definition();
         $this->setDefinition(
-            'supportyard_framework.interceptor.manager',
+            'support_yard_framework.interceptor.manager',
             $collectingService
         );
 
         $collectedService1 = new Definition();
         $collectedService1->addTag(
-            'supportyard_framework.interceptor',
+            'support_yard_framework.interceptor',
             ['alias' => 'interceptor_1']
         );
         $this->setDefinition('collected_service_1', $collectedService1);
 
         $collectedService2 = new Definition();
         $collectedService2->addTag(
-            'supportyard_framework.interceptor',
+            'support_yard_framework.interceptor',
             ['alias' => 'interceptor_2']
         );
         $this->setDefinition('collected_service_2', $collectedService2);
@@ -38,7 +38,7 @@ class InterceptorPassTest extends AbstractCompilerPassTestCase
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'supportyard_framework.interceptor.manager',
+            'support_yard_framework.interceptor.manager',
             'setInterceptors',
             [[
                 'interceptor_1' => new Reference('collected_service_1'),

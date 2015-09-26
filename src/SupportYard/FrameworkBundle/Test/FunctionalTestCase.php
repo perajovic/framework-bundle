@@ -58,12 +58,12 @@ abstract class FunctionalTestCase extends WebTestCase
     private function truncateTables()
     {
         $container = static::$kernel->getContainer();
-        if (!$container->has('supportyard_framework.listener.truncatable_tables')) {
+        if (!$container->has('support_yard_framework.listener.truncatable_tables')) {
             return;
         }
 
         $tables = $container
-            ->get('supportyard_framework.listener.truncatable_tables')
+            ->get('support_yard_framework.listener.truncatable_tables')
             ->getTables();
 
         if (empty($tables)) {

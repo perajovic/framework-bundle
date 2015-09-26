@@ -28,11 +28,11 @@ class SupportYardFrameworkExtension extends Extension
         );
 
         $container->setParameter(
-            'supportyard_framework.app',
+            'support_yard_framework.app',
             $processedConfig['app']
         );
         $container->setParameter(
-            'supportyard_framework.truncate_tables_between_tests',
+            'support_yard_framework.truncate_tables_between_tests',
             $processedConfig['truncate_tables_between_tests']
         );
 
@@ -48,7 +48,7 @@ class SupportYardFrameworkExtension extends Extension
             return;
         }
 
-        if (false === $container->getParameter('supportyard_framework.truncate_tables_between_tests')
+        if (false === $container->getParameter('support_yard_framework.truncate_tables_between_tests')
             || 'test' !== $container->getParameter('kernel.environment')
         ) {
             return;
@@ -59,7 +59,7 @@ class SupportYardFrameworkExtension extends Extension
         );
         $definition->addTag('doctrine.event_listener', ['event' => 'postPersist']);
         $container->setDefinition(
-            'supportyard_framework.listener.truncatable_tables',
+            'support_yard_framework.listener.truncatable_tables',
             $definition
         );
     }
