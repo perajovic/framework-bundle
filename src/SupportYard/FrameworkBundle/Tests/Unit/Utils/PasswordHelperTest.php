@@ -1,9 +1,9 @@
 <?php
 
-namespace SupportYard\FrameworkBundle\Tests\Unit\Utility;
+namespace SupportYard\FrameworkBundle\Tests\Unit\Utils;
 
 use SupportYard\FrameworkBundle\Test\TestCase;
-use SupportYard\FrameworkBundle\Utility\PasswordHelper;
+use SupportYard\FrameworkBundle\Utils\PasswordHelper;
 
 class PasswordHelperTest extends TestCase
 {

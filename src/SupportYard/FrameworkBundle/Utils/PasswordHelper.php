@@ -1,6 +1,6 @@
 <?php
 
-namespace SupportYard\FrameworkBundle\Utility;
+namespace SupportYard\FrameworkBundle\Utils;
 
 class PasswordHelper
 {

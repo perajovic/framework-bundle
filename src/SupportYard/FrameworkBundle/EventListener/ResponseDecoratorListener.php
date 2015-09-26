@@ -3,7 +3,7 @@
 namespace SupportYard\FrameworkBundle\EventListener;
 
 use SupportYard\FrameworkBundle\Response\ResponseHeaders as Headers;
-use SupportYard\FrameworkBundle\Utility\Escaper;
+use SupportYard\FrameworkBundle\Utils\Escaper;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;

@@ -1,9 +1,9 @@
 <?php
 
-namespace SupportYard\FrameworkBundle\Tests\Unit\Utility;
+namespace SupportYard\FrameworkBundle\Tests\Unit\Utils;
 
 use SupportYard\FrameworkBundle\Test\TestCase;
-use SupportYard\FrameworkBundle\Utility\Escaper;
+use SupportYard\FrameworkBundle\Utils\Escaper;
 use stdClass;
 
 class EscaperTest extends TestCase
