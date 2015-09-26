@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 class ExceptionController extends TwigExceptionController
 {
     /**
-     * {inheritedDoc}.
+     * {inheritdoc}
      */
     public function showAction(
         Request $request,

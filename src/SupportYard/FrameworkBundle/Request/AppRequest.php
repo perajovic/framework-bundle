@@ -2,13 +2,13 @@
 
 namespace SupportYard\FrameworkBundle\Request;
 
+use RuntimeException;
 use SupportYard\FrameworkBundle\Filter\BooleanFilterTrait;
 use SupportYard\FrameworkBundle\Filter\EmailFilterTrait;
 use SupportYard\FrameworkBundle\Filter\PasswordFilterTrait;
 use SupportYard\FrameworkBundle\Filter\ScalarFilterTrait;
 use SupportYard\FrameworkBundle\Filter\StringFilterTrait;
 use SupportYard\FrameworkBundle\Validator\ValidatorAdapter;
-use RuntimeException;
 
 abstract class AppRequest implements AppRequestInterface
 {
