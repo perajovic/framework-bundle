@@ -1,15 +1,14 @@
 {
-    "name": "codecontrol/framework-bundle",
+    "name": "supportyard/framework-bundle",
     "type": "symfony-bundle",
     "description": "FrameworkBundle for Symfony2 web apps",
     "keywords": ["symfony","bundle","framework"],
-    "homepage": "https://github.com/codecontrol/framework-bundle",
+    "homepage": "https://github.com/activecollab/framework-bundle",
     "license": "MIT",
     "authors": [
         {
-            "name": "Code Control",
-            "email": "info@codecontrol.rs",
-            "homepage": "http://www.codecontrol.rs/en"
+            "name": "SupportYard",
+            "homepage": "https://supportyard.com"
         }
     ],
     "require": {
@@ -26,10 +25,15 @@
         "symfony/twig-bundle": "~2.7"
     },
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": { "": "src/" }
     },
     "minimum-stability": "stable",
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "0.*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.7-dev"
+        }
     }
 }
