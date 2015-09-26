@@ -1,0 +1,41 @@
+services:
+    supportyard_framework.controller.exception:
+        class: SupportYard\FrameworkBundle\Controller\ExceptionController
+        parent: twig.controller.exception
+    supportyard_framework.listener.interceptor:
+        class: SupportYard\FrameworkBundle\EventListener\InterceptorListener
+        arguments:
+            - @supportyard_framework.interceptor.manager
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, priority: 150 }
+    supportyard_framework.listener.request_format:
+        class: SupportYard\FrameworkBundle\EventListener\RequestFormatListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 150 }
+    supportyard_framework.listener.response_decorator:
+        class: SupportYard\FrameworkBundle\EventListener\ResponseDecoratorListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.response }
+    supportyard_framework.listener.route_app:
+        class: SupportYard\FrameworkBundle\EventListener\RouteAppListener
+        arguments:
+            - %supportyard_framework.app%
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, priority: 230 }
+    supportyard_framework.listener.view_renderer:
+        class: SupportYard\FrameworkBundle\EventListener\ViewRendererListener
+        arguments:
+            - @templating
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, priority: 200 }
+    supportyard_framework.interceptor.manager:
+        class: SupportYard\FrameworkBundle\Interceptor\InterceptorManager
+    supportyard_framework.request.app_request:
+        class: SupportYard\FrameworkBundle\Request\AppRequest
+        abstract: true
+        arguments:
+            - @supportyard_framework.validator.adapter
+    supportyard_framework.validator.adapter:
+        class: SupportYard\FrameworkBundle\Validator\ValidatorAdapter
+        arguments:
+            - @validator
