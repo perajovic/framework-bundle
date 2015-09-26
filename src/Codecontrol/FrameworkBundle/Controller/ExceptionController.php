@@ -5,7 +5,7 @@ namespace Codecontrol\FrameworkBundle\Controller;
 use Codecontrol\FrameworkBundle\Response\ResponseHeaders;
 use Symfony\Bundle\TwigBundle\Controller\ExceptionController as TwigExceptionController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\FlattenException;
+use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
 class ExceptionController extends TwigExceptionController
