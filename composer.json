@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "FrameworkBundle for Symfony2 web apps",
     "keywords": ["symfony","bundle","framework"],
-    "homepage": "https://github.com/activecollab/framework-bundle",
+    "homepage": "https://github.com/supportyard/framework-bundle",
     "license": "MIT",
     "authors": [
         {
