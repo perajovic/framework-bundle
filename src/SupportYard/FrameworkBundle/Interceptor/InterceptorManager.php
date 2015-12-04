@@ -46,21 +46,19 @@ class InterceptorManager
      */
     public function handle(Request $request)
     {
-        $interceptors = $request->attributes->get('_app[interceptors]', [], true);
+        $app = $request->attributes->get('_app', []);
+        $interceptors = isset($app['interceptors']) ? $app['interceptors'] : [];
 
-        $cnt = count($interceptors);
-        for ($i = 0; $i < $cnt; ++$i) {
-            $name = $interceptors[$i];
-
-            if (!isset($this->interceptors[$name])) {
+        foreach ($interceptors as $value) {
+            if (!isset($this->interceptors[$value])) {
                 throw new RuntimeException(sprintf(
                     'Interceptor "%s" for route "%s" not found.',
-                    $name,
+                    $value,
                     $request->attributes->get('_route')
                 ));
             }
 
-            $this->interceptors[$name]->apply($request);
+            $this->interceptors[$value]->apply($request);
         }
     }
 }

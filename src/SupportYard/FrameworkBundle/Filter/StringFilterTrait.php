@@ -18,7 +18,6 @@ trait StringFilterTrait
         return $request->{$attribute}->filter(
             $field,
             null,
-            false,
             FILTER_SANITIZE_STRING,
             FILTER_FLAG_NO_ENCODE_QUOTES
         );

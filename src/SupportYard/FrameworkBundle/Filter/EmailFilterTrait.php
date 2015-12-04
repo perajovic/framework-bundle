@@ -18,7 +18,6 @@ trait EmailFilterTrait
         return $request->{$attribute}->filter(
             $field,
             null,
-            false,
             FILTER_SANITIZE_EMAIL,
             ['flags' => '']
         );

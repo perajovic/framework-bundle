@@ -21,7 +21,6 @@ trait BooleanFilterTrait
         $filtered = $request->{$attribute}->filter(
             $field,
             false,
-            false,
             FILTER_VALIDATE_BOOLEAN,
             FILTER_NULL_ON_FAILURE
         );
