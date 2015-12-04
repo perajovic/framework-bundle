@@ -5,7 +5,7 @@ services:
     support_yard_framework.listener.interceptor:
         class: SupportYard\FrameworkBundle\EventListener\InterceptorListener
         arguments:
-            - @support_yard_framework.interceptor.manager
+            - "@support_yard_framework.interceptor.manager"
         tags:
             - { name: kernel.event_listener, event: kernel.controller, priority: 150 }
     support_yard_framework.listener.request_format:
@@ -19,13 +19,13 @@ services:
     support_yard_framework.listener.route_app:
         class: SupportYard\FrameworkBundle\EventListener\RouteAppListener
         arguments:
-            - %support_yard_framework.app%
+            - "%support_yard_framework.app%"
         tags:
             - { name: kernel.event_listener, event: kernel.view, priority: 230 }
     support_yard_framework.listener.view_renderer:
         class: SupportYard\FrameworkBundle\EventListener\ViewRendererListener
         arguments:
-            - @templating
+            - "@templating"
         tags:
             - { name: kernel.event_listener, event: kernel.view, priority: 200 }
     support_yard_framework.interceptor.manager:
@@ -34,8 +34,8 @@ services:
         class: SupportYard\FrameworkBundle\Request\AppRequest
         abstract: true
         arguments:
-            - @support_yard_framework.validator.adapter
+            - "@support_yard_framework.validator.adapter"
     support_yard_framework.validator.adapter:
         class: SupportYard\FrameworkBundle\Validator\ValidatorAdapter
         arguments:
-            - @validator
+            - "@validator"
