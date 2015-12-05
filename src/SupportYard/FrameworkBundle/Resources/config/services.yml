@@ -1,41 +1,41 @@
 services:
     support_yard_framework.controller.exception:
-        class: SupportYard\FrameworkBundle\Controller\ExceptionController
-        parent: twig.controller.exception
+        class: 'SupportYard\FrameworkBundle\Controller\ExceptionController'
+        parent: 'twig.controller.exception'
     support_yard_framework.listener.interceptor:
-        class: SupportYard\FrameworkBundle\EventListener\InterceptorListener
+        class: 'SupportYard\FrameworkBundle\EventListener\InterceptorListener'
         arguments:
-            - "@support_yard_framework.interceptor.manager"
+            - '@support_yard_framework.interceptor.manager'
         tags:
-            - { name: kernel.event_listener, event: kernel.controller, priority: 150 }
+            - { name: 'kernel.event_listener', event: 'kernel.controller', priority: 150 }
     support_yard_framework.listener.request_format:
-        class: SupportYard\FrameworkBundle\EventListener\RequestFormatListener
+        class: 'SupportYard\FrameworkBundle\EventListener\RequestFormatListener'
         tags:
-            - { name: kernel.event_listener, event: kernel.request, priority: 150 }
+            - { name: 'kernel.event_listener', event: 'kernel.request', priority: 150 }
     support_yard_framework.listener.response_decorator:
-        class: SupportYard\FrameworkBundle\EventListener\ResponseDecoratorListener
+        class: 'SupportYard\FrameworkBundle\EventListener\ResponseDecoratorListener'
         tags:
-            - { name: kernel.event_listener, event: kernel.response }
+            - { name: 'kernel.event_listener', event: 'kernel.response' }
     support_yard_framework.listener.route_app:
-        class: SupportYard\FrameworkBundle\EventListener\RouteAppListener
+        class: 'SupportYard\FrameworkBundle\EventListener\RouteAppListener'
         arguments:
-            - "%support_yard_framework.app%"
+            - '%support_yard_framework.app%'
         tags:
-            - { name: kernel.event_listener, event: kernel.view, priority: 230 }
+            - { name: 'kernel.event_listener', event: 'kernel.view', priority: 230 }
     support_yard_framework.listener.view_renderer:
-        class: SupportYard\FrameworkBundle\EventListener\ViewRendererListener
+        class: 'SupportYard\FrameworkBundle\EventListener\ViewRendererListener'
         arguments:
-            - "@templating"
+            - '@templating'
         tags:
-            - { name: kernel.event_listener, event: kernel.view, priority: 200 }
+            - { name: 'kernel.event_listener', event: 'kernel.view', priority: 200 }
     support_yard_framework.interceptor.manager:
-        class: SupportYard\FrameworkBundle\Interceptor\InterceptorManager
+        class: 'SupportYard\FrameworkBundle\Interceptor\InterceptorManager'
     support_yard_framework.request.app_request:
-        class: SupportYard\FrameworkBundle\Request\AppRequest
+        class: 'SupportYard\FrameworkBundle\Request\AppRequest'
         abstract: true
         arguments:
-            - "@support_yard_framework.validator.adapter"
+            - '@support_yard_framework.validator.adapter'
     support_yard_framework.validator.adapter:
-        class: SupportYard\FrameworkBundle\Validator\ValidatorAdapter
+        class: 'SupportYard\FrameworkBundle\Validator\ValidatorAdapter'
         arguments:
-            - "@validator"
+            - '@validator'
