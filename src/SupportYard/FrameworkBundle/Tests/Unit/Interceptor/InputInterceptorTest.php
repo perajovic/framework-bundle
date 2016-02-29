@@ -55,7 +55,7 @@ class InputInterceptorTest extends TestCase
         $propertyPath = 'some_field';
 
         $this->request->attributes->set('_route_params', [
-            '_app' => ['send_flatten' => false]
+            '_app' => ['send_flatten' => false],
         ]);
         $this->ensureValidation($results);
         $this->ensureConstraint($propertyPath, $message);
