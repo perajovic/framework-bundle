@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-class AppRequestPass implements CompilerPassInterface
+class InputPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -23,9 +23,9 @@ class AppRequestPass implements CompilerPassInterface
         $definition = $container->getDefinition(
             'support_yard_framework.interceptor.manager'
         );
-        $services = $container->findTaggedServiceIds('support_yard_framework.request');
+        $services = $container->findTaggedServiceIds('support_yard_framework.input');
 
-        foreach ($services as $appRequestId => $tags) {
+        foreach ($services as $inputId => $tags) {
             foreach ($tags as $attributes) {
                 $metadata = $this->createServiceMetadata($attributes['alias']);
 
@@ -33,7 +33,7 @@ class AppRequestPass implements CompilerPassInterface
                     continue;
                 }
 
-                $metadata['appRequestId'] = $appRequestId;
+                $metadata['inputId'] = $inputId;
                 $this->registerService($container, $metadata);
                 $interceptors[$metadata['alias']] = new Reference(
                     $metadata['interceptorId']
@@ -55,8 +55,8 @@ class AppRequestPass implements CompilerPassInterface
         array_splice($interceptorId, 1, 0, 'interceptor');
 
         return [
-            'interceptorId' => implode('.', $interceptorId).'_request',
-            'alias' => $alias.'_request',
+            'interceptorId' => implode('.', $interceptorId).'_input',
+            'alias' => $alias.'_input',
         ];
     }
 
@@ -66,12 +66,12 @@ class AppRequestPass implements CompilerPassInterface
      */
     private function registerService(ContainerBuilder $container, array $metadata)
     {
-        $class = 'SupportYard\\FrameworkBundle\\Interceptor\\AppRequestInterceptor';
+        $class = 'SupportYard\\FrameworkBundle\\Interceptor\\InputInterceptor';
         $interceptorId = $metadata['interceptorId'];
         $alias = $metadata['alias'];
-        $appRequestId = $metadata['appRequestId'];
+        $inputId = $metadata['inputId'];
 
-        $definition = new Definition($class, [new Reference($appRequestId)]);
+        $definition = new Definition($class, [new Reference($inputId)]);
         $definition
             ->setLazy(true)
             ->addTag('support_yard_framework.interceptor', ['alias' => $alias]);
