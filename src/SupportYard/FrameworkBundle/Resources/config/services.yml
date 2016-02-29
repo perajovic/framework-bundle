@@ -30,7 +30,3 @@ services:
             - { name: 'kernel.event_listener', event: 'kernel.view', priority: 200 }
     support_yard_framework.interceptor.manager:
         class: 'SupportYard\FrameworkBundle\Interceptor\InterceptorManager'
-    support_yard_framework.validator.adapter:
-        class: 'SupportYard\FrameworkBundle\Validator\ValidatorAdapter'
-        arguments:
-            - '@validator'
