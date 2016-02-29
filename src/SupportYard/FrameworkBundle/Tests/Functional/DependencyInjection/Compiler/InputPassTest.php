@@ -2,13 +2,13 @@
 
 namespace SupportYard\FrameworkBundle\Tests\Functional\DependencyInjection\Compiler;
 
-use SupportYard\FrameworkBundle\DependencyInjection\Compiler\AppRequestPass;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
+use SupportYard\FrameworkBundle\DependencyInjection\Compiler\InputPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-class AppRequestPassTest extends AbstractCompilerPassTestCase
+class InputPassTest extends AbstractCompilerPassTestCase
 {
     /**
      * @test
@@ -23,28 +23,28 @@ class AppRequestPassTest extends AbstractCompilerPassTestCase
 
         $collectedService1 = new Definition();
         $collectedService1->addTag(
-            'support_yard_framework.request',
+            'support_yard_framework.input',
             ['alias' => 'app_bundle.service_1']
         );
         $this->setDefinition('collected_service_1', $collectedService1);
 
         $collectedService2 = new Definition();
         $collectedService2->addTag(
-            'support_yard_framework.request',
+            'support_yard_framework.input',
             ['alias' => 'app_bundle.service_2']
         );
         $this->setDefinition('collected_service_2', $collectedService2);
 
         $collectedService3 = new Definition();
         $collectedService3->addTag(
-            'support_yard_framework.request',
+            'support_yard_framework.input',
             ['alias' => 'app_bundle.service_3']
         );
         $this->setDefinition('collected_service_3', $collectedService3);
 
         $interceptor3 = new Definition();
         $this->setDefinition(
-            'app_bundle.interceptor.service_3_request',
+            'app_bundle.interceptor.service_3_input',
             $interceptor3
         );
 
@@ -54,18 +54,18 @@ class AppRequestPassTest extends AbstractCompilerPassTestCase
             'support_yard_framework.interceptor.manager',
             'setInterceptors',
             [[
-                'app_bundle.service_1_request' => new Reference('app_bundle.interceptor.service_1_request'),
-                'app_bundle.service_2_request' => new Reference('app_bundle.interceptor.service_2_request'),
+                'app_bundle.service_1_input' => new Reference('app_bundle.interceptor.service_1_input'),
+                'app_bundle.service_2_input' => new Reference('app_bundle.interceptor.service_2_input'),
             ]]
         );
 
         $this->assertContainerBuilderHasService(
-            'app_bundle.interceptor.service_3_request'
+            'app_bundle.interceptor.service_3_input'
         );
     }
 
     protected function registerCompilerPass(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new AppRequestPass());
+        $container->addCompilerPass(new InputPass());
     }
 }
