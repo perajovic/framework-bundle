@@ -71,7 +71,7 @@ class InputPass implements CompilerPassInterface
         $alias = $metadata['alias'];
         $inputId = $metadata['inputId'];
 
-        $definition = new Definition($class, [new Reference($inputId)]);
+        $definition = new Definition($class, [new Reference('validator'), new Reference($inputId)]);
         $definition
             ->setLazy(true)
             ->addTag('support_yard_framework.interceptor', ['alias' => $alias]);
