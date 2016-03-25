@@ -12,8 +12,8 @@
     bootstrap                   = "vendor/autoload.php">
 
     <testsuites>
-        <testsuite name="SupportYard FrameworkBundle Test Suite">
-            <directory>src/SupportYard/FrameworkBundle/Tests</directory>
+        <testsuite name="Filos FrameworkBundle Test Suite">
+            <directory>src/Filos/FrameworkBundle/Tests</directory>
         </testsuite>
     </testsuites>
 

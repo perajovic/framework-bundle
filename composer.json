@@ -1,14 +1,14 @@
 {
-    "name": "supportyard/framework-bundle",
+    "name": "filos/framework-bundle",
     "type": "symfony-bundle",
     "description": "FrameworkBundle for Symfony web apps",
     "keywords": ["symfony","bundle","framework"],
-    "homepage": "https://github.com/supportyard/framework-bundle",
+    "homepage": "https://github.com/perajovic/framework-bundle",
     "license": "MIT",
     "authors": [
         {
-            "name": "SupportYard",
-            "homepage": "https://supportyard.com"
+            "name": "Pera Jovic",
+            "email": "perajovic@me.com"
         }
     ],
     "require": {
