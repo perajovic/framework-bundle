@@ -14,7 +14,7 @@ declare (strict_types = 1);
 namespace Filos\FrameworkBundle\Tests\Unit\EventListener;
 
 use Filos\FrameworkBundle\EventListener\TruncatableTablesListener;
-use Filos\FrameworkBundle\Tests\Fixtures\TruncatableTableEntity;
+use Filos\FrameworkBundle\Tests\Fixture\TruncatableTableEntity;
 use Filos\FrameworkBundle\Test\EventListenerTestCase;
 use stdClass;
 

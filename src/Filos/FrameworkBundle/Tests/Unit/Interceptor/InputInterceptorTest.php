@@ -14,7 +14,7 @@ declare (strict_types = 1);
 namespace Filos\FrameworkBundle\Tests\Unit\Interceptor;
 
 use Filos\FrameworkBundle\Interceptor\InputInterceptor;
-use Filos\FrameworkBundle\Tests\Fixtures\RawInput;
+use Filos\FrameworkBundle\Tests\Fixture\RawInput;
 use Filos\FrameworkBundle\Test\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
