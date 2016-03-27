@@ -20,7 +20,7 @@ class PasswordHelper
      *
      * @return string
      */
-    public static function hash($password)
+    public static function hash(string $password): string
     {
         return password_hash($password, PASSWORD_DEFAULT);
     }
@@ -31,7 +31,7 @@ class PasswordHelper
      *
      * @return bool
      */
-    public static function verify($password, $hash)
+    public static function verify(string $password, string $hash): bool
     {
         return password_verify($password, $hash);
     }
@@ -41,7 +41,7 @@ class PasswordHelper
      *
      * @return string
      */
-    public static function generate($length = 15)
+    public static function generate(int $length = 15): string
     {
         $password = '';
 
