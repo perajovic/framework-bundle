@@ -25,7 +25,11 @@
         "symfony/twig-bundle": "~3.0"
     },
     "autoload": {
-        "psr-4": { "": "src/" }
+        "psr-4": { "Filos\\FrameworkBundle\\": "src/Filos/FrameworkBundle" },
+        "exclude-from-classmap": [
+            "**/Tests/",
+            "**/Test/"
+        ]
     },
     "minimum-stability": "stable",
     "require-dev": {
