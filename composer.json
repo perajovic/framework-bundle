@@ -1,7 +1,7 @@
 {
     "name": "filos/framework-bundle",
     "type": "symfony-bundle",
-    "description": "FrameworkBundle for Symfony web apps",
+    "description": "FrameworkBundle for building Symfony web apps",
     "keywords": ["symfony","bundle","framework"],
     "homepage": "https://github.com/perajovic/framework-bundle",
     "license": "MIT",
