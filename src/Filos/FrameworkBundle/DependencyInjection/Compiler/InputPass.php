@@ -66,7 +66,7 @@ class InputPass implements CompilerPassInterface
      */
     private function registerService(ContainerBuilder $container, array $metadata)
     {
-        $class = 'Filos\\FrameworkBundle\\Interceptor\\InputInterceptor';
+        $class = 'Filos\FrameworkBundle\Interceptor\InputInterceptor';
         $interceptorId = $metadata['interceptorId'];
         $alias = $metadata['alias'];
         $inputId = $metadata['inputId'];
