@@ -25,8 +25,8 @@ class ControllerResultTest extends TestCase
     {
         $result = new ControllerResult();
 
-        $this->assertEmpty($result->view->all());
-        $this->assertEmpty($result->app->all());
+        $this->assertCount(0, $result->view->all());
+        $this->assertCount(0, $result->app->all());
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $result->view);
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $result->app);
     }
