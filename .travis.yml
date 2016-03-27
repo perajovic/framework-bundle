@@ -3,6 +3,6 @@ php:
     - '7'
 before_install:
     - composer self-update
-    - phpunit self-update
+    - phpunit  --self-upgrade
 install: composer install
 script: phpunit
