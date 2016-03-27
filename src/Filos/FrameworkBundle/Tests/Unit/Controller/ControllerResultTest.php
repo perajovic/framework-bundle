@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Filos framework.
+ *
+ * (c) Pera Jovic <perajovic@me.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare (strict_types = 1);
+
 namespace Filos\FrameworkBundle\Tests\Unit\Controller;
 
 use Filos\FrameworkBundle\Controller\ControllerResult;
@@ -16,23 +27,8 @@ class ControllerResultTest extends TestCase
 
         $this->assertEmpty($result->view->all());
         $this->assertEmpty($result->app->all());
-    }
-
-    /**
-     * @test
-     */
-    public function propertiesAreParameterBagInstances()
-    {
-        $result = new ControllerResult();
-
-        $this->assertInstanceOf(
-            'Symfony\Component\HttpFoundation\ParameterBag',
-            $result->view
-        );
-        $this->assertInstanceOf(
-            'Symfony\Component\HttpFoundation\ParameterBag',
-            $result->view
-        );
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $result->view);
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\ParameterBag', $result->app);
     }
 
     /**

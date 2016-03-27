@@ -1,11 +1,23 @@
 <?php
 
+/*
+ * This file is part of the Filos framework.
+ *
+ * (c) Pera Jovic <perajovic@me.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare (strict_types = 1);
+
 namespace Filos\FrameworkBundle\Controller;
 
 use Filos\FrameworkBundle\Response\ResponseHeaders;
 use Symfony\Bundle\TwigBundle\Controller\ExceptionController as TwigExceptionController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Exception\FlattenException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
 class ExceptionController extends TwigExceptionController
@@ -17,7 +29,7 @@ class ExceptionController extends TwigExceptionController
         Request $request,
         FlattenException $exception,
         DebugLoggerInterface $logger = null
-    ) {
+    ): Response {
         //always enforce non-debug mode
         $this->debug = false;
 
