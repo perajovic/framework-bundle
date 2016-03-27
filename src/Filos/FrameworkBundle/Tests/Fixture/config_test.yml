@@ -1,0 +1,7 @@
+filos_framework:
+    app: []
+
+framework:
+    secret: '123abcllsk'
+    templating:
+        engines: ['twig']
