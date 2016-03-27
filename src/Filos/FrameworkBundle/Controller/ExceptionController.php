@@ -18,9 +18,18 @@ use Symfony\Bundle\TwigBundle\Controller\ExceptionController as TwigExceptionCon
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
+use Twig_Environment;
 
-class ExceptionController extends TwigExceptionController
+final class ExceptionController extends TwigExceptionController
 {
+    /**
+     * {inheritdoc}.
+     */
+    public function __construct(Twig_Environment $twig, bool $debug = false)
+    {
+        parent::__construct($twig, $debug);
+    }
+
     /**
      * {inheritdoc}.
      */
@@ -29,9 +38,6 @@ class ExceptionController extends TwigExceptionController
         FlattenException $exception,
         DebugLoggerInterface $logger = null
     ) {
-        //always enforce non-debug mode
-        $this->debug = false;
-
         $response = parent::showAction($request, $exception, $logger);
 
         $response->setStatusCode($exception->getStatusCode());
