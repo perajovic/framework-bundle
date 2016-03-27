@@ -1,0 +1,8 @@
+language: php
+php:
+    - '7'
+before_install:
+    - composer self-update
+    - phpunit self-update
+install: composer install
+script: phpunit
