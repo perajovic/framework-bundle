@@ -17,7 +17,6 @@ use Filos\FrameworkBundle\Response\ResponseHeaders;
 use Symfony\Bundle\TwigBundle\Controller\ExceptionController as TwigExceptionController;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 
 class ExceptionController extends TwigExceptionController
@@ -29,7 +28,7 @@ class ExceptionController extends TwigExceptionController
         Request $request,
         FlattenException $exception,
         DebugLoggerInterface $logger = null
-    ): Response {
+    ) {
         //always enforce non-debug mode
         $this->debug = false;
 

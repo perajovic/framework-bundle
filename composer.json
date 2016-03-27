@@ -27,8 +27,7 @@
     "autoload": {
         "psr-4": { "Filos\\FrameworkBundle\\": "src/Filos/FrameworkBundle" },
         "exclude-from-classmap": [
-            "**/Tests/",
-            "**/Test/"
+            "**/Tests/"
         ]
     },
     "minimum-stability": "stable",
