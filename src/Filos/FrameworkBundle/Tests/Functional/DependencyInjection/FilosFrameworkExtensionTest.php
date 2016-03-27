@@ -16,7 +16,7 @@ namespace Filos\FrameworkBundle\Tests\Functional\DependencyInjection;
 use Filos\FrameworkBundle\DependencyInjection\FilosFrameworkExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 
-class SupportYardFrameworkExtensionTest extends AbstractExtensionTestCase
+class FilosFrameworkExtensionTest extends AbstractExtensionTestCase
 {
     /**
      * @test
