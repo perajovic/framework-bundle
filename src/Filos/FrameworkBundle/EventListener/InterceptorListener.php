@@ -16,7 +16,7 @@ namespace Filos\FrameworkBundle\EventListener;
 use Filos\FrameworkBundle\Interceptor\InterceptorManager;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
-class InterceptorListener
+final class InterceptorListener
 {
     /**
      * @var InterceptorManager

@@ -13,7 +13,7 @@ declare (strict_types = 1);
 
 namespace Filos\FrameworkBundle\Utils;
 
-class PasswordHelper
+final class PasswordHelper
 {
     /**
      * @param string $password

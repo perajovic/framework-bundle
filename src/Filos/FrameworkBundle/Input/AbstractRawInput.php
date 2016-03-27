@@ -19,7 +19,7 @@ use Filos\FrameworkBundle\Filter\PasswordFilterTrait;
 use Filos\FrameworkBundle\Filter\ScalarFilterTrait;
 use Filos\FrameworkBundle\Filter\StringFilterTrait;
 
-abstract class RawInput implements RawInputInterface
+abstract class AbstractRawInput implements RawInputInterface
 {
     use BooleanFilterTrait,
         EmailFilterTrait,

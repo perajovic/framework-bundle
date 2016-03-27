@@ -2,31 +2,37 @@ services:
     filos_framework.controller.exception:
         class: 'Filos\FrameworkBundle\Controller\ExceptionController'
         parent: 'twig.controller.exception'
+
     filos_framework.listener.interceptor:
         class: 'Filos\FrameworkBundle\EventListener\InterceptorListener'
         arguments:
             - '@filos_framework.interceptor.manager'
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.controller', priority: 150 }
+
     filos_framework.listener.request_format:
         class: 'Filos\FrameworkBundle\EventListener\RequestFormatListener'
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.request', priority: 150 }
+
     filos_framework.listener.response_decorator:
         class: 'Filos\FrameworkBundle\EventListener\ResponseDecoratorListener'
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.response' }
+
     filos_framework.listener.route_app:
         class: 'Filos\FrameworkBundle\EventListener\RouteAppListener'
         arguments:
             - '%filos_framework.app%'
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.view', priority: 230 }
+
     filos_framework.listener.view_renderer:
         class: 'Filos\FrameworkBundle\EventListener\ViewRendererListener'
         arguments:
             - '@templating'
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.view', priority: 200 }
+
     filos_framework.interceptor.manager:
         class: 'Filos\FrameworkBundle\Interceptor\InterceptorManager'

@@ -13,14 +13,14 @@ declare (strict_types = 1);
 
 namespace Filos\FrameworkBundle\EventListener;
 
-use Filos\FrameworkBundle\Response\Headers as Headers;
+use Filos\FrameworkBundle\Response\Headers;
 use Filos\FrameworkBundle\Utils\Escaper;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class ResponseDecoratorListener
+final class ResponseDecoratorListener
 {
     /**
      * @param FilterResponseEvent $event
@@ -46,22 +46,22 @@ class ResponseDecoratorListener
             return;
         }
 
-        $this->setStatusCodeIfExists($app, $response);
+        $this->setStatusCode($app, $response);
 
         if (!$request->isXmlHttpRequest()) {
             return;
         }
 
-        $this->setPageTitleIfExists($app, $headers);
-        $this->setPageCallbackIfExists($app, $headers);
-        $this->setPageDataIfExists($app, $headers);
+        $this->setPageTitle($app, $headers);
+        $this->setPageCallback($app, $headers);
+        $this->setPageData($app, $headers);
     }
 
     /**
      * @param array    $app
      * @param Response $response
      */
-    private function setStatusCodeIfExists(array $app, Response $response)
+    private function setStatusCode(array $app, Response $response)
     {
         if (isset($app[Headers::RESPONSE_STATUS_KEY])) {
             $response->setStatusCode($app[Headers::RESPONSE_STATUS_KEY]);
@@ -72,7 +72,7 @@ class ResponseDecoratorListener
      * @param array             $app
      * @param ResponseHeaderBag $headers
      */
-    private function setPageTitleIfExists(array $app, ResponseHeaderBag $headers)
+    private function setPageTitle(array $app, ResponseHeaderBag $headers)
     {
         if (isset($app[Headers::PAGE_TITLE_KEY])) {
             $headers->set(
@@ -86,13 +86,10 @@ class ResponseDecoratorListener
      * @param array             $app
      * @param ResponseHeaderBag $headers
      */
-    private function setPageCallbackIfExists(array $app, ResponseHeaderBag $headers)
+    private function setPageCallback(array $app, ResponseHeaderBag $headers)
     {
         if (isset($app[Headers::ACTION_CALLBACK_KEY])) {
-            $headers->set(
-                Headers::ACTION_CALLBACK_HEADER,
-                $app[Headers::ACTION_CALLBACK_KEY]
-            );
+            $headers->set(Headers::ACTION_CALLBACK_HEADER, $app[Headers::ACTION_CALLBACK_KEY]);
         }
     }
 
@@ -100,7 +97,7 @@ class ResponseDecoratorListener
      * @param array             $app
      * @param ResponseHeaderBag $headers
      */
-    private function setPageDataIfExists(array $app, ResponseHeaderBag $headers)
+    private function setPageData(array $app, ResponseHeaderBag $headers)
     {
         if (isset($app[Headers::ACTION_DATA_KEY])) {
             $headers->set(

@@ -15,7 +15,7 @@ namespace Filos\FrameworkBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
-class TruncatableTablesListener
+final class TruncatableTablesListener
 {
     /**
      * @var array

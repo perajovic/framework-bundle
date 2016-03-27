@@ -16,7 +16,7 @@ namespace Filos\FrameworkBundle\EventListener;
 use Filos\FrameworkBundle\Controller\ControllerResult;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 
-class RouteAppListener
+final class RouteAppListener
 {
     /**
      * @var array

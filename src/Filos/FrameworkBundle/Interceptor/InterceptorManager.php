@@ -16,7 +16,7 @@ namespace Filos\FrameworkBundle\Interceptor;
 use Symfony\Component\HttpFoundation\Request;
 use RuntimeException;
 
-class InterceptorManager
+final class InterceptorManager
 {
     /**
      * @var array
@@ -58,7 +58,7 @@ class InterceptorManager
     public function handle(Request $request)
     {
         $app = $request->attributes->get('_app', []);
-        $interceptors = isset($app['interceptors']) ? $app['interceptors'] : [];
+        $interceptors = $app['interceptors'] ?? [];
 
         foreach ($interceptors as $value) {
             if (!isset($this->interceptors[$value])) {

@@ -15,7 +15,7 @@ namespace Filos\FrameworkBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-class RequestFormatListener
+final class RequestFormatListener
 {
     /**
      * @param GetResponseEvent $event

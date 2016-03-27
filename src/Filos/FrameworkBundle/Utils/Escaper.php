@@ -13,7 +13,7 @@ declare (strict_types = 1);
 
 namespace Filos\FrameworkBundle\Utils;
 
-class Escaper
+final class Escaper
 {
     /**
      * @param mixed $var

@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\Templating\EngineInterface;
 
-class ViewRendererListener
+final class ViewRendererListener
 {
     /**
      * @var EngineInterface
@@ -51,9 +51,7 @@ class ViewRendererListener
         $content = '';
         $template = $result->app->get('page_template');
         if ($template) {
-            $content = trim(
-                $this->templating->render($template, $result->view->all())
-            );
+            $content = trim($this->templating->render($template, $result->view->all()));
         }
 
         $event->setResponse(new Response($content));
