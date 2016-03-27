@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Filos framework.
+ *
+ * (c) Pera Jovic <perajovic@me.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare (strict_types = 1);
+
 namespace Filos\FrameworkBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -18,12 +29,8 @@ class InterceptorPass implements CompilerPassInterface
         }
 
         $interceptors = [];
-        $definition = $container->getDefinition(
-            'filos_framework.interceptor.manager'
-        );
-        $services = $container->findTaggedServiceIds(
-            'filos_framework.interceptor'
-        );
+        $definition = $container->getDefinition('filos_framework.interceptor.manager');
+        $services = $container->findTaggedServiceIds('filos_framework.interceptor');
 
         foreach ($services as $id => $tags) {
             foreach ($tags as $attributes) {

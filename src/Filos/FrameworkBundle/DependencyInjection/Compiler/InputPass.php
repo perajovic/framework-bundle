@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Filos framework.
+ *
+ * (c) Pera Jovic <perajovic@me.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare (strict_types = 1);
+
 namespace Filos\FrameworkBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -20,24 +31,20 @@ class InputPass implements CompilerPassInterface
 
         $interceptors = [];
 
-        $definition = $container->getDefinition(
-            'filos_framework.interceptor.manager'
-        );
+        $definition = $container->getDefinition('filos_framework.interceptor.manager');
         $services = $container->findTaggedServiceIds('filos_framework.input');
 
         foreach ($services as $inputId => $tags) {
             foreach ($tags as $attributes) {
                 $metadata = $this->createServiceMetadata($attributes['alias']);
 
-                if ($container->hasDefinition($metadata['interceptorId'])) {
+                if ($container->hasDefinition($metadata['interceptor_id'])) {
                     continue;
                 }
 
-                $metadata['inputId'] = $inputId;
+                $metadata['input_id'] = $inputId;
                 $this->registerService($container, $metadata);
-                $interceptors[$metadata['alias']] = new Reference(
-                    $metadata['interceptorId']
-                );
+                $interceptors[$metadata['alias']] = new Reference($metadata['interceptor_id']);
             }
         }
 
@@ -49,13 +56,13 @@ class InputPass implements CompilerPassInterface
      *
      * @return array
      */
-    private function createServiceMetadata($alias)
+    private function createServiceMetadata($alias): array
     {
         $interceptorId = explode('.', $alias);
         array_splice($interceptorId, 1, 0, 'interceptor');
 
         return [
-            'interceptorId' => implode('.', $interceptorId).'_input',
+            'interceptor_id' => implode('.', $interceptorId).'_input',
             'alias' => $alias.'_input',
         ];
     }
@@ -67,14 +74,12 @@ class InputPass implements CompilerPassInterface
     private function registerService(ContainerBuilder $container, array $metadata)
     {
         $class = 'Filos\FrameworkBundle\Interceptor\InputInterceptor';
-        $interceptorId = $metadata['interceptorId'];
+        $interceptorId = $metadata['interceptor_id'];
         $alias = $metadata['alias'];
-        $inputId = $metadata['inputId'];
+        $inputId = $metadata['input_id'];
 
         $definition = new Definition($class, [new Reference('validator'), new Reference($inputId)]);
-        $definition
-            ->setLazy(true)
-            ->addTag('filos_framework.interceptor', ['alias' => $alias]);
+        $definition->setLazy(true)->addTag('filos_framework.interceptor', ['alias' => $alias]);
         $container->setDefinition($interceptorId, $definition);
     }
 }

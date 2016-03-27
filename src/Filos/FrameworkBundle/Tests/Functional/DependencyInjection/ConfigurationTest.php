@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Filos framework.
+ *
+ * (c) Pera Jovic <perajovic@me.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare (strict_types = 1);
+
 namespace Filos\FrameworkBundle\Tests\Functional\DependencyInjection;
 
 use Filos\FrameworkBundle\DependencyInjection\Configuration;
@@ -17,16 +28,7 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         $this->assertConfigurationIsInvalid([$params]);
     }
 
-    /**
-     * @test
-     * @dataProvider provideValidConfiguration
-     */
-    public function configurationIsValid($params, $expected)
-    {
-        $this->assertProcessedConfigurationEquals($params, $expected);
-    }
-
-    public function provideInvalidConfiguration()
+    public function provideInvalidConfiguration(): array
     {
         return [
             [[5, 'truncate_tables_between_tests' => false]],
@@ -39,7 +41,16 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         ];
     }
 
-    public function provideValidConfiguration()
+    /**
+     * @test
+     * @dataProvider provideValidConfiguration
+     */
+    public function configurationIsValid($params, $expected)
+    {
+        $this->assertProcessedConfigurationEquals($params, $expected);
+    }
+
+    public function provideValidConfiguration(): array
     {
         return [
             [
@@ -75,7 +86,7 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         ];
     }
 
-    protected function getConfiguration()
+    protected function getConfiguration(): Configuration
     {
         return new Configuration();
     }

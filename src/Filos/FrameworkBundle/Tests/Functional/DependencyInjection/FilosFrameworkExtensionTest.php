@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Filos framework.
+ *
+ * (c) Pera Jovic <perajovic@me.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare (strict_types = 1);
+
 namespace Filos\FrameworkBundle\Tests\Functional\DependencyInjection;
 
 use Filos\FrameworkBundle\DependencyInjection\FilosFrameworkExtension;
@@ -16,10 +27,7 @@ class SupportYardFrameworkExtensionTest extends AbstractExtensionTestCase
 
         $this->load();
 
-        $this->assertContainerBuilderHasParameter(
-            'filos_framework.app',
-            $appParam
-        );
+        $this->assertContainerBuilderHasParameter('filos_framework.app', $appParam);
     }
 
     /**
@@ -29,9 +37,7 @@ class SupportYardFrameworkExtensionTest extends AbstractExtensionTestCase
     {
         $this->load(['truncate_tables_between_tests' => true]);
 
-        $this->assertContainerBuilderNotHasService(
-            'filos_framework.listener.truncatable_tables'
-        );
+        $this->assertContainerBuilderNotHasService('filos_framework.listener.truncatable_tables');
     }
 
     /**
@@ -42,9 +48,7 @@ class SupportYardFrameworkExtensionTest extends AbstractExtensionTestCase
         $this->setParameter('kernel.environment', 'dev');
         $this->load(['truncate_tables_between_tests' => true]);
 
-        $this->assertContainerBuilderNotHasService(
-            'filos_framework.listener.truncatable_tables'
-        );
+        $this->assertContainerBuilderNotHasService('filos_framework.listener.truncatable_tables');
     }
 
     /**
@@ -66,12 +70,12 @@ class SupportYardFrameworkExtensionTest extends AbstractExtensionTestCase
         );
     }
 
-    protected function getMinimalConfiguration()
+    protected function getMinimalConfiguration(): array
     {
         return ['app' => ['foo' => 'bar']];
     }
 
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         return [new FilosFrameworkExtension()];
     }

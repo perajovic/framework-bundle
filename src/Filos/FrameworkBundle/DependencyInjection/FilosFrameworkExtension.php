@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Filos framework.
+ *
+ * (c) Pera Jovic <perajovic@me.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare (strict_types = 1);
+
 namespace Filos\FrameworkBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -15,22 +26,13 @@ class FilosFrameworkExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader(
-            $container,
-            new FileLocator(__DIR__.'/../Resources/config')
-        );
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('services.yml');
 
-        $processedConfig = $this->processConfiguration(
-            new Configuration(),
-            $configs
-        );
+        $processedConfig = $this->processConfiguration(new Configuration(), $configs);
 
-        $container->setParameter(
-            'filos_framework.app',
-            $processedConfig['app']
-        );
+        $container->setParameter('filos_framework.app', $processedConfig['app']);
         $container->setParameter(
             'filos_framework.truncate_tables_between_tests',
             $processedConfig['truncate_tables_between_tests']
@@ -54,13 +56,8 @@ class FilosFrameworkExtension extends Extension
             return;
         }
 
-        $definition = new Definition(
-            'Filos\\FrameworkBundle\\EventListener\\TruncatableTablesListener'
-        );
+        $definition = new Definition('Filos\FrameworkBundle\EventListener\TruncatableTablesListener');
         $definition->addTag('doctrine.event_listener', ['event' => 'postPersist']);
-        $container->setDefinition(
-            'filos_framework.listener.truncatable_tables',
-            $definition
-        );
+        $container->setDefinition('filos_framework.listener.truncatable_tables', $definition);
     }
 }
