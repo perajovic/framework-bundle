@@ -14,7 +14,7 @@ declare (strict_types = 1);
 namespace Filos\FrameworkBundle\Tests\Unit\EventListener;
 
 use Filos\FrameworkBundle\EventListener\ResponseDecoratorListener;
-use Filos\FrameworkBundle\Response\ResponseHeaders;
+use Filos\FrameworkBundle\Response\Headers;
 use Filos\FrameworkBundle\Test\EventListenerTestCase;
 
 class ResponseDecoratorListenerTest extends EventListenerTestCase
@@ -46,7 +46,7 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
      */
     public function cacheIsConfiguredForRequestWithAppConfig()
     {
-        $attributes = ['_app' => [ResponseHeaders::RESPONSE_STATUS_KEY => 200]];
+        $attributes = ['_app' => [Headers::RESPONSE_STATUS_KEY => 200]];
 
         $this->request->attributes->replace($attributes);
 
@@ -87,7 +87,7 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
     public function responseStatus($isResponseStatusSettled)
     {
         $attributes = $isResponseStatusSettled
-            ? ['_app' => [ResponseHeaders::RESPONSE_STATUS_KEY => 200]]
+            ? ['_app' => [Headers::RESPONSE_STATUS_KEY => 200]]
             : [];
 
         $this->request->attributes->replace($attributes);
@@ -108,7 +108,7 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
      */
     public function pageHeadersAreNotSettledForAjaxRequest()
     {
-        $attributes = ['_app' => [ResponseHeaders::PAGE_TITLE_KEY => 'foo']];
+        $attributes = ['_app' => [Headers::PAGE_TITLE_KEY => 'foo']];
 
         $this->request->attributes->replace($attributes);
         $this->request->headers->set('X-Requested-With', false);
@@ -129,10 +129,10 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
         $attributes = $hasAppConfig
             ? [
                 '_app' => [
-                    ResponseHeaders::RESPONSE_STATUS_KEY => 200,
-                    ResponseHeaders::PAGE_TITLE_KEY => 'Foo',
-                    ResponseHeaders::PAGE_CALLBACK_KEY => 'foo:bar',
-                    ResponseHeaders::PAGE_DATA_KEY => ['foo' => 'bar'],
+                    Headers::RESPONSE_STATUS_KEY => 200,
+                    Headers::PAGE_TITLE_KEY => 'Foo',
+                    Headers::ACTION_CALLBACK_KEY => 'foo:bar',
+                    Headers::ACTION_DATA_KEY => ['foo' => 'bar'],
                 ],
             ]
             : [
@@ -152,15 +152,15 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
             $this->assertSame(200, $this->response->getStatusCode());
             $this->assertSame(
                 '"Foo"',
-                $this->response->headers->get(ResponseHeaders::PAGE_TITLE_HEADER)
+                $this->response->headers->get(Headers::PAGE_TITLE_HEADER)
             );
             $this->assertSame(
                 'foo:bar',
-                $this->response->headers->get(ResponseHeaders::PAGE_CALLBACK_HEADER)
+                $this->response->headers->get(Headers::ACTION_CALLBACK_HEADER)
             );
             $this->assertSame(
                 json_encode(['foo' => 'bar']),
-                $this->response->headers->get(ResponseHeaders::PAGE_DATA_HEADER)
+                $this->response->headers->get(Headers::ACTION_DATA_HEADER)
             );
         }
     }
@@ -169,7 +169,7 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
     {
         return [
             [null],
-            [['_app' => [ResponseHeaders::RESPONSE_STATUS_KEY => 200]]],
+            [['_app' => [Headers::RESPONSE_STATUS_KEY => 200]]],
         ];
     }
 

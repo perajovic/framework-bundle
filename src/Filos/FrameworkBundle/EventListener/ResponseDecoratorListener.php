@@ -13,7 +13,7 @@ declare (strict_types = 1);
 
 namespace Filos\FrameworkBundle\EventListener;
 
-use Filos\FrameworkBundle\Response\ResponseHeaders as Headers;
+use Filos\FrameworkBundle\Response\Headers as Headers;
 use Filos\FrameworkBundle\Utils\Escaper;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Response;
@@ -88,10 +88,10 @@ class ResponseDecoratorListener
      */
     private function setPageCallbackIfExists(array $app, ResponseHeaderBag $headers)
     {
-        if (isset($app[Headers::PAGE_CALLBACK_KEY])) {
+        if (isset($app[Headers::ACTION_CALLBACK_KEY])) {
             $headers->set(
-                Headers::PAGE_CALLBACK_HEADER,
-                $app[Headers::PAGE_CALLBACK_KEY]
+                Headers::ACTION_CALLBACK_HEADER,
+                $app[Headers::ACTION_CALLBACK_KEY]
             );
         }
     }
@@ -102,10 +102,10 @@ class ResponseDecoratorListener
      */
     private function setPageDataIfExists(array $app, ResponseHeaderBag $headers)
     {
-        if (isset($app[Headers::PAGE_DATA_KEY])) {
+        if (isset($app[Headers::ACTION_DATA_KEY])) {
             $headers->set(
-                Headers::PAGE_DATA_HEADER,
-                json_encode(Escaper::escape($app[Headers::PAGE_DATA_KEY]))
+                Headers::ACTION_DATA_HEADER,
+                json_encode(Escaper::escape($app[Headers::ACTION_DATA_KEY]))
             );
         }
     }
