@@ -19,14 +19,25 @@ use Filos\FrameworkBundle\Utils\PasswordHelper;
 class PasswordHelperTest extends TestCase
 {
     /**
+     * @var PasswordHelper
+     */
+    private $passwordHelper;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->passwordHelper = new PasswordHelper();
+    }
+
+    /**
      * @test
      */
     public function passwordIsHashedAndVerified()
     {
-        $password = '123abc';
-        $hash = PasswordHelper::hash($password);
+        $hash = $this->passwordHelper->hash('123abc');
 
-        $this->assertTrue(PasswordHelper::verify($password, $hash));
+        $this->assertTrue($this->passwordHelper->verify('123abc', $hash));
     }
 
     /**
@@ -35,7 +46,7 @@ class PasswordHelperTest extends TestCase
      */
     public function passwordIsGenerated($length)
     {
-        $this->assertSame($length, strlen(PasswordHelper::generate($length)));
+        $this->assertSame($length, strlen($this->passwordHelper->generate($length)));
     }
 
     public function provideLength()

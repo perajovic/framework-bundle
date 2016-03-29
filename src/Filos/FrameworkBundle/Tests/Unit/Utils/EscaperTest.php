@@ -20,12 +20,35 @@ use stdClass;
 class EscaperTest extends TestCase
 {
     /**
+     * @var Escaper
+     */
+    private $escaper;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->escaper = new Escaper();
+    }
+
+    /**
      * @test
      * @dataProvider provideScalarTypes
      */
     public function scalarTypesExceptStringAreNotEscaped($expected, $actual)
     {
-        $this->assertSame($expected, Escaper::escape($actual));
+        $this->assertSame($expected, $this->escaper->escape($actual));
+    }
+
+    public function provideScalarTypes()
+    {
+        return [
+            [4, 4],
+            [4.32, 4.32],
+            [null, null],
+            [false, false],
+            [true, true],
+        ];
     }
 
     /**
@@ -34,7 +57,19 @@ class EscaperTest extends TestCase
      */
     public function notModifiedEscapedChars($expected, $actual)
     {
-        $this->assertSame($expected, Escaper::escape($actual));
+        $this->assertSame($expected, $this->escaper->escape($actual));
+    }
+
+    public function provideNotModifiedEscapedChars()
+    {
+        return [
+            ['zxcvbnmasdfghjklqwertyuiop', 'zxcvbnmasdfghjklqwertyuiop'],
+            ['ZXCVBNMASDFGHJKLQWERTYUIOneplatform', 'ZXCVBNMASDFGHJKLQWERTYUIOneplatform'],
+            ['`,./;\\[]1234567890-=', '`,./;\\[]1234567890-='],
+            ['~?:|!@#$%^*()_+', '~?:|!@#$%^*()_+'],
+            ['ŠšĐđČčĆćŽž', 'ŠšĐđČčĆćŽž'],
+            ['ШшЂђЧчЋћЖжЉљЊњ', 'ШшЂђЧчЋћЖжЉљЊњ'],
+        ];
     }
 
     /**
@@ -45,7 +80,7 @@ class EscaperTest extends TestCase
         // in browser, special chars in simple text output and in form fields
         // (as value attribute) are displayed as '&<>"
 
-        $this->assertSame('&#039;&amp;&lt;&gt;&quot;', Escaper::escape('\'&<>"'));
+        $this->assertSame('&#039;&amp;&lt;&gt;&quot;', $this->escaper->escape('\'&<>"'));
     }
 
     /**
@@ -59,7 +94,7 @@ class EscaperTest extends TestCase
 
         $this->assertSame(
             ['foo' => '_foo&lt;', 'bar' => '_bar&gt;'],
-            (array) Escaper::escape($obj)
+            (array) $this->escaper->escape($obj)
         );
     }
 
@@ -91,33 +126,7 @@ class EscaperTest extends TestCase
                 'zaz' => null,
                 'vaz' => '11&quot;',
             ],
-           Escaper::escape($data)
+           $this->escaper->escape($data)
         );
-    }
-
-    public function provideScalarTypes()
-    {
-        return [
-            [4, 4],
-            [4.32, 4.32],
-            [null, null],
-            [false, false],
-            [true, true],
-        ];
-    }
-
-    public function provideNotModifiedEscapedChars()
-    {
-        return [
-            ['zxcvbnmasdfghjklqwertyuiop', 'zxcvbnmasdfghjklqwertyuiop'],
-            [
-                'ZXCVBNMASDFGHJKLQWERTYUIOneplatform',
-                'ZXCVBNMASDFGHJKLQWERTYUIOneplatform',
-            ],
-            ['`,./;\\[]1234567890-=', '`,./;\\[]1234567890-='],
-            ['~?:|!@#$%^*()_+', '~?:|!@#$%^*()_+'],
-            ['ŠšĐđČčĆćŽž', 'ŠšĐđČčĆćŽž'],
-            ['ШшЂђЧчЋћЖжЉљЊњ', 'ШшЂђЧчЋћЖжЉљЊњ'],
-        ];
     }
 }

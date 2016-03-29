@@ -20,16 +20,11 @@ final class Escaper
      *
      * @return mixed
      */
-    public static function escape($var)
+    public function escape($var)
     {
         $escaper = function ($value) {
             return is_string($value)
-                ? htmlspecialchars(
-                    $value,
-                    ENT_QUOTES | ENT_SUBSTITUTE,
-                    'UTF-8',
-                    false
-                )
+                ? htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false)
                 : $value;
         };
 
@@ -38,14 +33,14 @@ final class Escaper
         }
 
         if (is_object($var)) {
-            return static::escape((array) $var);
+            return $this->escape((array) $var);
         }
 
         foreach ($var as $key => $value) {
             if (is_array($value)) {
-                $var[$key] = static::escape($value);
+                $var[$key] = $this->escape($value);
             } elseif (is_object($value)) {
-                $var[$key] = static::escape((array) $value);
+                $var[$key] = $this->escape((array) $value);
             } else {
                 $var[$key] = $escaper($value);
             }

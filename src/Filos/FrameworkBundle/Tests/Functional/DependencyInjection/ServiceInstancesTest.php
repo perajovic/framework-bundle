@@ -37,6 +37,8 @@ class ServiceInstancesTest extends FunctionalTestCase
             ['Filos\FrameworkBundle\EventListener\RouteAppListener', 'filos_framework.listener.route_app'],
             ['Filos\FrameworkBundle\EventListener\ViewRendererListener', 'filos_framework.listener.view_renderer'],
             ['Filos\FrameworkBundle\Interceptor\InterceptorManager', 'filos_framework.interceptor.manager'],
+            ['Filos\FrameworkBundle\Utils\Escaper', 'filos_framework.utils.escaper'],
+            ['Filos\FrameworkBundle\Utils\PasswordHelper', 'filos_framework.utils.password_helper'],
         ];
     }
 
