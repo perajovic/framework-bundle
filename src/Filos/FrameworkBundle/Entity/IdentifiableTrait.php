@@ -13,12 +13,20 @@ declare (strict_types = 1);
 
 namespace Filos\FrameworkBundle\Entity;
 
-trait IdentityTrait
+trait IdentifiableTrait
 {
     /**
      * @var int
      */
     private $id;
+
+    /**
+     * @param int|null $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id ? (int) $id : null;
+    }
 
     /**
      * @return int|null

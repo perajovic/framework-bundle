@@ -15,15 +15,15 @@ namespace Filos\FrameworkBundle\Tests\Unit\Entity;
 
 use Filos\FrameworkBundle\Test\TestCase;
 
-class HashableTraitTest extends TestCase
+class IdentifiableTraitTest extends TestCase
 {
-    private $hashable;
+    private $identifiable;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->hashable = $this->getObjectForTrait('Filos\FrameworkBundle\Entity\HashableTrait');
+        $this->identifiable = $this->getObjectForTrait('Filos\FrameworkBundle\Entity\IdentifiableTrait');
     }
 
     /**
@@ -31,28 +31,29 @@ class HashableTraitTest extends TestCase
      */
     public function checkInitialState()
     {
-        $this->assertNull($this->hashable->getHash());
+        $this->assertNull($this->identifiable->getId());
     }
 
     /**
      * @test
-     * @dataProvider provideSalts
+     * @dataProvider provideId
      */
-    public function hashIsSettledAndRetrieved($salt)
+    public function idIsSettledAndRetrieved($id, $expected)
     {
-        $this->hashable->setHash($salt);
+        $this->identifiable->setId($id);
 
-        $this->assertEquals(40, strlen($this->hashable->getHash()));
+        $this->assertSame($expected, $this->identifiable->getId());
     }
 
     /**
      * @return array
      */
-    public function provideSalts(): array
+    public function provideId(): array
     {
         return [
-            [null],
-            ['foo123'],
+            [1, 1],
+            ['1', 1],
+            [null, null],
         ];
     }
 }

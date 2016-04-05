@@ -22,6 +22,8 @@ class UpdatableTraitTest extends TestCase
 
     protected function setUp()
     {
+        parent::setUp();
+
         $this->updatable = $this->getObjectForTrait('Filos\FrameworkBundle\Entity\UpdatableTrait');
     }
 

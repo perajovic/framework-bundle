@@ -29,7 +29,7 @@ trait HashableTrait
             $salt = uniqid(mt_rand().time(), true);
         }
 
-        $this->hash = sha1($salt.time().$salt.rand(1000, 1000000).$salt);
+        $this->hash = sha1($salt.time().$salt.rand(1000, 10000000).$salt);
     }
 
     /**

@@ -22,6 +22,8 @@ class CreatableTraitTest extends TestCase
 
     public function setUp()
     {
+        parent::setUp();
+
         $this->creatable = $this->getObjectForTrait('Filos\FrameworkBundle\Entity\CreatableTrait');
     }
 
