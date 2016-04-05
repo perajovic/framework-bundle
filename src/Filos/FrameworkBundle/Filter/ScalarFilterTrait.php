@@ -22,9 +22,9 @@ trait ScalarFilterTrait
      * @param string  $field
      * @param string  $attribute
      *
-     * @return string|null
+     * @return string|false
      */
-    protected function filterScalar(Request $request, $field, $attribute = 'request')
+    protected function filterScalar(Request $request, string $field, $attribute = 'request')
     {
         $filtered = $request->{$attribute}->filter($field);
 

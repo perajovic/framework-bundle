@@ -17,19 +17,23 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract class FilterTraitTestCase extends TestCase
 {
+    /**
+     * @var Request
+     */
     protected $request;
 
-    public function createRequest($method = 'POST')
+    public function setUp()
     {
-        return Request::create('/_filter_test', $method);
+        parent::setUp();
+
+        $this->request = Request::create('/_filter_test', 'POST');
     }
 
-    protected function setAttribute($name, $value)
-    {
-        $this->request->attributes->set($name, $value);
-    }
-
-    protected function setRequest($name, $value)
+    /**
+     * @param string $name
+     * @param mixed  $value
+     */
+    protected function setRequest(string $name, $value)
     {
         $this->request->request->set($name, $value);
     }

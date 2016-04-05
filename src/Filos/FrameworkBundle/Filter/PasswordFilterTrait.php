@@ -21,9 +21,9 @@ trait PasswordFilterTrait
      * @param Request $request
      * @param string  $field
      *
-     * @return string|null
+     * @return string|false
      */
-    protected function filterPassword(Request $request, $field)
+    protected function filterPassword(Request $request, string $field)
     {
         $filtered = $request->request->filter($field);
 

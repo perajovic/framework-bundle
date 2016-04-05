@@ -24,9 +24,9 @@ trait StringFilterTrait
      *
      * @return string
      */
-    protected function filterString(Request $request, $field, $attribute = 'request')
+    protected function filterString(Request $request, string $field, $attribute = 'request')
     {
-        return $request->{$attribute}->filter(
+        return $request->$attribute->filter(
             $field,
             null,
             FILTER_SANITIZE_STRING,

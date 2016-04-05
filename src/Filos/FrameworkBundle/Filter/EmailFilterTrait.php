@@ -24,9 +24,9 @@ trait EmailFilterTrait
      *
      * @return string
      */
-    protected function filterEmail(Request $request, $field, $attribute = 'request')
+    protected function filterEmail(Request $request, string $field, $attribute = 'request')
     {
-        return $request->{$attribute}->filter(
+        return $request->$attribute->filter(
             $field,
             null,
             FILTER_SANITIZE_EMAIL,

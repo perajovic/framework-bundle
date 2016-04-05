@@ -24,15 +24,15 @@ trait BooleanFilterTrait
      *
      * @return bool
      */
-    protected function filterBoolean(Request $request, $field, $attribute = 'request')
+    protected function filterBoolean(Request $request, string $field, $attribute = 'request')
     {
-        $filtered = $request->{$attribute}->filter(
+        $filtered = $request->$attribute->filter(
             $field,
             false,
             FILTER_VALIDATE_BOOLEAN,
             FILTER_NULL_ON_FAILURE
         );
 
-        return null === $filtered ? false : (boolean) $filtered;
+        return null === $filtered ? false : (bool) $filtered;
     }
 }
