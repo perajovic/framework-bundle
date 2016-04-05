@@ -23,14 +23,7 @@ use Twig_Loader_Filesystem;
 
 class ExceptionControllerTest extends TestCase
 {
-    /**
-     * @var ExceptionController
-     */
     private $controller;
-
-    /**
-     * @var Request
-     */
     private $request;
 
     public function setUp()

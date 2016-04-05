@@ -17,6 +17,17 @@ use Filos\FrameworkBundle\Test\FilterTraitTestCase;
 
 class BooleanFilterTraitTest extends FilterTraitTestCase
 {
+    private $request;
+    private $filter;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->request = $this->createRequest();
+        $this->filter = $this->getObjectForTrait('Filos\FrameworkBundle\Filter\BooleanFilterTrait');
+    }
+
     /**
      * @test
      * @dataProvider provideValue
@@ -35,7 +46,10 @@ class BooleanFilterTraitTest extends FilterTraitTestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function provideValue()
+    /**
+     * @return array
+     */
+    public function provideValue(): array
     {
         return [
             [['foo'], false],
@@ -52,15 +66,5 @@ class BooleanFilterTraitTest extends FilterTraitTestCase
             [true, true],
             ['true', true],
         ];
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->filter = $this->getObjectForTrait(
-            'Filos\FrameworkBundle\Filter\BooleanFilterTrait'
-        );
-        $this->request = $this->createRequest();
     }
 }

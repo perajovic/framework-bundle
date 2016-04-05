@@ -15,6 +15,13 @@ namespace Filos\FrameworkBundle\Tests\Fixture;
 
 class FilteredInput
 {
+    /**
+     * @var string
+     */
     public $name;
+
+    /**
+     * @var string
+     */
     public $email;
 }

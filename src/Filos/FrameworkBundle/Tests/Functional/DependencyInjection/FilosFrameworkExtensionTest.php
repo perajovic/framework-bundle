@@ -70,11 +70,17 @@ class FilosFrameworkExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    /**
+     * @return array
+     */
     protected function getMinimalConfiguration(): array
     {
         return ['app' => ['foo' => 'bar']];
     }
 
+    /**
+     * @return array
+     */
     protected function getContainerExtensions(): array
     {
         return [new FilosFrameworkExtension()];

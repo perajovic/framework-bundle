@@ -18,6 +18,13 @@ use DateTime;
 
 class UpdatableTraitTest extends TestCase
 {
+    private $updatable;
+
+    protected function setUp()
+    {
+        $this->updatable = $this->getObjectForTrait('Filos\FrameworkBundle\Entity\UpdatableTrait');
+    }
+
     /**
      * @test
      */
@@ -40,18 +47,14 @@ class UpdatableTraitTest extends TestCase
         $this->assertSame($updatedAt, $this->updatable->getUpdatedAt());
     }
 
-    public function provideFieldValues()
+    /**
+     * @return array
+     */
+    public function provideFieldValues(): array
     {
         return [
             [null, null],
             [123, new DateTime('now')],
         ];
-    }
-
-    protected function setUp()
-    {
-        $this->updatable = $this->getObjectForTrait(
-            'Filos\FrameworkBundle\Entity\UpdatableTrait'
-        );
     }
 }

@@ -18,9 +18,6 @@ use Filos\FrameworkBundle\Utils\PasswordHelper;
 
 class PasswordHelperTest extends TestCase
 {
-    /**
-     * @var PasswordHelper
-     */
     private $passwordHelper;
 
     public function setUp()
@@ -49,7 +46,10 @@ class PasswordHelperTest extends TestCase
         $this->assertSame($length, strlen($this->passwordHelper->generate($length)));
     }
 
-    public function provideLength()
+    /**
+     * @return array
+     */
+    public function provideLength(): array
     {
         return [
             [15],

@@ -17,6 +17,17 @@ use Filos\FrameworkBundle\Test\FilterTraitTestCase;
 
 class ScalarFilterTraitTest extends FilterTraitTestCase
 {
+    private $request;
+    private $filter;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->request = $this->createRequest();
+        $this->filter = $this->getObjectForTrait('Filos\FrameworkBundle\Filter\ScalarFilterTrait');
+    }
+
     /**
      * @test
      * @dataProvider provideValue
@@ -35,7 +46,10 @@ class ScalarFilterTraitTest extends FilterTraitTestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function provideValue()
+    /**
+     * @return array
+     */
+    public function provideValue(): array
     {
         return [
             [['value'], false],
@@ -49,15 +63,5 @@ class ScalarFilterTraitTest extends FilterTraitTestCase
             ["'", "'"],
             ['<script>alert("xss")</script>', '<script>alert("xss")</script>'],
         ];
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->filter = $this->getObjectForTrait(
-            'Filos\FrameworkBundle\Filter\ScalarFilterTrait'
-        );
-        $this->request = $this->createRequest();
     }
 }

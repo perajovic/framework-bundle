@@ -18,10 +18,24 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RawInput implements RawInputInterface
 {
+    /**
+     * @var string
+     */
     public $name;
+
+    /**
+     * @var string
+     */
     public $email;
+
+    /**
+     * @var string
+     */
     private $id;
 
+    /**
+     * {@inheritdoc}
+     */
     public function load(Request $request)
     {
         $this->name = 'John Doe';

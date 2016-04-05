@@ -17,6 +17,11 @@ use Filos\FrameworkBundle\Test\TestCase;
 
 class IdentityTraitTest extends TestCase
 {
+    public function setUp()
+    {
+        $this->identity = $this->getObjectForTrait('Filos\FrameworkBundle\Entity\IdentityTrait');
+    }
+
     /**
      * @test
      */
@@ -35,12 +40,5 @@ class IdentityTraitTest extends TestCase
         $this->setNonPublicPropertyValue($this->identity, 'id', $id);
 
         $this->assertSame($id, $this->identity->getId());
-    }
-
-    protected function setUp()
-    {
-        $this->identity = $this->getObjectForTrait(
-            'Filos\FrameworkBundle\Entity\IdentityTrait'
-        );
     }
 }

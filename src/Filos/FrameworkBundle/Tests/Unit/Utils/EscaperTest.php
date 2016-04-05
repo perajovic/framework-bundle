@@ -19,9 +19,6 @@ use stdClass;
 
 class EscaperTest extends TestCase
 {
-    /**
-     * @var Escaper
-     */
     private $escaper;
 
     public function setUp()
@@ -40,7 +37,10 @@ class EscaperTest extends TestCase
         $this->assertSame($expected, $this->escaper->escape($actual));
     }
 
-    public function provideScalarTypes()
+    /**
+     * @return array
+     */
+    public function provideScalarTypes(): array
     {
         return [
             [4, 4],
@@ -60,7 +60,10 @@ class EscaperTest extends TestCase
         $this->assertSame($expected, $this->escaper->escape($actual));
     }
 
-    public function provideNotModifiedEscapedChars()
+    /**
+     * @return array
+     */
+    public function provideNotModifiedEscapedChars(): array
     {
         return [
             ['zxcvbnmasdfghjklqwertyuiop', 'zxcvbnmasdfghjklqwertyuiop'],
@@ -107,13 +110,7 @@ class EscaperTest extends TestCase
         $obj->foo = '_foo<';
         $obj->bar = '_bar>';
 
-        $data = [
-            'foo<' => ['foo\''],
-            'bar' => $obj,
-            'baz&',
-            'zaz' => null,
-            'vaz' => '11"',
-        ];
+        $data = ['foo<' => ['foo\''], 'bar' => $obj, 'baz&', 'zaz' => null, 'vaz' => '11"'];
 
         $this->assertSame(
             [

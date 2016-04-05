@@ -18,6 +18,19 @@ use Filos\FrameworkBundle\Test\EventListenerTestCase;
 
 class RequestFormatListenerTest extends EventListenerTestCase
 {
+    private $request;
+    private $event;
+    private $listener;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->request = $this->createRequest();
+        $this->event = $this->createGetResponseEvent();
+        $this->listener = new RequestFormatListener();
+    }
+
     /**
      * @test
      */
@@ -44,14 +57,5 @@ class RequestFormatListenerTest extends EventListenerTestCase
         $this->listener->onKernelRequest($this->event);
 
         $this->assertSame($format, $this->request->getRequestFormat());
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->request = $this->createRequest();
-        $this->event = $this->createGetResponseEvent();
-        $this->listener = new RequestFormatListener();
     }
 }

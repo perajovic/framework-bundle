@@ -19,6 +19,21 @@ use Filos\FrameworkBundle\Test\EventListenerTestCase;
 
 class ResponseDecoratorListenerTest extends EventListenerTestCase
 {
+    private $request;
+    private $response;
+    private $event;
+    private $listener;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->request = $this->createRequest();
+        $this->response = $this->createResponse();
+        $this->event = $this->createFilterResponseEvent();
+        $this->listener = new ResponseDecoratorListener();
+    }
+
     /**
      * @test
      */
@@ -165,7 +180,10 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
         }
     }
 
-    public function provideSkippedHeaders()
+    /**
+     * @return array
+     */
+    public function provideSkippedHeaders(): array
     {
         return [
             [null],
@@ -173,7 +191,10 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
         ];
     }
 
-    public function provideAppConfig()
+    /**
+     * @return array
+     */
+    public function provideAppConfig(): array
     {
         return [
             [false],
@@ -181,21 +202,14 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
         ];
     }
 
-    public function provideResponseStatus()
+    /**
+     * @return array
+     */
+    public function provideResponseStatus(): array
     {
         return [
             [false],
             [true],
         ];
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->request = $this->createRequest();
-        $this->response = $this->createResponse();
-        $this->event = $this->createFilterResponseEvent();
-        $this->listener = new ResponseDecoratorListener();
     }
 }

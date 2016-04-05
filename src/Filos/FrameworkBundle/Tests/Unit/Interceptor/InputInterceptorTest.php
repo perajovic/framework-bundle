@@ -20,6 +20,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class InputInterceptorTest extends TestCase
 {
+    private $constraint;
+    private $validator;
+    private $rawInput;
+    private $request;
+    private $interceptor;
+
+    public function setUp()
+    {
+        $this->constraint = $this->createConstraintViolation();
+        $this->validator = $this->createValidator();
+        $this->rawInput = new RawInput();
+        $this->request = Request::create('/_interceptor_test', 'POST');
+        $this->interceptor = new InputInterceptor($this->validator, $this->rawInput);
+    }
+
     /**
      * @test
      */
@@ -72,15 +87,6 @@ class InputInterceptorTest extends TestCase
         $this->ensureConstraint($propertyPath, $message);
 
         $this->interceptor->apply($this->request);
-    }
-
-    protected function setUp()
-    {
-        $this->constraint = $this->createConstraintViolation();
-        $this->validator = $this->createValidator();
-        $this->rawInput = new RawInput();
-        $this->request = Request::create('/_interceptor_test', 'POST');
-        $this->interceptor = new InputInterceptor($this->validator, $this->rawInput);
     }
 
     private function ensureConstraint($propertyPath, $message)

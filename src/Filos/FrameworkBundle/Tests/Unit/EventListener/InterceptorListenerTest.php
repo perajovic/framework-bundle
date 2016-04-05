@@ -18,6 +18,21 @@ use Filos\FrameworkBundle\Test\EventListenerTestCase;
 
 class InterceptorListenerTest extends EventListenerTestCase
 {
+    private $request;
+    private $event;
+    private $manager;
+    private $listener;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->request = $this->createRequest();
+        $this->event = $this->createFilterControllerEvent();
+        $this->manager = $this->createInterceptorManager();
+        $this->listener = new InterceptorListener($this->manager);
+    }
+
     /**
      * @test
      */
@@ -51,16 +66,6 @@ class InterceptorListenerTest extends EventListenerTestCase
         $this->ensureManagerIsExecuted();
 
         $this->listener->onKernelController($this->event);
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->request = $this->createRequest();
-        $this->event = $this->createFilterControllerEvent();
-        $this->manager = $this->createInterceptorManager();
-        $this->listener = new InterceptorListener($this->manager);
     }
 
     private function ensureManagerIsNotExecuted()

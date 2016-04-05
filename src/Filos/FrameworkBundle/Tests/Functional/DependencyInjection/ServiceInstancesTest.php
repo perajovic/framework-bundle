@@ -27,6 +27,9 @@ class ServiceInstancesTest extends FunctionalTestCase
         $this->assertInstanceOf($class, $this->getService($serviceId));
     }
 
+    /**
+     * @return array
+     */
     public function provideService(): array
     {
         return [
@@ -42,6 +45,9 @@ class ServiceInstancesTest extends FunctionalTestCase
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected static function createKernel(array $options = []): AppKernel
     {
         return new AppKernel('test', true);

@@ -19,6 +19,21 @@ use Filos\FrameworkBundle\Test\EventListenerTestCase;
 
 class ViewRendererListenerTest extends EventListenerTestCase
 {
+    private $request;
+    private $templating;
+    private $event;
+    private $listener;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->request = $this->createRequest();
+        $this->templating = $this->createTemplating();
+        $this->event = $this->createGetResponseForControllerResultEvent();
+        $this->listener = new ViewRendererListener($this->templating);
+    }
+
     /**
      * @test
      */
@@ -55,16 +70,6 @@ class ViewRendererListenerTest extends EventListenerTestCase
         $this->ensureTemplateIsRendered($view, $template);
 
         $this->listener->onKernelView($this->event);
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->request = $this->createRequest();
-        $this->templating = $this->createTemplating();
-        $this->event = $this->createGetResponseForControllerResultEvent();
-        $this->listener = new ViewRendererListener($this->templating);
     }
 
     private function ensureTemplateIsRendered($view, $template)

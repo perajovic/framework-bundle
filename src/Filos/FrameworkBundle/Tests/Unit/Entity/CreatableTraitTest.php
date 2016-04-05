@@ -18,6 +18,13 @@ use DateTime;
 
 class CreatableTraitTest extends TestCase
 {
+    private $creatable;
+
+    public function setUp()
+    {
+        $this->creatable = $this->getObjectForTrait('Filos\FrameworkBundle\Entity\CreatableTrait');
+    }
+
     /**
      * @test
      */
@@ -40,18 +47,14 @@ class CreatableTraitTest extends TestCase
         $this->assertSame($createdAt, $this->creatable->getCreatedAt());
     }
 
-    public function provideFieldValues()
+    /**
+     * @return array
+     */
+    public function provideFieldValues(): array
     {
         return [
             [null, null],
             [123, new DateTime('now')],
         ];
-    }
-
-    protected function setUp()
-    {
-        $this->creatable = $this->getObjectForTrait(
-            'Filos\FrameworkBundle\Entity\CreatableTrait'
-        );
     }
 }

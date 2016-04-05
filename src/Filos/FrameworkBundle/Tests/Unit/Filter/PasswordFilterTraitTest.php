@@ -17,6 +17,17 @@ use Filos\FrameworkBundle\Test\FilterTraitTestCase;
 
 class PasswordFilterTraitTest extends FilterTraitTestCase
 {
+    private $request;
+    private $filter;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->request = $this->createRequest();
+        $this->filter = $this->getObjectForTrait('Filos\FrameworkBundle\Filter\PasswordFilterTrait');
+    }
+
     /**
      * @test
      * @dataProvider provideValue
@@ -35,21 +46,14 @@ class PasswordFilterTraitTest extends FilterTraitTestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function provideValue()
+    /**
+     * @return array
+     */
+    public function provideValue(): array
     {
         return [
             [['mypass'], false],
             ['mypass', 'mypass'],
         ];
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->filter = $this->getObjectForTrait(
-            'Filos\FrameworkBundle\Filter\PasswordFilterTrait'
-        );
-        $this->request = $this->createRequest();
     }
 }

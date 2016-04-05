@@ -17,6 +17,13 @@ use Filos\FrameworkBundle\Test\TestCase;
 
 class HashableTraitTest extends TestCase
 {
+    private $hashable;
+
+    public function setUp()
+    {
+        $this->hashable = $this->getObjectForTrait('Filos\FrameworkBundle\Entity\HashableTrait');
+    }
+
     /**
      * @test
      */
@@ -36,18 +43,14 @@ class HashableTraitTest extends TestCase
         $this->assertEquals(40, strlen($this->hashable->getHash()));
     }
 
-    public function provideSalts()
+    /**
+     * @return array
+     */
+    public function provideSalts(): array
     {
         return [
             [null],
             ['foo123'],
         ];
-    }
-
-    protected function setUp()
-    {
-        $this->hashable = $this->getObjectForTrait(
-            'Filos\FrameworkBundle\Entity\HashableTrait'
-        );
     }
 }

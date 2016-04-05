@@ -20,6 +20,17 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class InterceptorManagerTest extends TestCase
 {
+    private $manager;
+    private $request;
+    private $interceptor;
+
+    protected function setUp()
+    {
+        $this->interceptor = $this->createInterceptor();
+        $this->request = $this->createRequest();
+        $this->manager = new InterceptorManager([]);
+    }
+
     /**
      * @test
      */
@@ -81,13 +92,6 @@ class InterceptorManagerTest extends TestCase
         $this->ensureInterceptorIsApplied($this->interceptor);
 
         $manager->handle($this->request);
-    }
-
-    protected function setUp()
-    {
-        $this->interceptor = $this->createInterceptor();
-        $this->request = $this->createRequest();
-        $this->manager = new InterceptorManager([]);
     }
 
     private function ensureInterceptorThrowsException($interceptor)

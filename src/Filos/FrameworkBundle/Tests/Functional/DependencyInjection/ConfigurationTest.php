@@ -28,6 +28,9 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         $this->assertConfigurationIsInvalid([$params]);
     }
 
+    /**
+     * @return array
+     */
     public function provideInvalidConfiguration(): array
     {
         return [
@@ -50,6 +53,9 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         $this->assertProcessedConfigurationEquals($params, $expected);
     }
 
+    /**
+     * @return array
+     */
     public function provideValidConfiguration(): array
     {
         return [
@@ -86,6 +92,9 @@ class ConfigurationTest extends AbstractConfigurationTestCase
         ];
     }
 
+    /**
+     * @return Configuration
+     */
     protected function getConfiguration(): Configuration
     {
         return new Configuration();

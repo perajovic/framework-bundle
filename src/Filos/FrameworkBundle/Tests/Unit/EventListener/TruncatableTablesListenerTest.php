@@ -20,8 +20,20 @@ use stdClass;
 
 class TruncatableTablesListenerTest extends EventListenerTestCase
 {
+    private $classMetadataInfo;
+    private $em;
+    private $listener;
     private static $getClassMetadataCounter = 0;
     private static $getTableNameCounter = 0;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->classMetadataInfo = $this->createClassMetadataInfo();
+        $this->em = $this->createEntityManager();
+        $this->listener = new TruncatableTablesListener();
+    }
 
     /**
      * @test
@@ -56,15 +68,6 @@ class TruncatableTablesListenerTest extends EventListenerTestCase
 
         $this->assertSame([$tableName1, $tableName2], $tables);
         $this->assertEmpty($this->listener->getTables());
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->classMetadataInfo = $this->createClassMetadataInfo();
-        $this->em = $this->createEntityManager();
-        $this->listener = new TruncatableTablesListener();
     }
 
     private function ensureEventData($event, $entity)

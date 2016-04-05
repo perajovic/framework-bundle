@@ -19,6 +19,27 @@ use Filos\FrameworkBundle\Test\EventListenerTestCase;
 
 class RouteAppListenerTest extends EventListenerTestCase
 {
+    private $resquest;
+    private $event;
+    private $listener;
+
+    private function setUp()
+    {
+        parent::setUp();
+
+        $this->request = $this->createRequest();
+        $this->event = $this->createGetResponseForControllerResultEvent();
+        $this->listener = new RouteAppListener([
+            'page_title' => null,
+            'page_template' => null,
+            'page_has_layout' => false,
+            'page_has_menu' => false,
+            'action_callback' => null,
+            'action_data' => [],
+            'response_status' => 200,
+        ]);
+    }
+
     /**
      * @test
      */
@@ -126,22 +147,5 @@ class RouteAppListenerTest extends EventListenerTestCase
                 ],
             ],
         ];
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->request = $this->createRequest();
-        $this->event = $this->createGetResponseForControllerResultEvent();
-        $this->listener = new RouteAppListener([
-            'page_title' => null,
-            'page_template' => null,
-            'page_has_layout' => false,
-            'page_has_menu' => false,
-            'action_callback' => null,
-            'action_data' => [],
-            'response_status' => 200,
-        ]);
     }
 }

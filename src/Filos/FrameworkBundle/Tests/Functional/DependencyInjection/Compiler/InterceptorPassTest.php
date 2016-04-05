@@ -49,6 +49,9 @@ class InterceptorPassTest extends AbstractCompilerPassTestCase
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function registerCompilerPass(ContainerBuilder $container)
     {
         $container->addCompilerPass(new InterceptorPass());

@@ -17,6 +17,17 @@ use Filos\FrameworkBundle\Test\FilterTraitTestCase;
 
 class EmailFilterTraitTest extends FilterTraitTestCase
 {
+    private $request;
+    private $filter;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->request = $this->createRequest();
+        $this->filter = $this->getObjectForTrait('Filos\FrameworkBundle\Filter\EmailFilterTrait');
+    }
+
     /**
      * @test
      * @dataProvider provideValue
@@ -35,7 +46,10 @@ class EmailFilterTraitTest extends FilterTraitTestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function provideValue()
+    /**
+     * @return array
+     */
+    public function provideValue(): array
     {
         return [
             [['john@doe'], false],
@@ -43,15 +57,5 @@ class EmailFilterTraitTest extends FilterTraitTestCase
             ['john@doe.com', 'john@doe.com'],
             ['(john@doe.com)', 'john@doe.com'],
         ];
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->filter = $this->getObjectForTrait(
-            'Filos\FrameworkBundle\Filter\EmailFilterTrait'
-        );
-        $this->request = $this->createRequest();
     }
 }

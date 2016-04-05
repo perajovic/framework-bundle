@@ -17,6 +17,17 @@ use Filos\FrameworkBundle\Test\FilterTraitTestCase;
 
 class StringFilterTraitTest extends FilterTraitTestCase
 {
+    private $request;
+    private $filter;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->request = $this->createRequest();
+        $this->filter = $this->getObjectForTrait('Filos\FrameworkBundle\Filter\StringFilterTrait');
+    }
+
     /**
      * @test
      * @dataProvider provideValue
@@ -35,7 +46,7 @@ class StringFilterTraitTest extends FilterTraitTestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function provideValue()
+    public function provideValue(): array
     {
         return [
             [['some string'], false],
@@ -45,15 +56,5 @@ class StringFilterTraitTest extends FilterTraitTestCase
             ['<script>some string</script>', 'some string'],
             ['<a href="#">some string</a>', 'some string'],
         ];
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->filter = $this->getObjectForTrait(
-            'Filos\FrameworkBundle\Filter\StringFilterTrait'
-        );
-        $this->request = $this->createRequest();
     }
 }

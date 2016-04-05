@@ -58,6 +58,9 @@ class InputPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasService('app_bundle.interceptor.service_3_input');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function registerCompilerPass(ContainerBuilder $container)
     {
         $container->addCompilerPass(new InputPass());
