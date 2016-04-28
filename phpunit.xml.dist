@@ -13,7 +13,7 @@
 
     <testsuites>
         <testsuite name="Filos FrameworkBundle Test Suite">
-            <directory>src/Filos/FrameworkBundle/Tests</directory>
+            <directory>tests/Filos/FrameworkBundle/Tests</directory>
         </testsuite>
     </testsuites>
 
