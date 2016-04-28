@@ -13,10 +13,10 @@
     ],
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": { "Filos\\FrameworkBundle\\": "src/Filos/FrameworkBundle" },
-        "exclude-from-classmap": [
-            "**/Tests/"
-        ]
+        "psr-4": { "Filos\\FrameworkBundle\\": "src/Filos/FrameworkBundle" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests/" }
     },
     "require": {
         "php": ">=7.0.0",

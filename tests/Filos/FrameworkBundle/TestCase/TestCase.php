@@ -11,7 +11,7 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Test;
+namespace Filos\FrameworkBundle\TestCase;
 
 use PHPUnit_Framework_TestCase;
 
