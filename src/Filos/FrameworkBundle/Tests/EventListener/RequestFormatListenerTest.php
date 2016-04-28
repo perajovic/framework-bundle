@@ -14,20 +14,35 @@ declare (strict_types = 1);
 namespace Filos\FrameworkBundle\Tests\EventListener;
 
 use Filos\FrameworkBundle\EventListener\RequestFormatListener;
-use Filos\FrameworkBundle\Test\EventListenerTestCase;
+use Filos\FrameworkBundle\Tests\Fixture\AppKernel;
+use Filos\FrameworkBundle\Test\TestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class RequestFormatListenerTest extends EventListenerTestCase
+class RequestFormatListenerTest extends TestCase
 {
+    /**
+     * @var Request
+     */
     private $request;
-    private $event;
+
+    /**
+     * @var RequestFormatListener
+     */
     private $listener;
+
+    /**
+     * @var AppKernel
+     */
+    private $kernel;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->request = $this->createRequest();
-        $this->event = $this->createGetResponseEvent();
+        $this->kernel = new AppKernel('test', true);
+        $this->request = Request::create('/_listener');
         $this->listener = new RequestFormatListener();
     }
 
@@ -36,9 +51,11 @@ class RequestFormatListenerTest extends EventListenerTestCase
      */
     public function listenerIsStoppedForSubRequest()
     {
-        $this->ensureIsNotMasterRequest();
+        $event = $this->createGetResponseEvent(HttpKernelInterface::SUB_REQUEST);
 
-        $this->listener->onKernelRequest($this->event);
+        $this->listener->onKernelRequest($event);
+
+        $this->assertSame('html', $this->request->getRequestFormat());
     }
 
     /**
@@ -46,16 +63,22 @@ class RequestFormatListenerTest extends EventListenerTestCase
      */
     public function formatIsSettled()
     {
-        $format = 'json';
-
+        $event = $this->createGetResponseEvent(HttpKernelInterface::SUB_REQUEST);
         $this->request->headers->set('Accept', 'application/json');
-        $this->request->setRequestFormat($format);
+        $this->request->setRequestFormat('json');
 
-        $this->ensureIsMasterRequest();
-        $this->ensureRequest();
+        $this->listener->onKernelRequest($event);
 
-        $this->listener->onKernelRequest($this->event);
+        $this->assertSame('json', $this->request->getRequestFormat());
+    }
 
-        $this->assertSame($format, $this->request->getRequestFormat());
+    /**
+     * @param string $requestType
+     *
+     * @return GetResponseEvent
+     */
+    private function createGetResponseEvent($requestType): GetResponseEvent
+    {
+        return new GetResponseEvent($this->kernel, $this->request, $requestType);
     }
 }

@@ -14,22 +14,44 @@ declare (strict_types = 1);
 namespace Filos\FrameworkBundle\Tests\EventListener;
 
 use Filos\FrameworkBundle\EventListener\InterceptorListener;
-use Filos\FrameworkBundle\Test\EventListenerTestCase;
+use Filos\FrameworkBundle\Interceptor\InterceptorManager;
+use Filos\FrameworkBundle\Tests\Fixture\AppKernel;
+use Filos\FrameworkBundle\Tests\Fixture\FooInterceptor;
+use Filos\FrameworkBundle\Test\TestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class InterceptorListenerTest extends EventListenerTestCase
+class InterceptorListenerTest extends TestCase
 {
+    /**
+     * @var Request
+     */
     private $request;
-    private $event;
+
+    /**
+     * @var InterceptorManager
+     */
     private $manager;
+
+    /**
+     * @var InterceptorListener
+     */
     private $listener;
 
-    protected function setUp()
+    /**
+     * @var AppKernel
+     */
+    private $kernel;
+
+    public function setUp()
     {
         parent::setUp();
 
-        $this->request = $this->createRequest();
-        $this->event = $this->createFilterControllerEvent();
-        $this->manager = $this->createInterceptorManager();
+        $this->kernel = new AppKernel('test', true);
+        $this->request = Request::create('/_listener');
+        $this->interceptor = new FooInterceptor();
+        $this->manager = new InterceptorManager(['foo' => $this->interceptor]);
         $this->listener = new InterceptorListener($this->manager);
     }
 
@@ -38,9 +60,11 @@ class InterceptorListenerTest extends EventListenerTestCase
      */
     public function listenerIsStoppedForSubRequest()
     {
-        $this->ensureIsNotMasterRequest();
+        $event = $this->createFilterControllerEvent(HttpKernelInterface::SUB_REQUEST);
 
-        $this->listener->onKernelController($this->event);
+        $this->listener->onKernelController($event);
+
+        $this->assertFalse($this->interceptor->executed);
     }
 
     /**
@@ -48,11 +72,11 @@ class InterceptorListenerTest extends EventListenerTestCase
      */
     public function ifAppRouteParamDoesNotExistListenerExecutionIsStopped()
     {
-        $this->ensureIsMasterRequest();
-        $this->ensureRequest();
-        $this->ensureManagerIsNotExecuted();
+        $event = $this->createFilterControllerEvent(HttpKernelInterface::MASTER_REQUEST);
 
-        $this->listener->onKernelController($this->event);
+        $this->listener->onKernelController($event);
+
+        $this->assertFalse($this->interceptor->executed);
     }
 
     /**
@@ -60,35 +84,26 @@ class InterceptorListenerTest extends EventListenerTestCase
      */
     public function managerHandledRequest()
     {
-        $this->ensureIsMasterRequest();
-        $this->ensureRequest();
+        $event = $this->createFilterControllerEvent(HttpKernelInterface::MASTER_REQUEST);
         $this->request->attributes->set('_app', ['interceptors' => ['foo']]);
-        $this->ensureManagerIsExecuted();
 
-        $this->listener->onKernelController($this->event);
+        $this->listener->onKernelController($event);
+
+        $this->assertTrue($this->interceptor->executed);
     }
 
-    private function ensureManagerIsNotExecuted()
+    /**
+     * @param string $requestType
+     *
+     * @return FilterControllerEvent
+     */
+    private function createFilterControllerEvent($requestType): FilterControllerEvent
     {
-        $this
-            ->manager
-            ->expects($this->never())
-            ->method('handle');
-    }
-
-    private function ensureManagerIsExecuted()
-    {
-        $this
-            ->manager
-            ->expects($this->once())
-            ->method('handle')
-            ->with($this->request);
-    }
-
-    private function createInterceptorManager()
-    {
-        return $this->createMockFor(
-            'Filos\FrameworkBundle\Interceptor\InterceptorManager'
+        return new FilterControllerEvent(
+            $this->kernel,
+            function () {},
+            $this->request,
+            $requestType
         );
     }
 }

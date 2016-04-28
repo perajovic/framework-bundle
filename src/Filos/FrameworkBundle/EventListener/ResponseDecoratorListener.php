@@ -40,7 +40,9 @@ final class ResponseDecoratorListener
             return;
         }
 
-        $this->enforceNoCache($headers);
+        if (isset($app['no_cache']) && true === (bool) $app['no_cache']) {
+            $this->enforceNoCache($headers);
+        }
 
         if (true === $headers->get(Headers::ERROR_HANDLED_HEADER)) {
             return;
@@ -77,7 +79,7 @@ final class ResponseDecoratorListener
         if (isset($app[Headers::PAGE_TITLE_KEY])) {
             $headers->set(
                 Headers::PAGE_TITLE_HEADER,
-                json_encode(Escaper::escape($app[Headers::PAGE_TITLE_KEY]))
+                $this->getDecodedString($app[Headers::PAGE_TITLE_KEY])
             );
         }
     }
@@ -102,7 +104,7 @@ final class ResponseDecoratorListener
         if (isset($app[Headers::ACTION_DATA_KEY])) {
             $headers->set(
                 Headers::ACTION_DATA_HEADER,
-                json_encode(Escaper::escape($app[Headers::ACTION_DATA_KEY]))
+                $this->getDecodedString($app[Headers::ACTION_DATA_KEY])
             );
         }
     }
@@ -118,5 +120,15 @@ final class ResponseDecoratorListener
             false
         );
         $headers->set('Pragma', 'no-cache', false);
+    }
+
+    /**
+     * @param mixed $data
+     *
+     * @return string
+     */
+    private function getDecodedString($data): string
+    {
+        return json_encode(Escaper::escape($data));
     }
 }

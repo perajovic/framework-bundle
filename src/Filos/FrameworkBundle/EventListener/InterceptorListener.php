@@ -43,10 +43,8 @@ final class InterceptorListener
         $request = $event->getRequest();
         $app = $request->attributes->get('_app');
 
-        if (!isset($app['interceptors'])) {
-            return;
+        if (isset($app['interceptors'])) {
+            $this->manager->handle($request);
         }
-
-        $this->manager->handle($request);
     }
 }

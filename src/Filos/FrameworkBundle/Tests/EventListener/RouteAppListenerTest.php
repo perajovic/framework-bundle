@@ -23,7 +23,7 @@ class RouteAppListenerTest extends EventListenerTestCase
     private $event;
     private $listener;
 
-    private function setUp()
+    public function setUp()
     {
         parent::setUp();
 
