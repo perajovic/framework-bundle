@@ -13,7 +13,7 @@ declare (strict_types = 1);
 
 namespace Filos\FrameworkBundle\Entity;
 
-trait HashableTrait
+class Hash
 {
     /**
      * @var string|null
@@ -23,7 +23,7 @@ trait HashableTrait
     /**
      * @param string|null $salt
      */
-    public function setHash($salt = null)
+    public function __construct($salt = null)
     {
         if (null === $salt) {
             $salt = uniqid(mt_rand().time(), true);
@@ -35,7 +35,7 @@ trait HashableTrait
     /**
      * @return string|null
      */
-    public function getHash()
+    public function get()
     {
         return $this->hash;
     }
