@@ -11,14 +11,17 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Utils;
+namespace Tests\Filos\FrameworkBundle\Utils;
 
-use Filos\FrameworkBundle\Test\TestCase;
 use Filos\FrameworkBundle\Utils\Escaper;
 use stdClass;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
 class EscaperTest extends TestCase
 {
+    /**
+     * @var Escaper
+     */
     private $escaper;
 
     public function setUp()

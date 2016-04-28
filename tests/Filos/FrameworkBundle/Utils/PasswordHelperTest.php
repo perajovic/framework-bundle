@@ -11,13 +11,16 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Utils;
+namespace Tests\Filos\FrameworkBundle\Utils;
 
-use Filos\FrameworkBundle\Test\TestCase;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 use Filos\FrameworkBundle\Utils\PasswordHelper;
 
 class PasswordHelperTest extends TestCase
 {
+    /**
+     * @var PasswordHelper
+     */
     private $passwordHelper;
 
     public function setUp()
@@ -41,7 +44,7 @@ class PasswordHelperTest extends TestCase
      * @test
      * @dataProvider provideLength
      */
-    public function passwordIsGenerated($length)
+    public function passwordIsGenerated(int $length)
     {
         $this->assertSame($length, strlen($this->passwordHelper->generate($length)));
     }
