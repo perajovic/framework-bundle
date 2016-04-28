@@ -11,10 +11,10 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\DependencyInjection;
+namespace Tests\Filos\FrameworkBundle\DependencyInjection;
 
-use Filos\FrameworkBundle\Tests\Fixture\AppKernel;
-use Filos\FrameworkBundle\Test\FunctionalTestCase;
+use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
+use Tests\Filos\FrameworkBundle\TestCase\FunctionalTestCase;
 
 class ServiceInstancesTest extends FunctionalTestCase
 {

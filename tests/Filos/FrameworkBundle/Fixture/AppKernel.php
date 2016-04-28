@@ -11,9 +11,10 @@
 
 declare (strict_types = 1);
 
-namespace Tests\Filos\FrameworkBundle\Tests\Fixture;
+namespace Tests\Filos\FrameworkBundle\Fixture;
 
 use Filos\FrameworkBundle\FilosFrameworkBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle as SymfonyFrameworkBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
@@ -25,7 +26,7 @@ class AppKernel extends Kernel
      */
     public function registerBundles(): array
     {
-        return [new TwigBundle(), new FilosFrameworkBundle()];
+        return [new TwigBundle(), new SymfonyFrameworkBundle(), new FilosFrameworkBundle()];
     }
 
     /**
@@ -41,7 +42,7 @@ class AppKernel extends Kernel
      */
     public function getCacheDir(): string
     {
-        return __DIR__.'/../../../../../var/cache/'.$this->environment;
+        return __DIR__.'/../../../../var/cache/'.$this->environment;
     }
 
     /**
@@ -49,6 +50,6 @@ class AppKernel extends Kernel
      */
     public function getLogDir(): string
     {
-        return __DIR__.'/../../../../../var/logs';
+        return __DIR__.'/../../../../var/logs';
     }
 }

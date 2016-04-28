@@ -11,7 +11,7 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\DependencyInjection;
+namespace Tests\Filos\FrameworkBundle\DependencyInjection;
 
 use Filos\FrameworkBundle\DependencyInjection\FilosFrameworkExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;

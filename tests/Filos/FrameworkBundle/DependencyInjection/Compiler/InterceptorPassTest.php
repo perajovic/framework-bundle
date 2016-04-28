@@ -11,7 +11,7 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\DependencyInjection\Compiler;
+namespace Tests\Filos\FrameworkBundle\DependencyInjection\Compiler;
 
 use Filos\FrameworkBundle\DependencyInjection\Compiler\InterceptorPass;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;

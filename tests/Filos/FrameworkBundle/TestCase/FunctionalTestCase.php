@@ -11,7 +11,7 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\TestCase;
+namespace Tests\Filos\FrameworkBundle\TestCase;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use LogicException;
