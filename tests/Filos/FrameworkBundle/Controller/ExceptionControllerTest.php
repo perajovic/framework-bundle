@@ -11,19 +11,26 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Controller;
+namespace Tests\Filos\FrameworkBundle\Controller;
 
 use Exception;
 use Filos\FrameworkBundle\Controller\ExceptionController;
-use Filos\FrameworkBundle\Test\TestCase;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
 class ExceptionControllerTest extends TestCase
 {
+    /**
+     * @var ExceptionController
+     */
     private $controller;
+
+    /**
+     * @var Request
+     */
     private $request;
 
     public function setUp()
@@ -31,7 +38,7 @@ class ExceptionControllerTest extends TestCase
         parent::setUp();
 
         $twigLoaderFilesystem = new Twig_Loader_Filesystem();
-        $twigLoaderFilesystem->setPaths(__DIR__.'/../../Fixture/views', 'Twig');
+        $twigLoaderFilesystem->setPaths(__DIR__.'/../Fixture/views', 'Twig');
         $twigEnvironment = new Twig_Environment($twigLoaderFilesystem);
 
         $this->request = Request::createFromGlobals();
@@ -47,6 +54,7 @@ class ExceptionControllerTest extends TestCase
 
         $response = $this->controller->showAction($this->request, $flattenException);
 
+        $this->assertSame("Test error template\n", $response->getContent());
         $this->assertSame(502, $response->getStatusCode());
         $this->assertTrue($response->headers->get('X-Error-Handled'));
     }

@@ -33,11 +33,8 @@ final class ExceptionController extends TwigExceptionController
     /**
      * {inheritdoc}.
      */
-    public function showAction(
-        Request $request,
-        FlattenException $exception,
-        DebugLoggerInterface $logger = null
-    ) {
+    public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null)
+    {
         $response = parent::showAction($request, $exception, $logger);
 
         $response->setStatusCode($exception->getStatusCode());
