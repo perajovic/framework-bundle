@@ -11,10 +11,10 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Controller;
+namespace Tests\Filos\FrameworkBundle\Controller;
 
 use Filos\FrameworkBundle\Controller\ControllerResult;
-use Filos\FrameworkBundle\Test\TestCase;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
 class ControllerResultTest extends TestCase
 {

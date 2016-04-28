@@ -11,10 +11,9 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Fixture;
+namespace Tests\Filos\FrameworkBundle\Tests\Fixture;
 
-use Filos\FrameworkBundle\FilosFrameworkBundle as FilosFrameworkBundle;
-use Symfony\Bundle\FrameworkBundle\FrameworkBundle as SymfonyFrameworkBundle;
+use Filos\FrameworkBundle\FilosFrameworkBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
@@ -26,7 +25,7 @@ class AppKernel extends Kernel
      */
     public function registerBundles(): array
     {
-        return [new TwigBundle(), new SymfonyFrameworkBundle(), new FilosFrameworkBundle()];
+        return [new TwigBundle(), new FilosFrameworkBundle()];
     }
 
     /**
