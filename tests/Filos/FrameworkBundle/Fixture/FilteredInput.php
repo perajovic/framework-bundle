@@ -11,7 +11,7 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Fixture;
+namespace Tests\Filos\FrameworkBundle\Fixture;
 
 class FilteredInput
 {
