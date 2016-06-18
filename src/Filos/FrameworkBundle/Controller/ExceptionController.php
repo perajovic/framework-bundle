@@ -23,7 +23,7 @@ use Twig_Environment;
 final class ExceptionController extends TwigExceptionController
 {
     /**
-     * {inheritdoc}.
+     * {@inheritdoc}.
      */
     public function __construct(Twig_Environment $twig, bool $debug = false)
     {
@@ -31,7 +31,7 @@ final class ExceptionController extends TwigExceptionController
     }
 
     /**
-     * {inheritdoc}.
+     * {@inheritdoc}.
      */
     public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null)
     {
