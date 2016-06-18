@@ -11,9 +11,9 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Response;
+namespace Filos\FrameworkBundle\Http;
 
-final class Headers
+final class ResponseHeaders
 {
     const RESPONSE_STATUS_KEY = 'response_status';
     const PAGE_TITLE_KEY = 'page_title';

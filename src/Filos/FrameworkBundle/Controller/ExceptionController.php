@@ -13,7 +13,7 @@ declare (strict_types = 1);
 
 namespace Filos\FrameworkBundle\Controller;
 
-use Filos\FrameworkBundle\Response\Headers;
+use Filos\FrameworkBundle\Http\ResponseHeaders;
 use Symfony\Bundle\TwigBundle\Controller\ExceptionController as TwigExceptionController;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +38,7 @@ final class ExceptionController extends TwigExceptionController
         $response = parent::showAction($request, $exception, $logger);
 
         $response->setStatusCode($exception->getStatusCode());
-        $response->headers->set(Headers::ERROR_HANDLED_HEADER, true);
+        $response->headers->set(ResponseHeaders::ERROR_HANDLED_HEADER, true);
 
         return $response;
     }

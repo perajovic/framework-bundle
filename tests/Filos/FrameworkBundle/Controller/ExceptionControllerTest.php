@@ -37,9 +37,9 @@ class ExceptionControllerTest extends TestCase
     {
         parent::setUp();
 
-        $twigLoaderFilesystem = new Twig_Loader_Filesystem();
-        $twigLoaderFilesystem->setPaths(__DIR__.'/../Fixture/views', 'Twig');
-        $twigEnvironment = new Twig_Environment($twigLoaderFilesystem);
+        $twigLoader = new Twig_Loader_Filesystem();
+        $twigLoader->setPaths(__DIR__.'/../Fixture/views', 'Twig');
+        $twigEnvironment = new Twig_Environment($twigLoader);
 
         $this->request = Request::createFromGlobals();
         $this->controller = new ExceptionController($twigEnvironment);
