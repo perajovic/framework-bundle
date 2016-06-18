@@ -21,24 +21,25 @@
     },
     "require": {
         "php": ">=7.0.0",
-        "symfony/config" : "~3.0",
-        "symfony/yaml" : "~3.0",
-        "symfony/dependency-injection" : "~3.0",
-        "symfony/event-dispatcher" : "~3.0",
-        "symfony/http-kernel": "~3.0",
-        "symfony/http-foundation": "~3.0",
-        "symfony/validator": "~3.0",
-        "symfony/translation": "~3.0",
-        "symfony/templating": "~3.0",
-        "symfony/twig-bundle": "~3.0",
-        "symfony/framework-bundle": "~3.0"
+        "symfony/config" : "~3.1",
+        "symfony/yaml" : "~3.1",
+        "symfony/dependency-injection" : "~3.1",
+        "symfony/event-dispatcher" : "~3.1",
+        "symfony/http-kernel": "~3.1",
+        "symfony/http-foundation": "~3.1",
+        "symfony/validator": "~3.1",
+        "symfony/translation": "~3.1",
+        "symfony/templating": "~3.1",
+        "symfony/twig-bundle": "~3.1",
+        "symfony/framework-bundle": "~3.1"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "0.*"
+        "matthiasnoback/symfony-dependency-injection-test": "0.*",
+        "phpunit/phpunit": "~5.4.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0-dev"
+            "dev-master": "3.1-dev"
         }
     }
 }
