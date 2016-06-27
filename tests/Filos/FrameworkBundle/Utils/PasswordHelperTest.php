@@ -42,6 +42,8 @@ class PasswordHelperTest extends TestCase
 
     /**
      * @test
+     *
+     * @param int $length
      * @dataProvider provideLength
      */
     public function passwordIsGenerated(int $length)

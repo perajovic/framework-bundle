@@ -33,6 +33,9 @@ class EscaperTest extends TestCase
 
     /**
      * @test
+     *
+     * @param mixed $expected
+     * @param mixed $actual
      * @dataProvider provideScalarTypes
      */
     public function scalarTypesExceptStringAreNotEscaped($expected, $actual)
@@ -56,9 +59,12 @@ class EscaperTest extends TestCase
 
     /**
      * @test
+     *
+     * @param string $expected
+     * @param string $actual
      * @dataProvider provideNotModifiedEscapedChars
      */
-    public function notModifiedEscapedChars($expected, $actual)
+    public function notModifiedEscapedChars(string $expected, string $actual)
     {
         $this->assertSame($expected, $this->escaper->escape($actual));
     }
