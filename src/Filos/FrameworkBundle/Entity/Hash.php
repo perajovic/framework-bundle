@@ -23,7 +23,7 @@ class Hash
     /**
      * @param string|null $salt
      */
-    public function __construct($salt = null)
+    public function __construct(string $salt = null)
     {
         if (null === $salt) {
             $salt = uniqid(mt_rand().time(), true);

@@ -20,11 +20,22 @@ class IdentityTest extends TestCase
 {
     /**
      * @test
+     *
+     * @param int|null $id
+     * @dataProvider provideIds
      */
-    public function idIsSettledAndRetrieved()
+    public function idIsSettledAndRetrieved(int $id = null)
     {
-        $identity = new Identity(123);
+        $identity = new Identity($id);
 
-        $this->assertSame(123, $identity->get());
+        $this->assertSame($id, $identity->get());
+    }
+
+    public function provideIds(): array
+    {
+        return [
+            [null],
+            [132],
+        ];
     }
 }

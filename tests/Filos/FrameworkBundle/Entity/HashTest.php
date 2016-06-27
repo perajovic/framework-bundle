@@ -20,9 +20,11 @@ class HashTest extends TestCase
 {
     /**
      * @test
+     *
+     * @param string|null $salt
      * @dataProvider provideSalts
      */
-    public function hashIsSettledAndRetrieved($salt)
+    public function hashIsSettledAndRetrieved(string $salt = null)
     {
         $hash = new Hash($salt);
 

@@ -21,15 +21,15 @@ class Identity
     private $id;
 
     /**
-     * @param int $id
+     * @param int|null $id
      */
-    public function __construct(int $id)
+    public function __construct(int $id = null)
     {
         $this->id = $id;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function get()
     {
