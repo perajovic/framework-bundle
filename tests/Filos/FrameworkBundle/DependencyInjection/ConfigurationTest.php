@@ -14,11 +14,14 @@ declare (strict_types = 1);
 namespace Tests\Filos\FrameworkBundle\DependencyInjection;
 
 use Filos\FrameworkBundle\DependencyInjection\Configuration;
-use Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase;
 use stdClass;
+use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
-class ConfigurationTest extends AbstractConfigurationTestCase
+class ConfigurationTest extends TestCase
 {
+    use ConfigurationTestCaseTrait;
+
     /**
      * @test
      * @dataProvider provideInvalidConfiguration
