@@ -17,12 +17,13 @@ final class PasswordHelper
 {
     /**
      * @param string $password
+     * @param int    $algorithm
      *
      * @return string
      */
-    public function hash(string $password): string
+    public function hash(string $password, $algorithm = PASSWORD_DEFAULT): string
     {
-        return password_hash($password, PASSWORD_DEFAULT);
+        return password_hash($password, $algorithm);
     }
 
     /**
@@ -44,7 +45,6 @@ final class PasswordHelper
     public function generate(int $length = 15): string
     {
         $password = '';
-
         $chars = str_shuffle(
             time().'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
         );

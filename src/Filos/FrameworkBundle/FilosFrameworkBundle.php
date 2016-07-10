@@ -27,7 +27,8 @@ class FilosFrameworkBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new InterceptorPass());
-        $container->addCompilerPass(new InputPass());
+        $container
+            ->addCompilerPass(new InterceptorPass())
+            ->addCompilerPass(new InputPass());
     }
 }

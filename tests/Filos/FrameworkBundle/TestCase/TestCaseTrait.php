@@ -25,11 +25,8 @@ trait TestCaseTrait
      *
      * @return mixed
      */
-    protected function callNonPublicMethodWithArguments(
-        $obj,
-        $method,
-        array $arguments = []
-    ) {
+    protected function callNonPublicMethodWithArguments($obj, $method, array $arguments = [])
+    {
         return $this
             ->setClassMemberAsAccessible($obj, $method, 'method')
             ->invokeArgs($obj, $arguments);
@@ -72,9 +69,13 @@ trait TestCaseTrait
     protected function setClassMemberAsAccessible($classOrObj, $member, $type)
     {
         $class = is_object($classOrObj) ? get_class($classOrObj) : $classOrObj;
-        $method = 'method' === $type ? 'getMethod' : 'getProperty';
 
-        $member = (new ReflectionClass($class))->{$method}($member);
+        if ('method' === $type) {
+            $member = (new ReflectionClass($class))->getMethod($member);
+        } else {
+            $member = (new ReflectionClass($class))->getProperty($member);
+        }
+
         $member->setAccessible(true);
 
         return $member;
@@ -85,9 +86,7 @@ trait TestCaseTrait
         $rObj = new ReflectionObject($this);
 
         foreach ($rObj->getProperties() as $property) {
-            if (!$property->isStatic() && 0
-                !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit_')
-            ) {
+            if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit_')) {
                 $property->setAccessible(true);
                 $property->setValue($this, null);
             }

@@ -30,7 +30,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      * @param string $class
      * @param array  $methods
      *
-     * @return object
+     * @return \PHPUnit_Framework_MockObject_MockObject
      */
     protected function createMockFor($class, array $methods = [])
     {

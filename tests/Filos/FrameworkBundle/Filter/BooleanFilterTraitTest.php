@@ -32,6 +32,7 @@ class BooleanFilterTraitTest extends FilterTraitTestCase
 
     /**
      * @test
+     * 
      * @dataProvider provideValue
      */
     public function valueIsFiltered($value, $expected)

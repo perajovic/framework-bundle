@@ -27,6 +27,6 @@ trait PasswordFilterTrait
     {
         $filtered = $request->request->filter($field);
 
-        return is_array($filtered) ? '' : $filtered;
+        return is_array($filtered) ? '' : (string) $filtered;
     }
 }

@@ -14,21 +14,20 @@ declare (strict_types = 1);
 namespace Tests\Filos\FrameworkBundle\Interceptor;
 
 use Filos\FrameworkBundle\Interceptor\InputInterceptor;
+use PHPUnit_Framework_MockObject_MockObject;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\ConstraintViolationInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Tests\Filos\FrameworkBundle\Fixture\RawInput;
 use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
 class InputInterceptorTest extends TestCase
 {
     /**
-     * @var ConstraintViolationInterface
+     * @var PHPUnit_Framework_MockObject_MockObject
      */
     private $constraint;
 
     /**
-     * @var ValidatorInterface
+     * @var PHPUnit_Framework_MockObject_MockObject
      */
     private $validator;
 
@@ -49,8 +48,10 @@ class InputInterceptorTest extends TestCase
 
     public function setUp()
     {
-        $this->constraint = $this->createConstraintViolation();
-        $this->validator = $this->createValidator();
+        parent::setUp();
+
+        $this->constraint = $this->createMockFor('Symfony\Component\Validator\ConstraintViolationInterface');
+        $this->validator = $this->createMockFor('Symfony\Component\Validator\Validator\ValidatorInterface');
         $this->rawInput = new RawInput();
         $this->request = Request::create('/_interceptor_test', 'POST');
         $this->interceptor = new InputInterceptor($this->validator, $this->rawInput);
@@ -139,19 +140,5 @@ class InputInterceptorTest extends TestCase
             ->method('validate')
             ->with($this->rawInput)
             ->will($this->returnValue($results));
-    }
-
-    private function createValidator()
-    {
-        return $this->createMockFor(
-            'Symfony\Component\Validator\Validator\ValidatorInterface'
-        );
-    }
-
-    private function createConstraintViolation()
-    {
-        return $this->createMockFor(
-            'Symfony\Component\Validator\ConstraintViolationInterface'
-        );
     }
 }

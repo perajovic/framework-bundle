@@ -33,6 +33,6 @@ trait StringFilterTrait
             FILTER_FLAG_NO_ENCODE_QUOTES
         );
 
-        return is_string($filtered) ? $filtered : '';
+        return is_string($filtered) ? (string) $filtered : '';
     }
 }

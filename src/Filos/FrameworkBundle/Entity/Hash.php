@@ -33,9 +33,9 @@ class Hash
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function get()
+    public function get(): string
     {
         return $this->hash;
     }

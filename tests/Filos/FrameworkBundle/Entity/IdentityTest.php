@@ -31,6 +31,9 @@ class IdentityTest extends TestCase
         $this->assertSame($id, $identity->get());
     }
 
+    /**
+     * @return array
+     */
     public function provideIds(): array
     {
         return [

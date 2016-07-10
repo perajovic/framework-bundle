@@ -94,9 +94,14 @@ class RouteAppListenerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider provideAppAttributes
+     *
+     * @param array $controllerResultApp
+     * @param array $attributesApp
+     * @param array $merged
      */
-    public function attributesForMerge($controllerResultApp, $attributesApp, $merged)
+    public function attributesForMerge(array $controllerResultApp, array $attributesApp, array $merged)
     {
         $this->controllerResult->app->replace($controllerResultApp);
         $this->request->attributes->set('_app', $attributesApp);

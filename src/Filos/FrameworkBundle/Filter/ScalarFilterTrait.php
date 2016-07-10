@@ -28,6 +28,6 @@ trait ScalarFilterTrait
     {
         $filtered = $request->{$attribute}->filter($field);
 
-        return is_array($filtered) ? '' : $filtered;
+        return is_array($filtered) ? '' : (string) $filtered;
     }
 }
