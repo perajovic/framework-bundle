@@ -11,19 +11,40 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Interceptor;
+namespace Tests\Filos\FrameworkBundle\Interceptor;
 
 use Filos\FrameworkBundle\Interceptor\InputInterceptor;
-use Filos\FrameworkBundle\Tests\Fixture\RawInput;
-use Filos\FrameworkBundle\Test\TestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\ConstraintViolationInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Tests\Filos\FrameworkBundle\Fixture\RawInput;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
 class InputInterceptorTest extends TestCase
 {
+    /**
+     * @var ConstraintViolationInterface
+     */
     private $constraint;
+
+    /**
+     * @var ValidatorInterface
+     */
     private $validator;
+
+    /**
+     * @var RawInput
+     */
     private $rawInput;
+
+    /**
+     * @var Request
+     */
     private $request;
+
+    /**
+     * @var InputInterceptor
+     */
     private $interceptor;
 
     public function setUp()
@@ -54,7 +75,7 @@ class InputInterceptorTest extends TestCase
 
     /**
      * @test
-     * @expectedException Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage error text
      */
     public function exceptionIsThrownWithFlattenErrors()
@@ -71,7 +92,7 @@ class InputInterceptorTest extends TestCase
 
     /**
      * @test
-     * @expectedException Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage {"some_field":"error text"}
      */
     public function exceptionIsThrownWithJsonEncodedErrors()
@@ -89,7 +110,11 @@ class InputInterceptorTest extends TestCase
         $this->interceptor->apply($this->request);
     }
 
-    private function ensureConstraint($propertyPath, $message)
+    /**
+     * @param string $propertyPath
+     * @param string $message
+     */
+    private function ensureConstraint(string $propertyPath, string $message)
     {
         $this
             ->constraint
@@ -103,7 +128,10 @@ class InputInterceptorTest extends TestCase
             ->will($this->returnValue($propertyPath));
     }
 
-    private function ensureValidation($results)
+    /**
+     * @param array $results
+     */
+    private function ensureValidation(array $results)
     {
         $this
             ->validator

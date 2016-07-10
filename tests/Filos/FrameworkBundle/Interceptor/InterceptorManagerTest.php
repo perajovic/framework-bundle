@@ -11,17 +11,29 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Interceptor;
+namespace Tests\Filos\FrameworkBundle\Interceptor;
 
+use Filos\FrameworkBundle\Interceptor\InterceptorInterface;
 use Filos\FrameworkBundle\Interceptor\InterceptorManager;
-use Filos\FrameworkBundle\Test\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
 class InterceptorManagerTest extends TestCase
 {
+    /**
+     * @var InterceptorManager
+     */
     private $manager;
+
+    /**
+     * @var Request
+     */
     private $request;
+
+    /**
+     * @var InterceptorInterface
+     */
     private $interceptor;
 
     protected function setUp()
@@ -58,7 +70,7 @@ class InterceptorManagerTest extends TestCase
 
     /**
      * @test
-     * @expectedException Symfony\Component\HttpKernel\Exception\HttpException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\HttpException
      * @expectedExceptionMessage 404 test status
      */
     public function interceptorThrowsException()
@@ -94,7 +106,10 @@ class InterceptorManagerTest extends TestCase
         $manager->handle($this->request);
     }
 
-    private function ensureInterceptorThrowsException($interceptor)
+    /**
+     * @param InterceptorInterface $interceptor
+     */
+    private function ensureInterceptorThrowsException(InterceptorInterface $interceptor)
     {
         $interceptor
             ->expects($this->once())
@@ -105,7 +120,10 @@ class InterceptorManagerTest extends TestCase
             ));
     }
 
-    private function ensureInterceptorIsApplied($interceptor)
+    /**
+     * @param InterceptorInterface $interceptor
+     */
+    private function ensureInterceptorIsApplied(InterceptorInterface $interceptor)
     {
         $interceptor
             ->expects($this->once())
@@ -120,6 +138,9 @@ class InterceptorManagerTest extends TestCase
         );
     }
 
+    /**
+     * @return Request
+     */
     private function createRequest()
     {
         return Request::create('/_interceptor_test');
