@@ -17,6 +17,8 @@ services:
 
     filos_framework.listener.response_decorator:
         class: 'Filos\FrameworkBundle\EventListener\ResponseDecoratorListener'
+        arguments:
+            - '@filos_framework.utils.escaper'
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.response' }
 

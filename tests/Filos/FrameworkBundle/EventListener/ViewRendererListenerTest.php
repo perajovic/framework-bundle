@@ -11,26 +11,47 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\EventListener;
+namespace Tests\Filos\FrameworkBundle\EventListener;
 
 use Filos\FrameworkBundle\Controller\ControllerResult;
 use Filos\FrameworkBundle\EventListener\ViewRendererListener;
-use Filos\FrameworkBundle\Test\EventListenerTestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Templating\EngineInterface;
+use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
+use Tests\Filos\FrameworkBundle\Fixture\Engine;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
-class ViewRendererListenerTest extends EventListenerTestCase
+class ViewRendererListenerTest extends TestCase
 {
+    /**
+     * @var AppKernel
+     */
+    private $kernel;
+
+    /**
+     * @var Request
+     */
     private $request;
+
+    /**
+     * @var EngineInterface
+     */
     private $templating;
-    private $event;
+
+    /**
+     * @var ViewRendererListener
+     */
     private $listener;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->request = $this->createRequest();
-        $this->templating = $this->createTemplating();
-        $this->event = $this->createGetResponseForControllerResultEvent();
+        $this->kernel = new AppKernel('test', true);
+        $this->request = Request::create('/_listener_test');
+        $this->templating = new Engine();
         $this->listener = new ViewRendererListener($this->templating);
     }
 
@@ -39,9 +60,9 @@ class ViewRendererListenerTest extends EventListenerTestCase
      */
     public function listenerIsStoppedForSubRequest()
     {
-        $this->ensureIsNotMasterRequest();
+        $event = $this->createGetResponseForControllerResultEvent(HttpKernelInterface::SUB_REQUEST, null);
 
-        $this->listener->onKernelView($this->event);
+        $this->listener->onKernelView($event);
     }
 
     /**
@@ -49,41 +70,59 @@ class ViewRendererListenerTest extends EventListenerTestCase
      */
     public function listenerIsStoppedIfResultIsNotControllerResultInstance()
     {
-        $this->ensureIsMasterRequest();
-        $this->ensureControllerResult(['foo' => 'bar']);
+        $event = $this->createGetResponseForControllerResultEvent(HttpKernelInterface::MASTER_REQUEST, ['foo' => 'bar']);
 
-        $this->listener->onKernelView($this->event);
+        $this->listener->onKernelView($event);
     }
 
     /**
      * @test
      */
-    public function templateIsRendered()
+    public function ifTemplateIsNotConfiguredEmptyResponseisSettled()
     {
-        $view = ['foo' => 'bar'];
-        $template = 'foo.html';
+        $view = ['foo_var' => 'bar'];
+
+        $result = new ControllerResult($view);
+
+        $event = $this->createGetResponseForControllerResultEvent(HttpKernelInterface::MASTER_REQUEST, $result);
+
+        $this->listener->onKernelView($event);
+
+        $this->assertEmpty($event->getResponse()->getContent());
+    }
+
+    /**
+     * @test
+     */
+    public function templateIsRenderedWithContent()
+    {
+        $view = ['foo_var' => 'bar'];
+        $template = 'view.html';
 
         $result = new ControllerResult($view, ['page_template' => $template]);
 
-        $this->ensureIsMasterRequest();
-        $this->ensureControllerResult($result);
-        $this->ensureTemplateIsRendered($view, $template);
+        $event = $this->createGetResponseForControllerResultEvent(HttpKernelInterface::MASTER_REQUEST, $result);
 
-        $this->listener->onKernelView($this->event);
+        $this->listener->onKernelView($event);
+
+        $this->assertSame('view.html foo_var bar', $event->getResponse()->getContent());
     }
 
-    private function ensureTemplateIsRendered($view, $template)
-    {
-        $this
-            ->templating
-            ->expects($this->once())
-            ->method('render')
-            ->with($template, $view)
-            ->will($this->returnValue('template rendered'));
-    }
-
-    private function createTemplating()
-    {
-        return $this->createMockFor('Symfony\Component\Templating\EngineInterface');
+    /**
+     * @param string                 $requestType
+     * @param ControllerResult|mixed $controllerResult
+     *
+     * @return GetResponseForControllerResultEvent
+     */
+    private function createGetResponseForControllerResultEvent(
+        int $requestType,
+        $controllerResult
+    ): GetResponseForControllerResultEvent {
+        return new GetResponseForControllerResultEvent(
+            $this->kernel,
+            $this->request,
+            $requestType,
+            $controllerResult
+        );
     }
 }

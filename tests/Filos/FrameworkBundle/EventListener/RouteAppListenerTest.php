@@ -11,24 +11,45 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\EventListener;
+namespace Tests\Filos\FrameworkBundle\EventListener;
 
 use Filos\FrameworkBundle\Controller\ControllerResult;
 use Filos\FrameworkBundle\EventListener\RouteAppListener;
-use Filos\FrameworkBundle\Test\EventListenerTestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
-class RouteAppListenerTest extends EventListenerTestCase
+class RouteAppListenerTest extends TestCase
 {
-    private $resquest;
-    private $event;
+    /**
+     * @var AppKernel
+     */
+    private $kernel;
+
+    /**
+     * @var Request
+     */
+    private $request;
+
+    /**
+     * @var RouteAppListener
+     */
     private $listener;
+
+    /**
+     * @var ControllerResult
+     */
+    private $controllerResult;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->request = $this->createRequest();
-        $this->event = $this->createGetResponseForControllerResultEvent();
+        $this->controllerResult = new ControllerResult();
+        $this->kernel = new AppKernel('test', true);
+        $this->request = Request::create('/_listener');
         $this->listener = new RouteAppListener([
             'page_title' => null,
             'page_template' => null,
@@ -45,9 +66,17 @@ class RouteAppListenerTest extends EventListenerTestCase
      */
     public function listenerIsStoppedForSubRequest()
     {
-        $this->ensureIsNotMasterRequest();
+        $this->request->attributes->set('_app', ['foo' => 'bar']);
+        $this->controllerResult->app = ['foo' => 'baz'];
 
-        $this->listener->onKernelView($this->event);
+        $event = $this->createGetResponseForControllerResultEvent(
+            HttpKernelInterface::SUB_REQUEST,
+            $this->controllerResult
+        );
+
+        $this->listener->onKernelView($event);
+
+        $this->assertSame('bar', $this->request->get('_app')['foo']);
     }
 
     /**
@@ -55,10 +84,12 @@ class RouteAppListenerTest extends EventListenerTestCase
      */
     public function listenerIsStoppedIfResultIsNotControllerResultInstance()
     {
-        $this->ensureIsMasterRequest();
-        $this->ensureControllerResult(['foo' => 'bar']);
+        $event = $this->createGetResponseForControllerResultEvent(
+            HttpKernelInterface::MASTER_REQUEST,
+            ['foo' => 'bar']
+        );
 
-        $this->listener->onKernelView($this->event);
+        $this->listener->onKernelView($event);
     }
 
     /**
@@ -67,20 +98,23 @@ class RouteAppListenerTest extends EventListenerTestCase
      */
     public function attributesForMerge($controllerResultApp, $attributesApp, $merged)
     {
-        $result = new ControllerResult([], $controllerResultApp);
-
+        $this->controllerResult->app->replace($controllerResultApp);
         $this->request->attributes->set('_app', $attributesApp);
 
-        $this->ensureIsMasterRequest();
-        $this->ensureControllerResult($result);
-        $this->ensureRequest();
+        $event = $this->createGetResponseForControllerResultEvent(
+            HttpKernelInterface::MASTER_REQUEST,
+            $this->controllerResult
+        );
 
-        $this->listener->onKernelView($this->event);
+        $this->listener->onKernelView($event);
 
-        $this->assertEquals($merged, $result->app->all());
+        $this->assertEquals($merged, $this->controllerResult->app->all());
     }
 
-    public function provideAppAttributes()
+    /**
+     * @return array
+     */
+    public function provideAppAttributes(): array
     {
         return [
             [
@@ -147,5 +181,23 @@ class RouteAppListenerTest extends EventListenerTestCase
                 ],
             ],
         ];
+    }
+
+    /**
+     * @param int                    $requestType
+     * @param ControllerResult|mixed $controllerResult
+     *
+     * @return GetResponseForControllerResultEvent
+     */
+    private function createGetResponseForControllerResultEvent(
+        int $requestType,
+        $controllerResult
+    ): GetResponseForControllerResultEvent {
+        return new GetResponseForControllerResultEvent(
+            $this->kernel,
+            $this->request,
+            $requestType,
+            $controllerResult
+        );
     }
 }

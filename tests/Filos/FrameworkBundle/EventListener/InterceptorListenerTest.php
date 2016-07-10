@@ -11,16 +11,16 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\EventListener;
+namespace Tests\Filos\FrameworkBundle\EventListener;
 
 use Filos\FrameworkBundle\EventListener\InterceptorListener;
 use Filos\FrameworkBundle\Interceptor\InterceptorManager;
-use Filos\FrameworkBundle\Tests\Fixture\AppKernel;
-use Filos\FrameworkBundle\Tests\Fixture\FooInterceptor;
-use Filos\FrameworkBundle\Test\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
+use Tests\Filos\FrameworkBundle\Fixture\FooInterceptor;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
 class InterceptorListenerTest extends TestCase
 {
@@ -43,6 +43,11 @@ class InterceptorListenerTest extends TestCase
      * @var AppKernel
      */
     private $kernel;
+
+    /**
+     * @var FooInterceptor
+     */
+    private $interceptor;
 
     public function setUp()
     {
@@ -93,11 +98,11 @@ class InterceptorListenerTest extends TestCase
     }
 
     /**
-     * @param string $requestType
+     * @param int $requestType
      *
      * @return FilterControllerEvent
      */
-    private function createFilterControllerEvent($requestType): FilterControllerEvent
+    private function createFilterControllerEvent(int $requestType): FilterControllerEvent
     {
         return new FilterControllerEvent(
             $this->kernel,

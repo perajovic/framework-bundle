@@ -48,11 +48,7 @@ final class RouteAppListener
 
         $attributes = $event->getRequest()->attributes;
 
-        $app = array_replace(
-            $this->appDefaults,
-            $attributes->get('_app', []),
-            $result->app->all()
-        );
+        $app = array_replace($this->appDefaults, $attributes->get('_app', []), $result->app->all());
 
         $result->app->replace($app);
         $attributes->set('_app', $app);

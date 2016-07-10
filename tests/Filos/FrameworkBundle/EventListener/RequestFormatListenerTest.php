@@ -11,14 +11,14 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\EventListener;
+namespace Tests\Filos\FrameworkBundle\EventListener;
 
 use Filos\FrameworkBundle\EventListener\RequestFormatListener;
-use Filos\FrameworkBundle\Tests\Fixture\AppKernel;
-use Filos\FrameworkBundle\Test\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
 class RequestFormatListenerTest extends TestCase
 {
@@ -73,11 +73,11 @@ class RequestFormatListenerTest extends TestCase
     }
 
     /**
-     * @param string $requestType
+     * @param int $requestType
      *
      * @return GetResponseEvent
      */
-    private function createGetResponseEvent($requestType): GetResponseEvent
+    private function createGetResponseEvent(int $requestType): GetResponseEvent
     {
         return new GetResponseEvent($this->kernel, $this->request, $requestType);
     }

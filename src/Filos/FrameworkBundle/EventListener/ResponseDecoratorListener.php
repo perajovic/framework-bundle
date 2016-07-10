@@ -13,7 +13,7 @@ declare (strict_types = 1);
 
 namespace Filos\FrameworkBundle\EventListener;
 
-use Filos\FrameworkBundle\Response\Headers;
+use Filos\FrameworkBundle\Http\ResponseHeaders;
 use Filos\FrameworkBundle\Utils\Escaper;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +22,19 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 final class ResponseDecoratorListener
 {
+    /**
+     * @var Escaper
+     */
+    private $escaper;
+
+    /**
+     * @param Escaper $escaper
+     */
+    public function __construct(Escaper $escaper)
+    {
+        $this->escaper = $escaper;
+    }
+
     /**
      * @param FilterResponseEvent $event
      */
@@ -40,12 +53,12 @@ final class ResponseDecoratorListener
             return;
         }
 
-        if (isset($app['no_cache']) && true === (bool) $app['no_cache']) {
-            $this->enforceNoCache($headers);
+        if (true === $headers->get(ResponseHeaders::ERROR_HANDLED_HEADER)) {
+            return;
         }
 
-        if (true === $headers->get(Headers::ERROR_HANDLED_HEADER)) {
-            return;
+        if (isset($app['no_cache']) && true === (bool) $app['no_cache']) {
+            $this->enforceNoCache($headers);
         }
 
         $this->setStatusCode($app, $response);
@@ -65,8 +78,8 @@ final class ResponseDecoratorListener
      */
     private function setStatusCode(array $app, Response $response)
     {
-        if (isset($app[Headers::RESPONSE_STATUS_KEY])) {
-            $response->setStatusCode($app[Headers::RESPONSE_STATUS_KEY]);
+        if (isset($app[ResponseHeaders::RESPONSE_STATUS_KEY])) {
+            $response->setStatusCode($app[ResponseHeaders::RESPONSE_STATUS_KEY]);
         }
     }
 
@@ -76,10 +89,10 @@ final class ResponseDecoratorListener
      */
     private function setPageTitle(array $app, ResponseHeaderBag $headers)
     {
-        if (isset($app[Headers::PAGE_TITLE_KEY])) {
+        if (isset($app[ResponseHeaders::PAGE_TITLE_KEY])) {
             $headers->set(
-                Headers::PAGE_TITLE_HEADER,
-                $this->getDecodedString($app[Headers::PAGE_TITLE_KEY])
+                ResponseHeaders::PAGE_TITLE_HEADER,
+                $this->getDecodedString($app[ResponseHeaders::PAGE_TITLE_KEY])
             );
         }
     }
@@ -90,8 +103,8 @@ final class ResponseDecoratorListener
      */
     private function setPageCallback(array $app, ResponseHeaderBag $headers)
     {
-        if (isset($app[Headers::ACTION_CALLBACK_KEY])) {
-            $headers->set(Headers::ACTION_CALLBACK_HEADER, $app[Headers::ACTION_CALLBACK_KEY]);
+        if (isset($app[ResponseHeaders::ACTION_CALLBACK_KEY])) {
+            $headers->set(ResponseHeaders::ACTION_CALLBACK_HEADER, $app[ResponseHeaders::ACTION_CALLBACK_KEY]);
         }
     }
 
@@ -101,10 +114,10 @@ final class ResponseDecoratorListener
      */
     private function setPageData(array $app, ResponseHeaderBag $headers)
     {
-        if (isset($app[Headers::ACTION_DATA_KEY])) {
+        if (isset($app[ResponseHeaders::ACTION_DATA_KEY])) {
             $headers->set(
-                Headers::ACTION_DATA_HEADER,
-                $this->getDecodedString($app[Headers::ACTION_DATA_KEY])
+                ResponseHeaders::ACTION_DATA_HEADER,
+                $this->getDecodedString($app[ResponseHeaders::ACTION_DATA_KEY])
             );
         }
     }
@@ -129,6 +142,6 @@ final class ResponseDecoratorListener
      */
     private function getDecodedString($data): string
     {
-        return json_encode(Escaper::escape($data));
+        return json_encode($this->escaper->escape($data));
     }
 }

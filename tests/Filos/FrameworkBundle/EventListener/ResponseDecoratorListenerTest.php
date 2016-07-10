@@ -11,27 +11,53 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\EventListener;
+namespace Tests\Filos\FrameworkBundle\EventListener;
 
 use Filos\FrameworkBundle\EventListener\ResponseDecoratorListener;
-use Filos\FrameworkBundle\Response\Headers;
-use Filos\FrameworkBundle\Test\EventListenerTestCase;
+use Filos\FrameworkBundle\Utils\Escaper;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
+use Tests\Filos\FrameworkBundle\TestCase\TestCase;
 
-class ResponseDecoratorListenerTest extends EventListenerTestCase
+class ResponseDecoratorListenerTest extends TestCase
 {
-    private $request;
-    private $response;
+    /**
+     * @var FilterResponseEvent
+     */
     private $event;
+
+    /**
+     * @var AppKernel
+     */
+    private $kernel;
+
+    /**
+     * @var Request
+     */
+    private $request;
+
+    /**
+     * @var Response
+     */
+    private $response;
+
+    /**
+     * @var ResponseDecoratorListener
+     */
     private $listener;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->request = $this->createRequest();
-        $this->response = $this->createResponse();
-        $this->event = $this->createFilterResponseEvent();
-        $this->listener = new ResponseDecoratorListener();
+        $this->kernel = new AppKernel('test', true);
+        $this->request = Request::create('/_listener');
+        $this->response = new Response();
+        $this->event = $this->createFilterResponseEvent(HttpKernelInterface::MASTER_REQUEST);
+        $this->listener = new ResponseDecoratorListener(new Escaper());
     }
 
     /**
@@ -39,9 +65,13 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
      */
     public function listenerIsStoppedForSubRequest()
     {
-        $this->ensureIsNotMasterRequest();
+        $this->request->attributes->set('_app', ['response_status' => 201]);
 
-        $this->listener->onKernelResponse($this->event);
+        $event = $this->createFilterResponseEvent(HttpKernelInterface::SUB_REQUEST);
+
+        $this->listener->onKernelResponse($event);
+
+        $this->assertSame(200, $this->response->getStatusCode());
     }
 
     /**
@@ -49,25 +79,30 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
      */
     public function listenerIsStoppedForRequestWithoutAppConfig()
     {
-        $this->ensureIsMasterRequest();
-        $this->ensureRequest();
-        $this->ensureResponse();
-
         $this->listener->onKernelResponse($this->event);
     }
 
     /**
      * @test
      */
-    public function cacheIsConfiguredForRequestWithAppConfig()
+    public function ifErrorIsHandledSomeResponseDecorationIsSkipped()
     {
-        $attributes = ['_app' => [Headers::RESPONSE_STATUS_KEY => 200]];
+        $this->request->attributes->set('_app', ['response_status' => 201]);
+        $this->response->headers->set('X-Error-Handled', true);
+
+        $this->listener->onKernelResponse($this->event);
+
+        $this->assertSame(200, $this->response->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function cacheIsConfigured()
+    {
+        $attributes = ['_app' => ['response_status' => 200, 'no_cache' => true]];
 
         $this->request->attributes->replace($attributes);
-
-        $this->ensureIsMasterRequest();
-        $this->ensureRequest();
-        $this->ensureResponse();
 
         $this->listener->onKernelResponse($this->event);
 
@@ -80,42 +115,14 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
 
     /**
      * @test
-     * @dataProvider provideSkippedHeaders
      */
-    public function appHeadersAreNotSettled($attributes)
+    public function newResponseStatusCodeIsSettled()
     {
-        if ($attributes) {
-            $this->request->attributes->replace($attributes);
-        }
-
-        $this->ensureIsMasterRequest();
-        $this->ensureRequest();
-        $this->ensureResponse();
-
-        $this->listener->onKernelResponse($this->event);
-    }
-
-    /**
-     * @test
-     * @dataProvider provideResponseStatus
-     */
-    public function responseStatus($isResponseStatusSettled)
-    {
-        $attributes = $isResponseStatusSettled
-            ? ['_app' => [Headers::RESPONSE_STATUS_KEY => 200]]
-            : [];
-
-        $this->request->attributes->replace($attributes);
-
-        $this->ensureIsMasterRequest();
-        $this->ensureRequest();
-        $this->ensureResponse();
+        $this->request->attributes->set('_app', ['response_status' => 201]);
 
         $this->listener->onKernelResponse($this->event);
 
-        if ($isResponseStatusSettled) {
-            $this->assertSame(200, $this->response->getStatusCode());
-        }
+        $this->assertSame(201, $this->response->getStatusCode());
     }
 
     /**
@@ -123,93 +130,48 @@ class ResponseDecoratorListenerTest extends EventListenerTestCase
      */
     public function pageHeadersAreNotSettledForAjaxRequest()
     {
-        $attributes = ['_app' => [Headers::PAGE_TITLE_KEY => 'foo']];
+        $attributes = ['_app' => ['page_title' => 'foo']];
 
         $this->request->attributes->replace($attributes);
         $this->request->headers->set('X-Requested-With', false);
 
-        $this->ensureIsMasterRequest();
-        $this->ensureRequest();
-        $this->ensureResponse();
-
         $this->listener->onKernelResponse($this->event);
+
+        $this->assertNull($this->response->headers->get('page_title'));
     }
 
     /**
      * @test
-     * @dataProvider provideAppConfig
      */
-    public function responseStatusCodeAndPageHeaders($hasAppConfig)
+    public function allHeadersAreSettled()
     {
-        $attributes = $hasAppConfig
-            ? [
-                '_app' => [
-                    Headers::RESPONSE_STATUS_KEY => 200,
-                    Headers::PAGE_TITLE_KEY => 'Foo',
-                    Headers::ACTION_CALLBACK_KEY => 'foo:bar',
-                    Headers::ACTION_DATA_KEY => ['foo' => 'bar'],
-                ],
-            ]
-            : [
-                '_app' => [],
-            ];
+        $attributes = [
+            '_app' => [
+                'response_status' => 200,
+                'page_title' => 'Foo',
+                'action_callback' => 'foo:bar',
+                'action_data' => ['foo' => 'bar'],
+            ],
+        ];
 
         $this->request->attributes->replace($attributes);
         $this->request->headers->set('X-Requested-With', true);
 
-        $this->ensureIsMasterRequest();
-        $this->ensureRequest();
-        $this->ensureResponse();
-
         $this->listener->onKernelResponse($this->event);
 
-        if ($hasAppConfig) {
-            $this->assertSame(200, $this->response->getStatusCode());
-            $this->assertSame(
-                '"Foo"',
-                $this->response->headers->get(Headers::PAGE_TITLE_HEADER)
-            );
-            $this->assertSame(
-                'foo:bar',
-                $this->response->headers->get(Headers::ACTION_CALLBACK_HEADER)
-            );
-            $this->assertSame(
-                json_encode(['foo' => 'bar']),
-                $this->response->headers->get(Headers::ACTION_DATA_HEADER)
-            );
-        }
+        $this->assertSame(200, $this->response->getStatusCode());
+        $this->assertSame('"Foo"', $this->response->headers->get('X-Page-Title'));
+        $this->assertSame('foo:bar', $this->response->headers->get('X-Action-Callback'));
+        $this->assertSame(json_encode(['foo' => 'bar']), $this->response->headers->get('X-Action-Data'));
     }
 
     /**
-     * @return array
+     * @param int $requestType
+     *
+     * @return FilterResponseEvent
      */
-    public function provideSkippedHeaders(): array
+    private function createFilterResponseEvent(int $requestType): FilterResponseEvent
     {
-        return [
-            [null],
-            [['_app' => [Headers::RESPONSE_STATUS_KEY => 200]]],
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function provideAppConfig(): array
-    {
-        return [
-            [false],
-            [true],
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function provideResponseStatus(): array
-    {
-        return [
-            [false],
-            [true],
-        ];
+        return new FilterResponseEvent($this->kernel, $this->request, $requestType, $this->response);
     }
 }
