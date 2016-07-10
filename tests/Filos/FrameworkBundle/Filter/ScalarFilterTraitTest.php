@@ -11,12 +11,16 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Filter;
+namespace Tests\Filos\FrameworkBundle\Filter;
 
-use Filos\FrameworkBundle\Test\FilterTraitTestCase;
+use Filos\FrameworkBundle\Filter\ScalarFilterTrait;
+use Tests\Filos\FrameworkBundle\TestCase\FilterTraitTestCase;
 
 class ScalarFilterTraitTest extends FilterTraitTestCase
 {
+    /**
+     * @var ScalarFilterTrait
+     */
     private $filter;
 
     public function setUp()

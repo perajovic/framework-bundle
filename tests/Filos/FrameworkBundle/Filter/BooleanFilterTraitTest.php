@@ -11,12 +11,16 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Filter;
+namespace Tests\Filos\FrameworkBundle\Filter;
 
-use Filos\FrameworkBundle\Test\FilterTraitTestCase;
+use Filos\FrameworkBundle\Filter\BooleanFilterTrait;
+use Tests\Filos\FrameworkBundle\TestCase\FilterTraitTestCase;
 
 class BooleanFilterTraitTest extends FilterTraitTestCase
 {
+    /**
+     * @var BooleanFilterTrait
+     */
     private $filter;
 
     public function setUp()
@@ -33,11 +37,7 @@ class BooleanFilterTraitTest extends FilterTraitTestCase
     public function valueIsFiltered($value, $expected)
     {
         $this->setRequest('field', $value);
-        $actual = $this->callNonPublicMethodWithArguments(
-            $this->filter,
-            'filterBoolean',
-            [$this->request, 'field']
-        );
+        $actual = $this->callNonPublicMethodWithArguments($this->filter, 'filterBoolean', [$this->request, 'field']);
 
         $this->assertSame($expected, $actual);
     }

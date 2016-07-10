@@ -11,12 +11,16 @@
 
 declare (strict_types = 1);
 
-namespace Filos\FrameworkBundle\Tests\Filter;
+namespace Tests\Filos\FrameworkBundle\Filter;
 
-use Filos\FrameworkBundle\Test\FilterTraitTestCase;
+use Filos\FrameworkBundle\Filter\EmailFilterTrait;
+use Tests\Filos\FrameworkBundle\TestCase\FilterTraitTestCase;
 
 class EmailFilterTraitTest extends FilterTraitTestCase
 {
+    /**
+     * @var EmailFilterTrait
+     */
     private $filter;
 
     public function setUp()
