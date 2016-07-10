@@ -52,7 +52,9 @@ class ScalarFilterTraitTest extends FilterTraitTestCase
     public function provideValue(): array
     {
         return [
-            [['value'], false],
+            [['value'], ''],
+            ['', ''],
+            [null, ''],
             ['value', 'value'],
             ['<div>value</div>', '<div>value</div>'],
             ['<a href="/">value</a>', '<a href="/">value</a>'],

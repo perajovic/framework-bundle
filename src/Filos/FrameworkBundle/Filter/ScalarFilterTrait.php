@@ -22,12 +22,12 @@ trait ScalarFilterTrait
      * @param string  $field
      * @param string  $attribute
      *
-     * @return string|false
+     * @return string
      */
-    protected function filterScalar(Request $request, string $field, $attribute = 'request')
+    protected function filterScalar(Request $request, string $field, $attribute = 'request'): string
     {
         $filtered = $request->{$attribute}->filter($field);
 
-        return is_array($filtered) ? false : $filtered;
+        return is_array($filtered) ? '' : $filtered;
     }
 }

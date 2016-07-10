@@ -24,13 +24,15 @@ trait StringFilterTrait
      *
      * @return string
      */
-    protected function filterString(Request $request, string $field, $attribute = 'request')
+    protected function filterString(Request $request, string $field, $attribute = 'request'): string
     {
-        return $request->$attribute->filter(
+        $filtered = $request->$attribute->filter(
             $field,
-            null,
+            '',
             FILTER_SANITIZE_STRING,
             FILTER_FLAG_NO_ENCODE_QUOTES
         );
+
+        return is_string($filtered) ? $filtered : '';
     }
 }

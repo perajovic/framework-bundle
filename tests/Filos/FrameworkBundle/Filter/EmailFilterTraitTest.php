@@ -52,7 +52,9 @@ class EmailFilterTraitTest extends FilterTraitTestCase
     public function provideValue(): array
     {
         return [
-            [['john@doe'], false],
+            [['john@doe'], ''],
+            ['', ''],
+            [null, ''],
             ['john@doe', 'john@doe'],
             ['john@doe.com', 'john@doe.com'],
             ['(john@doe.com)', 'john@doe.com'],

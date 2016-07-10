@@ -45,7 +45,9 @@ class StringFilterTraitTest extends FilterTraitTestCase
     public function provideValue(): array
     {
         return [
-            [['some string'], false],
+            [['some string'], ''],
+            ['', ''],
+            [null, ''],
             ['some string', 'some string'],
             ['some string with "', 'some string with "'],
             ['some string with \'', 'some string with \''],

@@ -24,13 +24,15 @@ trait EmailFilterTrait
      *
      * @return string
      */
-    protected function filterEmail(Request $request, string $field, $attribute = 'request')
+    protected function filterEmail(Request $request, string $field, $attribute = 'request'): string
     {
-        return $request->$attribute->filter(
+        $filtered = $request->$attribute->filter(
             $field,
-            null,
+            '',
             FILTER_SANITIZE_EMAIL,
             ['flags' => '']
         );
+
+        return is_string($filtered) ? $filtered : '';
     }
 }

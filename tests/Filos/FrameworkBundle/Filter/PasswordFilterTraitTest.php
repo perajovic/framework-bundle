@@ -52,7 +52,9 @@ class PasswordFilterTraitTest extends FilterTraitTestCase
     public function provideValue(): array
     {
         return [
-            [['mypass'], false],
+            [['mypass'], ''],
+            [null, ''],
+            ['', ''],
             ['mypass', 'mypass'],
         ];
     }

@@ -24,7 +24,7 @@ trait BooleanFilterTrait
      *
      * @return bool
      */
-    protected function filterBoolean(Request $request, string $field, $attribute = 'request')
+    protected function filterBoolean(Request $request, string $field, $attribute = 'request'): bool
     {
         $filtered = $request->$attribute->filter(
             $field,

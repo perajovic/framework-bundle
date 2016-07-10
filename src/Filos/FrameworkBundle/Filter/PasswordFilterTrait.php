@@ -21,12 +21,12 @@ trait PasswordFilterTrait
      * @param Request $request
      * @param string  $field
      *
-     * @return string|false
+     * @return string
      */
-    protected function filterPassword(Request $request, string $field)
+    protected function filterPassword(Request $request, string $field): string
     {
         $filtered = $request->request->filter($field);
 
-        return is_array($filtered) ? false : $filtered;
+        return is_array($filtered) ? '' : $filtered;
     }
 }
