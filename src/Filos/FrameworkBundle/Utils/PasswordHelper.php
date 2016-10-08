@@ -21,7 +21,7 @@ final class PasswordHelper
      *
      * @return string
      */
-    public function hash(string $password, $algorithm = PASSWORD_DEFAULT): string
+    public function hash(string $password, int $algorithm = PASSWORD_DEFAULT): string
     {
         return password_hash($password, $algorithm);
     }
