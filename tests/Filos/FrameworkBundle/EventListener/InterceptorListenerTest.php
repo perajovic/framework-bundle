@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle\EventListener;
 
@@ -106,7 +106,8 @@ class InterceptorListenerTest extends TestCase
     {
         return new FilterControllerEvent(
             $this->kernel,
-            function () {},
+            function () {
+            },
             $this->request,
             $requestType
         );
