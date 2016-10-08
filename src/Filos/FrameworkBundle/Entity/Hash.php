@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Filos\FrameworkBundle\Entity;
 
-class Hash
+final class Hash
 {
     /**
      * @var string|null

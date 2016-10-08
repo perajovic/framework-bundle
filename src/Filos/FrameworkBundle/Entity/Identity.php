@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Filos\FrameworkBundle\Entity;
 
-class Identity
+final class Identity
 {
     /**
      * @var int

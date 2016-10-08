@@ -15,7 +15,7 @@ namespace Filos\FrameworkBundle\Entity;
 
 use DateTime;
 
-class Created
+final class Created
 {
     /**
      * @var ByInterface|null

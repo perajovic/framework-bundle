@@ -15,7 +15,7 @@ namespace Filos\FrameworkBundle\Entity;
 
 use DateTime;
 
-class Updated
+final class Updated
 {
     /**
      * @var ByInterface|null
