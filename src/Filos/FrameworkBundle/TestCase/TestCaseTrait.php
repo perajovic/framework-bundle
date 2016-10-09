@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Filos\FrameworkBundle\TestCase;
+namespace Filos\FrameworkBundle\TestCase;
 
 use ReflectionClass;
 use ReflectionObject;
@@ -78,7 +78,7 @@ trait TestCaseTrait
         return $member;
     }
 
-    private function nullifyProperties()
+    protected function nullifyProperties()
     {
         $rObj = new ReflectionObject($this);
 

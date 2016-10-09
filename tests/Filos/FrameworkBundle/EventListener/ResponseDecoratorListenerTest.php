@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 
 class ResponseDecoratorListenerTest extends TestCase
 {

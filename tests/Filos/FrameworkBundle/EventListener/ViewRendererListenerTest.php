@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
 use Tests\Filos\FrameworkBundle\Fixture\Engine;
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 
 class ViewRendererListenerTest extends TestCase
 {

@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Tests\Filos\FrameworkBundle\DependencyInjection;
 
 use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
-use Tests\Filos\FrameworkBundle\TestCase\FunctionalTestCase;
+use Filos\FrameworkBundle\TestCase\FunctionalTestCase;
 
 class ServiceInstancesTest extends FunctionalTestCase
 {

@@ -14,7 +14,7 @@ use Filos\FrameworkBundle\Interceptor\InputInterceptor;
 use PHPUnit_Framework_MockObject_MockObject;
 use Symfony\Component\HttpFoundation\Request;
 use Tests\Filos\FrameworkBundle\Fixture\RawInput;
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 
 class InputInterceptorTest extends TestCase
 {

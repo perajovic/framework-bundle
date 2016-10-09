@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
 use Tests\Filos\FrameworkBundle\Fixture\FooInterceptor;
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 
 class InterceptorListenerTest extends TestCase
 {

@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Filos\FrameworkBundle\TestCase;
+namespace Filos\FrameworkBundle\TestCase;
 
 use PHPUnit_Framework_TestCase;
 

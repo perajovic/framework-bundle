@@ -14,7 +14,7 @@ use DateTime;
 use Filos\FrameworkBundle\Entity\ByInterface;
 use Filos\FrameworkBundle\Entity\Updated;
 use Tests\Filos\FrameworkBundle\Fixture\ByUser;
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 
 class UpdatedTest extends TestCase
 {

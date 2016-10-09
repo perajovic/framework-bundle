@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle\Utils;
 
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 use Filos\FrameworkBundle\Utils\PasswordHelper;
 
 class PasswordHelperTest extends TestCase

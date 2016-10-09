@@ -14,7 +14,7 @@ use Filos\FrameworkBundle\Interceptor\InterceptorManager;
 use PHPUnit_Framework_MockObject_MockObject;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 
 class InterceptorManagerTest extends TestCase
 {

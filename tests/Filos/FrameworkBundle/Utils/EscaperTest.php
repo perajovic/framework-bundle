@@ -12,7 +12,7 @@ namespace Tests\Filos\FrameworkBundle\Utils;
 
 use Filos\FrameworkBundle\Utils\Escaper;
 use stdClass;
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 
 class EscaperTest extends TestCase
 {

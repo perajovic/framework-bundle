@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle\Entity;
 
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 use Filos\FrameworkBundle\Entity\Hash;
 
 class HashTest extends TestCase

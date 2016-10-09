@@ -14,7 +14,7 @@ use Exception;
 use Filos\FrameworkBundle\Controller\ExceptionController;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 

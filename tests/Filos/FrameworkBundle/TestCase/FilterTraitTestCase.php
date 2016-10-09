@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle\TestCase;
 
+use Filos\FrameworkBundle\TestCase\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 abstract class FilterTraitTestCase extends TestCase

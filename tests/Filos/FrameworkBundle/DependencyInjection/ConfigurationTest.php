@@ -13,7 +13,7 @@ namespace Tests\Filos\FrameworkBundle\DependencyInjection;
 use Filos\FrameworkBundle\DependencyInjection\Configuration;
 use stdClass;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
-use Tests\Filos\FrameworkBundle\TestCase\TestCase;
+use Filos\FrameworkBundle\TestCase\TestCase;
 
 class ConfigurationTest extends TestCase
 {
