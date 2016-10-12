@@ -65,8 +65,8 @@ final class ResponseDecoratorListener
         }
 
         $this->setPageTitle($app, $headers);
-        $this->setPageCallback($app, $headers);
-        $this->setPageData($app, $headers);
+        $this->setActionCallback($app, $headers);
+        $this->setActionData($app, $headers);
     }
 
     /**
@@ -98,7 +98,7 @@ final class ResponseDecoratorListener
      * @param array             $app
      * @param ResponseHeaderBag $headers
      */
-    private function setPageCallback(array $app, ResponseHeaderBag $headers)
+    private function setActionCallback(array $app, ResponseHeaderBag $headers)
     {
         if (isset($app[ResponseHeaders::ACTION_CALLBACK_KEY])) {
             $headers->set(ResponseHeaders::ACTION_CALLBACK_HEADER, $app[ResponseHeaders::ACTION_CALLBACK_KEY]);
@@ -109,7 +109,7 @@ final class ResponseDecoratorListener
      * @param array             $app
      * @param ResponseHeaderBag $headers
      */
-    private function setPageData(array $app, ResponseHeaderBag $headers)
+    private function setActionData(array $app, ResponseHeaderBag $headers)
     {
         if (isset($app[ResponseHeaders::ACTION_DATA_KEY])) {
             $headers->set(
