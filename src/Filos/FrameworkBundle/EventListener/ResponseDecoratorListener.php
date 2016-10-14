@@ -44,11 +44,7 @@ final class ResponseDecoratorListener
         $request = $event->getRequest();
         $response = $event->getResponse();
         $headers = $response->headers;
-        $app = $request->attributes->get('_app');
-
-        if (!is_array($app)) {
-            return;
-        }
+        $app = $request->attributes->get('_app') ?: [];
 
         if (true === $headers->get(ResponseHeaders::ERROR_HANDLED_HEADER)) {
             return;
