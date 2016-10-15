@@ -20,6 +20,7 @@ return (new Symfony\CS\Config\Config())
     ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
     ->fixers([
         '-psr0',
+        '-ternary_spaces',
         'header_comment',
     ])
     ->finder((new Symfony\CS\Finder\DefaultFinder())->in([
