@@ -32,7 +32,7 @@ final class ExceptionController extends TwigExceptionController
      */
     public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null)
     {
-        $request->attributes->get('showException', false);
+        $request->attributes->set('showException', false);
 
         $response = parent::showAction($request, $exception, $logger);
 
