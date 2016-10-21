@@ -34,17 +34,15 @@ final class TruncatableTablesListener
             ->getClassMetadata(get_class($event->getEntity()))
             ->getTableName();
 
-        if (in_array($table, $this->tables)) {
-            return;
+        if (!in_array($table, $this->tables, true)) {
+            $this->tables[] = $table;
         }
-
-        $this->tables[] = $table;
     }
 
     /**
      * @return array
      */
-    public function getTables()
+    public function getTables(): array
     {
         $tables = $this->tables;
 
