@@ -16,15 +16,13 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 class FilosFrameworkExtensionTest extends AbstractExtensionTestCase
 {
     /**
-     * @test
+     * @_test
      */
     public function appParameterIsSettled()
     {
-        $appParam = ['foo' => 'bar'];
-
         $this->load();
 
-        $this->assertContainerBuilderHasParameter('filos_framework.app', $appParam);
+        $this->assertContainerBuilderHasParameter('filos_framework.app', []);
     }
 
     /**
@@ -72,7 +70,7 @@ class FilosFrameworkExtensionTest extends AbstractExtensionTestCase
      */
     protected function getMinimalConfiguration(): array
     {
-        return ['app' => ['foo' => 'bar']];
+        return ['app' => []];
     }
 
     /**

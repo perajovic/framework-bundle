@@ -60,32 +60,45 @@ class ConfigurationTest extends TestCase
     {
         return [
             [
+                [[
+                    'app' => [],
+                ]],
                 [
-                    ['app' => ['foo']],
-                    ['app' => ['bar']],
-                ],
-                [
-                    'app' => ['foo', 'bar'],
+                    'app' => [
+                        'no_cache' => false,
+                        'send_flatten' => true,
+                        'status_code' => 200,
+                        'page_title' => null,
+                        'action_callback' => null,
+                        'action_data' => [],
+                        'interceptors' => [],
+                    ],
                     'truncate_tables_between_tests' => false,
                 ],
             ],
             [
+                [[
+                    'app' => [
+                        'no_cache' => true,
+                        'send_flatten' => false,
+                        'status_code' => 201,
+                        'page_title' => 'Page Title',
+                        'action_callback' => 'action/callback',
+                        'action_data' => ['foo' => 'bar', 'abc' => '123', 5, new stdClass()],
+                        'interceptors' => ['first', 'second'],
+                    ],
+                    'truncate_tables_between_tests' => true,
+                ]],
                 [
-                    ['app' => ['foo' => 'bar']],
-                    ['truncate_tables_between_tests' => false],
-                ],
-                [
-                    'app' => ['foo' => 'bar'],
-                    'truncate_tables_between_tests' => false,
-                ],
-            ],
-            [
-                [
-                    ['app' => ['foo' => 'bar']],
-                    ['truncate_tables_between_tests' => true],
-                ],
-                [
-                    'app' => ['foo' => 'bar'],
+                    'app' => [
+                        'no_cache' => true,
+                        'send_flatten' => false,
+                        'status_code' => 201,
+                        'page_title' => 'Page Title',
+                        'action_callback' => 'action/callback',
+                        'action_data' => ['foo' => 'bar', 'abc' => '123', 5, new stdClass()],
+                        'interceptors' => ['first', 'second'],
+                    ],
                     'truncate_tables_between_tests' => true,
                 ],
             ],
