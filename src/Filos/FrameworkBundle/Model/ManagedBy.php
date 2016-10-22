@@ -15,32 +15,32 @@ class ManagedBy
     /**
      * @var Uuid
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * @var bool
      */
-    private $exists;
+    protected $exists;
 
     /**
      * @var string|null
      */
-    private $firstname;
+    protected $firstname;
 
     /**
      * @var string|null
      */
-    private $lastname;
+    protected $lastname;
 
     /**
      * @var string
      */
-    private $email;
+    protected $email;
 
     private function __construct()
     {
