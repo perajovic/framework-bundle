@@ -12,7 +12,7 @@ namespace Filos\FrameworkBundle\Doctrine\Type;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Filos\FrameworkBundle\Entity\Uuid;
+use Filos\FrameworkBundle\Model\Uuid;
 
 class UuidType extends Type
 {
