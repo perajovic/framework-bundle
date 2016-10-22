@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Filos\FrameworkBundle\Entity;
+namespace Tests\Filos\FrameworkBundle\Model;
 
-use Filos\FrameworkBundle\Entity\Uuid;
+use Filos\FrameworkBundle\Model\Uuid;
 use Filos\FrameworkBundle\TestCase\TestCase;
 
 class UuidTest extends TestCase

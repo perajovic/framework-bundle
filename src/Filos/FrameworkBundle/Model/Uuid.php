@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle\Entity;
+namespace Filos\FrameworkBundle\Model;
 
 use Ramsey\Uuid\Uuid as UuidGenerator;
 
