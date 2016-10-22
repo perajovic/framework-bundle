@@ -13,7 +13,7 @@ namespace Filos\FrameworkBundle\EventListener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 /**
- * @todo Unit test is missing.
+ * @todo Unit test is missing
  */
 final class TruncatableTablesListener
 {

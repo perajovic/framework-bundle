@@ -23,7 +23,7 @@ trait ScalarFilterTrait
      */
     protected function filterScalar(Request $request, string $field, $attribute = 'request'): string
     {
-        $filtered = $request->{$attribute}->filter($field);
+        $filtered = $request->$attribute->filter($field);
 
         return is_array($filtered) ? '' : (string) $filtered;
     }

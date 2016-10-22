@@ -20,7 +20,7 @@ abstract class FilterTraitTestCase extends TestCase
      */
     protected $request;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
