@@ -20,7 +20,7 @@ final class Hash
     /**
      * @param string|null $salt
      */
-    public function __construct(?string $salt)
+    public function __construct(?string $salt = null)
     {
         if (null === $salt) {
             $salt = uniqid((string) mt_rand(), true);

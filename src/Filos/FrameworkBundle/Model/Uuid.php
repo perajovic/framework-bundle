@@ -22,7 +22,7 @@ final class Uuid
     /**
      * @param string|null $value
      */
-    public function __construct(string $value = null)
+    public function __construct(?string $value = null)
     {
         $this->value = $value === null ? UuidGenerator::uuid4()->toString() : $value;
     }
