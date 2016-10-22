@@ -8,10 +8,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Filos\FrameworkBundle\Entity;
+namespace Tests\Filos\FrameworkBundle\Model;
 
 use Filos\FrameworkBundle\TestCase\TestCase;
-use Filos\FrameworkBundle\Entity\Hash;
+use Filos\FrameworkBundle\Model\Hash;
 
 class HashTest extends TestCase
 {
@@ -21,11 +21,11 @@ class HashTest extends TestCase
      * @param string|null $salt
      * @dataProvider provideSalts
      */
-    public function hashIsSettledAndRetrieved(string $salt = null)
+    public function hashIsSettledAndRetrieved(?string $salt)
     {
         $hash = new Hash($salt);
 
-        $this->assertEquals(40, strlen($hash->get()));
+        $this->assertEquals(64, strlen($hash->get()));
     }
 
     /**

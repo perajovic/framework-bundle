@@ -8,25 +8,25 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle\Entity;
+namespace Filos\FrameworkBundle\Model;
 
 final class Hash
 {
     /**
-     * @var string|null
+     * @var string
      */
-    private $hash;
+    private $value;
 
     /**
      * @param string|null $salt
      */
-    public function __construct(string $salt = null)
+    public function __construct(?string $salt)
     {
         if (null === $salt) {
-            $salt = uniqid(mt_rand().time(), true);
+            $salt = uniqid((string) mt_rand(), true);
         }
 
-        $this->hash = sha1($salt.time().$salt.rand(1000, 10000000).$salt);
+        $this->value = hash('sha256', $salt.microtime().$salt);
     }
 
     /**
@@ -34,6 +34,6 @@ final class Hash
      */
     public function get(): string
     {
-        return $this->hash;
+        return $this->value;
     }
 }
