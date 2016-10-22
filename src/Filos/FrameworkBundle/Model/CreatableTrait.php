@@ -15,7 +15,7 @@ use DateTime;
 trait CreatableTrait
 {
     /**
-     * @var int|null
+     * @var string|null
      */
     private $createdBy;
 

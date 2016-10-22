@@ -15,7 +15,7 @@ use DateTime;
 trait UpdatableTrait
 {
     /**
-     * @var int|null
+     * @var string|null
      */
     private $updatedBy;
 
