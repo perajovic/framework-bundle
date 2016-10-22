@@ -10,26 +10,26 @@ declare(strict_types=1);
 
 namespace Filos\FrameworkBundle\Entity;
 
-final class Identity
+final class Id
 {
     /**
-     * @var int
+     * @var int|null
      */
-    private $id;
+    private $value;
 
     /**
-     * @param int|null $id
+     * @param int|null $value
      */
-    public function __construct(int $id = null)
+    public function __construct(int $value = null)
     {
-        $this->id = $id;
+        $this->value = $value;
     }
 
     /**
      * @return int|null
      */
-    public function get()
+    public function get(): ?int
     {
-        return $this->id;
+        return $this->value;
     }
 }
