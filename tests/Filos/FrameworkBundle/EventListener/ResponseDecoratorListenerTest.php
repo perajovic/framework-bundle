@@ -62,7 +62,7 @@ class ResponseDecoratorListenerTest extends TestCase
      */
     public function listenerIsStoppedForSubRequest()
     {
-        $this->request->attributes->set('_app', ['response_status' => 201]);
+        $this->request->attributes->set('_app', ['status_code' => 201]);
 
         $event = $this->createFilterResponseEvent(HttpKernelInterface::SUB_REQUEST);
 
@@ -74,17 +74,9 @@ class ResponseDecoratorListenerTest extends TestCase
     /**
      * @test
      */
-    public function listenerIsStoppedForRequestWithoutAppConfig()
-    {
-        $this->listener->onKernelResponse($this->event);
-    }
-
-    /**
-     * @test
-     */
     public function ifErrorIsHandledSomeResponseDecorationIsSkipped()
     {
-        $this->request->attributes->set('_app', ['response_status' => 201]);
+        $this->request->attributes->set('_app', ['status_code' => 201]);
         $this->response->headers->set('X-Error-Handled', true);
 
         $this->listener->onKernelResponse($this->event);
@@ -97,7 +89,7 @@ class ResponseDecoratorListenerTest extends TestCase
      */
     public function cacheIsConfigured()
     {
-        $attributes = ['_app' => ['response_status' => 200, 'no_cache' => true]];
+        $attributes = ['_app' => ['status_code' => 200, 'no_cache' => true]];
 
         $this->request->attributes->replace($attributes);
 
@@ -115,7 +107,7 @@ class ResponseDecoratorListenerTest extends TestCase
      */
     public function newResponseStatusCodeIsSettled()
     {
-        $this->request->attributes->set('_app', ['response_status' => 201]);
+        $this->request->attributes->set('_app', ['status_code' => 201]);
 
         $this->listener->onKernelResponse($this->event);
 
@@ -144,7 +136,7 @@ class ResponseDecoratorListenerTest extends TestCase
     {
         $attributes = [
             '_app' => [
-                'response_status' => 200,
+                'status_code' => 200,
                 'page_title' => 'Foo',
                 'action_callback' => 'foo:bar',
                 'action_data' => ['foo' => 'bar'],
@@ -159,7 +151,7 @@ class ResponseDecoratorListenerTest extends TestCase
         $this->assertSame(200, $this->response->getStatusCode());
         $this->assertSame('"Foo"', $this->response->headers->get('X-Page-Title'));
         $this->assertSame('foo:bar', $this->response->headers->get('X-Action-Callback'));
-        $this->assertSame(json_encode(['foo' => 'bar']), $this->response->headers->get('X-Action-Data'));
+        $this->assertSame('{"foo":"bar"}', $this->response->headers->get('X-Action-Data'));
     }
 
     /**

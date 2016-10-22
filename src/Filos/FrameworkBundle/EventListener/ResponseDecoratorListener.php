@@ -46,7 +46,7 @@ final class ResponseDecoratorListener
         $headers = $response->headers;
         $app = $request->attributes->get('_app') ?: [];
 
-        if (true === $headers->get(ResponseHeaders::ERROR_HANDLED_HEADER)) {
+        if (true === (bool) $headers->get(ResponseHeaders::ERROR_HANDLED_HEADER)) {
             return;
         }
 
@@ -71,8 +71,8 @@ final class ResponseDecoratorListener
      */
     private function setStatusCode(array $app, Response $response)
     {
-        if (isset($app[ResponseHeaders::RESPONSE_STATUS_KEY])) {
-            $response->setStatusCode($app[ResponseHeaders::RESPONSE_STATUS_KEY]);
+        if (isset($app[ResponseHeaders::STATUS_CODE_KEY])) {
+            $response->setStatusCode($app[ResponseHeaders::STATUS_CODE_KEY]);
         }
     }
 
@@ -97,7 +97,10 @@ final class ResponseDecoratorListener
     private function setActionCallback(array $app, ResponseHeaderBag $headers)
     {
         if (isset($app[ResponseHeaders::ACTION_CALLBACK_KEY])) {
-            $headers->set(ResponseHeaders::ACTION_CALLBACK_HEADER, $app[ResponseHeaders::ACTION_CALLBACK_KEY]);
+            $headers->set(
+                ResponseHeaders::ACTION_CALLBACK_HEADER,
+                $app[ResponseHeaders::ACTION_CALLBACK_KEY]
+            );
         }
     }
 
@@ -120,12 +123,10 @@ final class ResponseDecoratorListener
      */
     private function enforceNoCache(HeaderBag $headers)
     {
-        $headers->set(
-            'cache-control',
-            'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
-            false
-        );
-        $headers->set('Pragma', 'no-cache', false);
+        $headers->add([
+            'cache-control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
+            'pragma' => 'no-cache',
+        ]);
     }
 
     /**

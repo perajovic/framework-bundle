@@ -12,7 +12,7 @@ namespace Filos\FrameworkBundle\Http;
 
 final class ResponseHeaders
 {
-    const RESPONSE_STATUS_KEY = 'response_status';
+    const STATUS_CODE_KEY = 'status_code';
     const PAGE_TITLE_KEY = 'page_title';
     const ACTION_CALLBACK_KEY = 'action_callback';
     const ACTION_DATA_KEY = 'action_data';

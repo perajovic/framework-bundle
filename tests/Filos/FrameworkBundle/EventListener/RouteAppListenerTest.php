@@ -50,11 +50,9 @@ class RouteAppListenerTest extends TestCase
         $this->listener = new RouteAppListener([
             'page_title' => null,
             'page_template' => null,
-            'page_has_layout' => false,
-            'page_has_menu' => false,
             'action_callback' => null,
             'action_data' => [],
-            'response_status' => 200,
+            'status_code' => 200,
         ]);
     }
 
@@ -125,11 +123,9 @@ class RouteAppListenerTest extends TestCase
                 [
                     'page_title' => null,
                     'page_template' => null,
-                    'page_has_layout' => false,
-                    'page_has_menu' => false,
                     'action_data' => [],
                     'action_callback' => null,
-                    'response_status' => 200,
+                    'status_code' => 200,
                 ],
             ],
             [
@@ -137,49 +133,39 @@ class RouteAppListenerTest extends TestCase
                 [
                     'page_title' => 'Title',
                     'page_template' => 'template',
-                    'page_has_layout' => true,
-                    'page_has_menu' => true,
                     'action_callback' => 'controller:action',
                     'action_data' => ['foo' => 'bar'],
-                    'response_status' => 400,
+                    'status_code' => 400,
                 ],
                 [
                     'page_title' => 'Title',
                     'page_template' => 'template',
-                    'page_has_layout' => true,
-                    'page_has_menu' => true,
                     'action_callback' => 'controller:action',
                     'action_data' => ['foo' => 'bar'],
-                    'response_status' => 400,
+                    'status_code' => 400,
                 ],
             ],
             [
                 [
                     'page_title' => 'Title 1',
                     'page_template' => 'template 1',
-                    'page_has_layout' => true,
-                    'page_has_menu' => true,
                     'action_callback' => 'controller_1:action_1',
                     'action_data' => ['foo' => 'bar 1', 'bar' => 'baz'],
-                    'response_status' => 500,
+                    'status_code' => 500,
                 ],
                 [
                     'page_title' => 'Title',
                     'page_template' => 'template',
-                    'page_has_layout' => false,
-                    'page_has_menu' => false,
                     'action_callback' => 'controller:action',
                     'action_data' => ['foo' => 'bar'],
-                    'response_status' => 400,
+                    'status_code' => 400,
                 ],
                 [
                     'page_title' => 'Title 1',
                     'page_template' => 'template 1',
-                    'page_has_layout' => true,
-                    'page_has_menu' => true,
                     'action_callback' => 'controller_1:action_1',
                     'action_data' => ['foo' => 'bar 1', 'bar' => 'baz'],
-                    'response_status' => 500,
+                    'status_code' => 500,
                 ],
             ],
         ];
