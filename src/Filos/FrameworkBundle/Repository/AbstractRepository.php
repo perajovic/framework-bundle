@@ -20,6 +20,14 @@ abstract class AbstractRepository
     protected $entityManager;
 
     /**
+     * @param EntityManager $entityManager
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
      * @param object $entity
      */
     public function create($entity)
