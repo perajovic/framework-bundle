@@ -40,8 +40,7 @@ class HashType extends Type
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        /* @var Hash $value */
-        return $value->get();
+        return (string) $value;
     }
 
     /**
