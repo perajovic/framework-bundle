@@ -33,5 +33,6 @@ class UuidTest extends TestCase
         $uuid = new Uuid('facf4be0-0b37-48ee-92c5-e2ba50bc47e6');
 
         $this->assertSame('facf4be0-0b37-48ee-92c5-e2ba50bc47e6', $uuid->get());
+        $this->assertSame('facf4be0-0b37-48ee-92c5-e2ba50bc47e6', (string) $uuid);
     }
 }
