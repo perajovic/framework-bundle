@@ -15,7 +15,7 @@ use DateTime;
 trait CreatableTrait
 {
     /**
-     * @var string|null
+     * @var ManagedBy|null
      */
     private $createdBy;
 
@@ -25,9 +25,25 @@ trait CreatableTrait
     private $createdAt;
 
     /**
-     * @return string|null
+     * @param ManagedBy $createdBy
      */
-    public function getCreatedBy(): ?string
+    public function setCreatedBy(ManagedBy $createdBy)
+    {
+        $this->createdBy = $createdBy;
+    }
+
+    /**
+     * @param DateTime $createdAt
+     */
+    public function setCreatedAt(DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return ManagedBy|null
+     */
+    public function getCreatedBy(): ?ManagedBy
     {
         return $this->createdBy;
     }

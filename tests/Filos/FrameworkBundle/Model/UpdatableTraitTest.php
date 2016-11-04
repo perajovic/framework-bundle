@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace Filos\FrameworkBundle\Tests\Model;
 
 use DateTime;
+use Filos\FrameworkBundle\Model\ManagedBy;
 use Filos\FrameworkBundle\Model\UpdatableTrait;
+use Filos\FrameworkBundle\Model\Uuid;
 use Filos\FrameworkBundle\TestCase\TestCase;
 
 class UpdatableTraitTest extends TestCase
@@ -39,28 +41,16 @@ class UpdatableTraitTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideFieldValues
-     *
-     * @param null|string   $updatedBy
-     * @param null|DateTime $updatedAt
      */
-    public function fieldValuesAreRetrieved(?string $updatedBy, ?DateTime $updatedAt)
+    public function fieldValuesAreRetrieved()
     {
-        $this->setNonPublicPropertyValue($this->creatable, 'updatedBy', $updatedBy);
-        $this->setNonPublicPropertyValue($this->creatable, 'updatedAt', $updatedAt);
+        $updatedBy = ManagedBy::create(new Uuid(), 'stdClass', 'john@doe.com');
+        $updatedAt = new DateTime('now');
+
+        $this->creatable->setUpdatedBy($updatedBy);
+        $this->creatable->setUpdatedAt($updatedAt);
 
         $this->assertSame($updatedBy, $this->creatable->getUpdatedBy());
         $this->assertSame($updatedAt, $this->creatable->getUpdatedAt());
-    }
-
-    /**
-     * @return array
-     */
-    public function provideFieldValues(): array
-    {
-        return [
-            [null, null],
-            ['123-abc', new DateTime('now')],
-        ];
     }
 }

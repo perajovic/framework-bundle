@@ -12,6 +12,8 @@ namespace Filos\FrameworkBundle\Tests\Model;
 
 use DateTime;
 use Filos\FrameworkBundle\Model\CreatableTrait;
+use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\Uuid;
 use Filos\FrameworkBundle\TestCase\TestCase;
 
 class CreatableTraitTest extends TestCase
@@ -39,28 +41,16 @@ class CreatableTraitTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideFieldValues
-     *
-     * @param null|string   $createdBy
-     * @param null|DateTime $createdAt
      */
-    public function fieldValuesAreRetrieved(?string $createdBy, ?DateTime $createdAt)
+    public function fieldValuesAreRetrieved()
     {
-        $this->setNonPublicPropertyValue($this->creatable, 'createdBy', $createdBy);
-        $this->setNonPublicPropertyValue($this->creatable, 'createdAt', $createdAt);
+        $createdBy = ManagedBy::create(new Uuid(), 'stdClass', 'john@doe.com');
+        $createdAt = new DateTime('now');
+
+        $this->creatable->setCreatedBy($createdBy);
+        $this->creatable->setCreatedAt($createdAt);
 
         $this->assertSame($createdBy, $this->creatable->getCreatedBy());
         $this->assertSame($createdAt, $this->creatable->getCreatedAt());
-    }
-
-    /**
-     * @return array
-     */
-    public function provideFieldValues(): array
-    {
-        return [
-            [null, null],
-            ['123-abc', new DateTime('now')],
-        ];
     }
 }

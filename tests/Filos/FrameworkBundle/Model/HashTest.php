@@ -26,6 +26,7 @@ class HashTest extends TestCase
         $hash = new Hash($salt);
 
         $this->assertEquals(64, strlen($hash->get()));
+        $this->assertEquals(64, strlen((string) $hash));
     }
 
     /**

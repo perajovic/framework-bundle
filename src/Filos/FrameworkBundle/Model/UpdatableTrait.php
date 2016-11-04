@@ -15,7 +15,7 @@ use DateTime;
 trait UpdatableTrait
 {
     /**
-     * @var string|null
+     * @var ManagedBy|null
      */
     private $updatedBy;
 
@@ -25,9 +25,25 @@ trait UpdatableTrait
     private $updatedAt;
 
     /**
-     * @return string|null
+     * @param ManagedBy $updatedBy
      */
-    public function getUpdatedBy(): ?string
+    public function setUpdatedBy(ManagedBy $updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
+    }
+
+    /**
+     * @param DateTime|null $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return ManagedBy|null
+     */
+    public function getUpdatedBy(): ?ManagedBy
     {
         return $this->updatedBy;
     }
