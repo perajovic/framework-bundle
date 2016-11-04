@@ -40,8 +40,7 @@ class UuidType extends Type
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        /* @var Uuid $value */
-        return $value->get();
+        return (string) $value;
     }
 
     /**
