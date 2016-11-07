@@ -36,11 +36,12 @@ class HashType extends Type
 
     /**
      * {@inheritdoc}
-     * If the value of the field is NULL the method convertToDatabaseValue() is not called.
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return (string) $value;
+        $value = (string) $value;
+
+        return empty($value) ? null : $value;
     }
 
     /**
