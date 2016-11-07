@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Filos\FrameworkBundle\TestCase;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use LogicException;
 
@@ -46,11 +48,11 @@ abstract class FunctionalTestCase extends WebTestCase
     }
 
     /**
-     * @return Doctrine\ORM\EntityManagerInterface
+     * @return EntityManagerInterface
      *
      * @throws LogicException
      */
-    protected function getEntityManager()
+    protected function getEntityManager(): EntityManagerInterface
     {
         if (!static::$kernel->getContainer()->has('doctrine')) {
             throw new LogicException(
@@ -80,16 +82,12 @@ abstract class FunctionalTestCase extends WebTestCase
 
         $connection = $this->getEntityManager()->getConnection();
 
-        if ($connection->getDatabasePlatform()->getName() !== 'postgresql') {
+        if ('postgresql' !== $connection->getDatabasePlatform()->getName()) {
             return;
         }
 
         foreach ($tables as $table) {
             $connection->exec(sprintf('TRUNCATE %s CASCADE', $table));
-            $connection->exec(sprintf(
-                'ALTER SEQUENCE %s_id_seq RESTART WITH 1',
-                $table
-            ));
         }
     }
 }
