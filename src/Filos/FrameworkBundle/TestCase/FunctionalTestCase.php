@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Filos\FrameworkBundle\TestCase;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use LogicException;
