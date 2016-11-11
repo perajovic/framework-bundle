@@ -14,24 +14,15 @@ use Symfony\Component\Templating\EngineInterface;
 
 class Engine implements EngineInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function render($name, array $parameters = [])
     {
         return sprintf('  %s %s %s   ', $name, array_keys($parameters)[0], array_values($parameters)[0]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function exists($name)
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($name)
     {
     }

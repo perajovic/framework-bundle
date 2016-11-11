@@ -94,11 +94,6 @@ class InterceptorListenerTest extends TestCase
         $this->assertTrue($this->interceptor->executed);
     }
 
-    /**
-     * @param int $requestType
-     *
-     * @return FilterControllerEvent
-     */
     private function createFilterControllerEvent(int $requestType): FilterControllerEvent
     {
         return new FilterControllerEvent(

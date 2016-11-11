@@ -28,10 +28,6 @@ final class InputInterceptor implements InterceptorInterface
      */
     private $rawInput;
 
-    /**
-     * @param ValidatorInterface $validator
-     * @param RawInputInterface  $rawInput
-     */
     public function __construct(ValidatorInterface $validator, RawInputInterface $rawInput)
     {
         $this->validator = $validator;
@@ -39,8 +35,6 @@ final class InputInterceptor implements InterceptorInterface
     }
 
     /**
-     * @param Request $request
-     *
      * @throws BadRequestHttpException
      */
     public function apply(Request $request)

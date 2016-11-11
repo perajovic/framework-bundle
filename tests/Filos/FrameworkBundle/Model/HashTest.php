@@ -18,7 +18,6 @@ class HashTest extends TestCase
     /**
      * @test
      *
-     * @param string|null $salt
      * @dataProvider provideSalts
      */
     public function hashIsSettledAndRetrieved(?string $salt)
@@ -29,9 +28,6 @@ class HashTest extends TestCase
         $this->assertEquals(64, strlen((string) $hash));
     }
 
-    /**
-     * @return array
-     */
     public function provideSalts(): array
     {
         return [

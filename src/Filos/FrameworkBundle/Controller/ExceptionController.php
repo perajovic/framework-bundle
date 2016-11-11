@@ -19,17 +19,11 @@ use Twig_Environment;
 
 final class ExceptionController extends TwigExceptionController
 {
-    /**
-     * {@inheritdoc}.
-     */
     public function __construct(Twig_Environment $twig, bool $debug = false)
     {
         parent::__construct($twig, $debug);
     }
 
-    /**
-     * {@inheritdoc}.
-     */
     public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null)
     {
         $request->attributes->set('showException', false);

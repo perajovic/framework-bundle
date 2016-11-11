@@ -20,17 +20,11 @@ final class InterceptorManager
      */
     private $interceptors;
 
-    /**
-     * @param array $interceptors
-     */
     public function __construct(array $interceptors = [])
     {
         $this->setInterceptors($interceptors);
     }
 
-    /**
-     * @param array $interceptors
-     */
     public function setInterceptors(array $interceptors)
     {
         foreach ($interceptors as $name => $interceptor) {
@@ -38,18 +32,12 @@ final class InterceptorManager
         }
     }
 
-    /**
-     * @param string               $name
-     * @param InterceptorInterface $interceptor
-     */
     public function addInterceptor($name, InterceptorInterface $interceptor)
     {
         $this->interceptors[$name] = $interceptor;
     }
 
     /**
-     * @param Request $request
-     *
      * @throws RuntimeException
      */
     public function handle(Request $request)

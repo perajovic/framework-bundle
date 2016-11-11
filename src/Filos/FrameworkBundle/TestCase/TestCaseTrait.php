@@ -16,13 +16,9 @@ use ReflectionObject;
 trait TestCaseTrait
 {
     /**
-     * @param object $obj
-     * @param string $method
-     * @param array  $arguments
-     *
      * @return mixed
      */
-    protected function callNonPublicMethodWithArguments($obj, $method, array $arguments = [])
+    protected function callNonPublicMethodWithArguments($obj, string $method, array $arguments = [])
     {
         return $this
             ->setClassMemberAsAccessible($obj, $method, 'method')
@@ -30,13 +26,9 @@ trait TestCaseTrait
     }
 
     /**
-     * @param mixed  $obj
-     * @param string $property
-     * @param mixed  $value
-     *
      * @return mixed
      */
-    protected function setNonPublicPropertyValue($obj, $property, $value)
+    protected function setNonPublicPropertyValue($obj, string $property, $value)
     {
         $this
             ->setClassMemberAsAccessible($obj, $property, 'property')
@@ -44,12 +36,9 @@ trait TestCaseTrait
     }
 
     /**
-     * @param mixed  $obj
-     * @param string $property
-     *
      * @return mixed
      */
-    protected function getNonPublicPropertyValue($obj, $property)
+    protected function getNonPublicPropertyValue($obj, string $property)
     {
         return $this
             ->setClassMemberAsAccessible($obj, $property, 'property')
@@ -57,13 +46,9 @@ trait TestCaseTrait
     }
 
     /**
-     * @param mixed  $classOrObj
-     * @param string $member
-     * @param string $type
-     *
      * @return mixed
      */
-    protected function setClassMemberAsAccessible($classOrObj, $member, $type)
+    protected function setClassMemberAsAccessible($classOrObj, string $member, string $type)
     {
         $class = is_object($classOrObj) ? get_class($classOrObj) : $classOrObj;
 

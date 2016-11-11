@@ -17,9 +17,6 @@ trait IdentityTrait
      */
     private $id;
 
-    /**
-     * @return Uuid
-     */
     public function getId(): Uuid
     {
         return $this->id;

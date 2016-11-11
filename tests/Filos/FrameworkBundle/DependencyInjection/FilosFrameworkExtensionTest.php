@@ -16,16 +16,6 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 class FilosFrameworkExtensionTest extends AbstractExtensionTestCase
 {
     /**
-     * @_test
-     */
-    public function appParameterIsSettled()
-    {
-        $this->load();
-
-        $this->assertContainerBuilderHasParameter('filos_framework.app', []);
-    }
-
-    /**
      * @test
      */
     public function truncatableTablesServiceIsNotRegisteredWhenKernelEnvironmentDoesNotExist()
@@ -65,17 +55,11 @@ class FilosFrameworkExtensionTest extends AbstractExtensionTestCase
         );
     }
 
-    /**
-     * @return array
-     */
     protected function getMinimalConfiguration(): array
     {
         return ['app' => []];
     }
 
-    /**
-     * @return array
-     */
     protected function getContainerExtensions(): array
     {
         return [new FilosFrameworkExtension()];

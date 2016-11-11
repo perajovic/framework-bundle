@@ -40,7 +40,6 @@ class PasswordHelperTest extends TestCase
     /**
      * @test
      *
-     * @param int $length
      * @dataProvider provideLength
      */
     public function passwordIsGenerated(int $length)
@@ -48,9 +47,6 @@ class PasswordHelperTest extends TestCase
         $this->assertSame($length, strlen($this->passwordHelper->generate($length)));
     }
 
-    /**
-     * @return array
-     */
     public function provideLength(): array
     {
         return [

@@ -69,11 +69,6 @@ class RequestFormatListenerTest extends TestCase
         $this->assertSame('json', $this->request->getRequestFormat());
     }
 
-    /**
-     * @param int $requestType
-     *
-     * @return GetResponseEvent
-     */
     private function createGetResponseEvent(int $requestType): GetResponseEvent
     {
         return new GetResponseEvent($this->kernel, $this->request, $requestType);

@@ -14,13 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 trait BooleanFilterTrait
 {
-    /**
-     * @param Request $request
-     * @param string  $field
-     * @param string  $attribute
-     *
-     * @return bool
-     */
     protected function filterBoolean(Request $request, string $field, $attribute = 'request'): bool
     {
         $filtered = $request->$attribute->filter(

@@ -17,9 +17,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class InputPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('filos_framework.interceptor.manager')) {
@@ -48,12 +45,7 @@ class InputPass implements CompilerPassInterface
         $definition->addMethodCall('setInterceptors', [$interceptors]);
     }
 
-    /**
-     * @param string $alias
-     *
-     * @return array
-     */
-    private function createServiceMetadata($alias): array
+    private function createServiceMetadata(string $alias): array
     {
         $interceptorId = explode('.', $alias);
         array_splice($interceptorId, 1, 0, 'interceptor');
@@ -64,10 +56,6 @@ class InputPass implements CompilerPassInterface
         ];
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $metadata
-     */
     private function registerService(ContainerBuilder $container, array $metadata)
     {
         $class = 'Filos\FrameworkBundle\Interceptor\InputInterceptor';

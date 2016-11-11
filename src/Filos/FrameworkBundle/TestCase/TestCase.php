@@ -24,12 +24,9 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $class
-     * @param array  $methods
-     *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function createMockFor($class, array $methods = [])
+    protected function createMockFor(string $class, array $methods = [])
     {
         return $this
             ->getMockBuilder($class)

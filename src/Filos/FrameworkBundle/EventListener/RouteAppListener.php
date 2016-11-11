@@ -28,9 +28,6 @@ final class RouteAppListener
         $this->appDefaults = $appDefaults;
     }
 
-    /**
-     * @param GetResponseForControllerResultEvent $event
-     */
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
         if (!$event->isMasterRequest()) {

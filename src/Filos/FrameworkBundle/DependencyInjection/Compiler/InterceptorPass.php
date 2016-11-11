@@ -16,9 +16,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class InterceptorPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('filos_framework.interceptor.manager')) {

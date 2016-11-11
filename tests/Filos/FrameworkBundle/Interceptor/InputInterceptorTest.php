@@ -108,10 +108,6 @@ class InputInterceptorTest extends TestCase
         $this->interceptor->apply($this->request);
     }
 
-    /**
-     * @param string $propertyPath
-     * @param string $message
-     */
     private function ensureConstraint(string $propertyPath, string $message)
     {
         $this
@@ -126,9 +122,6 @@ class InputInterceptorTest extends TestCase
             ->will($this->returnValue($propertyPath));
     }
 
-    /**
-     * @param array $results
-     */
     private function ensureValidation(array $results)
     {
         $this

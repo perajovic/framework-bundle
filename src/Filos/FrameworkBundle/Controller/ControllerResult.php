@@ -24,10 +24,6 @@ final class ControllerResult
      */
     public $app;
 
-    /**
-     * @param array $view
-     * @param array $app
-     */
     public function __construct(array $view = [], array $app = [])
     {
         $this->view = new ParameterBag($view);

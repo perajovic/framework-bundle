@@ -14,12 +14,6 @@ use ReflectionClass;
 
 class ConstantsToArrayResolver
 {
-    /**
-     * @param string $class
-     * @param string $pattern
-     *
-     * @return array
-     */
     public function resolve(string $class, string $pattern): array
     {
         $options = [];

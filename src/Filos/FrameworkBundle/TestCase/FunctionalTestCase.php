@@ -37,18 +37,14 @@ abstract class FunctionalTestCase extends WebTestCase
     }
 
     /**
-     * @param string $id
-     *
      * @return object
      */
-    protected function getService($id)
+    protected function getService(string $id)
     {
         return static::$kernel->getContainer()->get($id);
     }
 
     /**
-     * @return EntityManagerInterface
-     *
      * @throws LogicException
      */
     protected function getEntityManager(): EntityManagerInterface

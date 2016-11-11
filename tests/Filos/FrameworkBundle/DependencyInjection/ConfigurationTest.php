@@ -53,9 +53,6 @@ class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals($params, $expected);
     }
 
-    /**
-     * @return array
-     */
     public function provideValidConfiguration(): array
     {
         return [
@@ -105,9 +102,6 @@ class ConfigurationTest extends TestCase
         ];
     }
 
-    /**
-     * @return Configuration
-     */
     protected function getConfiguration(): Configuration
     {
         return new Configuration();

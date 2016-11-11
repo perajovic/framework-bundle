@@ -47,12 +47,6 @@ class ManagedBy
     }
 
     /**
-     * @param Uuid        $id
-     * @param string      $type
-     * @param string      $email
-     * @param null|string $firstname
-     * @param null|string $lastname
-     *
      * @return static
      */
     public static function create(
@@ -73,11 +67,6 @@ class ManagedBy
         return $managedBy;
     }
 
-    /**
-     * @param string      $email
-     * @param null|string $firstname
-     * @param null|string $lastname
-     */
     public function update(string $email, ?string $firstname, ?string $lastname)
     {
         $this->email = $email;
@@ -90,49 +79,31 @@ class ManagedBy
         $this->exists = false;
     }
 
-    /**
-     * @return Uuid
-     */
     public function getId(): Uuid
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @return bool
-     */
     public function isExists(): bool
     {
         return $this->exists;
     }
 
-    /**
-     * @return null|string
-     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
-    /**
-     * @return null|string
-     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;

@@ -91,10 +91,6 @@ class RouteAppListenerTest extends TestCase
      * @test
      *
      * @dataProvider provideAppAttributes
-     *
-     * @param array $controllerResultApp
-     * @param array $attributesApp
-     * @param array $merged
      */
     public function attributesForMerge(array $controllerResultApp, array $attributesApp, array $merged)
     {
@@ -111,9 +107,6 @@ class RouteAppListenerTest extends TestCase
         $this->assertEquals($merged, $this->controllerResult->app->all());
     }
 
-    /**
-     * @return array
-     */
     public function provideAppAttributes(): array
     {
         return [
@@ -174,8 +167,6 @@ class RouteAppListenerTest extends TestCase
     /**
      * @param int                    $requestType
      * @param ControllerResult|mixed $controllerResult
-     *
-     * @return GetResponseForControllerResultEvent
      */
     private function createGetResponseForControllerResultEvent(
         int $requestType,

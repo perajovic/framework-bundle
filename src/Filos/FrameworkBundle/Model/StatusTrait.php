@@ -19,17 +19,11 @@ trait StatusTrait
      */
     private $status;
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @return array
-     */
     public static function getStatuses(): array
     {
         return (new ConstantsToArrayResolver())->resolve(static::class, 'STATUS');

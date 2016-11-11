@@ -14,9 +14,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 final class RequestFormatListener
 {
-    /**
-     * @param GetResponseEvent $event
-     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {

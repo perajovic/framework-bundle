@@ -19,17 +19,11 @@ final class Uuid
      */
     private $value;
 
-    /**
-     * @param string|null $value
-     */
     public function __construct(?string $value = null)
     {
         $this->value = $value === null ? UuidGenerator::uuid4()->toString() : $value;
     }
 
-    /**
-     * @return string
-     */
     public function get(): string
     {
         return $this->value;

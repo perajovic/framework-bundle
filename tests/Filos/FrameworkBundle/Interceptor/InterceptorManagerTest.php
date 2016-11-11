@@ -105,9 +105,6 @@ class InterceptorManagerTest extends TestCase
         $manager->handle($this->request);
     }
 
-    /**
-     * @param PHPUnit_Framework_MockObject_MockObject $interceptor
-     */
     private function ensureInterceptorThrowsException(PHPUnit_Framework_MockObject_MockObject $interceptor)
     {
         $interceptor
@@ -117,9 +114,6 @@ class InterceptorManagerTest extends TestCase
             ->will($this->throwException(new HttpException(404, '404 test status')));
     }
 
-    /**
-     * @param PHPUnit_Framework_MockObject_MockObject $interceptor
-     */
     private function ensureInterceptorIsApplied(PHPUnit_Framework_MockObject_MockObject $interceptor)
     {
         $interceptor
@@ -128,9 +122,6 @@ class InterceptorManagerTest extends TestCase
             ->with($this->request);
     }
 
-    /**
-     * @return PHPUnit_Framework_MockObject_MockObject
-     */
     private function createInterceptor(): PHPUnit_Framework_MockObject_MockObject
     {
         return $this->createMockFor('Filos\FrameworkBundle\Interceptor\InterceptorInterface');

@@ -14,12 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 trait PasswordFilterTrait
 {
-    /**
-     * @param Request $request
-     * @param string  $field
-     *
-     * @return string
-     */
     protected function filterPassword(Request $request, string $field): string
     {
         $filtered = $request->request->filter($field);

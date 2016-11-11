@@ -10,10 +10,14 @@ declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle\Filter;
 
+use Filos\FrameworkBundle\Filter\StringFilterTrait;
 use Tests\Filos\FrameworkBundle\TestCase\FilterTraitTestCase;
 
 class StringFilterTraitTest extends FilterTraitTestCase
 {
+    /**
+     * @var StringFilterTrait
+     */
     private $filter;
 
     public function setUp()

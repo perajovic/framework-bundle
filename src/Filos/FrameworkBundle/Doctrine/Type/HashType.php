@@ -18,25 +18,16 @@ class HashType extends Type
 {
     const HASH = 'hash';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
         return $platform->getClobTypeDeclarationSQL($fieldDeclaration);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         return null !== $value ? new Hash($value) : null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         $value = (string) $value;
@@ -44,9 +35,6 @@ class HashType extends Type
         return empty($value) ? null : $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return self::HASH;

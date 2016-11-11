@@ -27,9 +27,6 @@ final class TruncatableTablesListener
         $this->tables = [];
     }
 
-    /**
-     * @param LifecycleEventArgs $event
-     */
     public function postPersist(LifecycleEventArgs $event)
     {
         $table = $event
@@ -42,9 +39,6 @@ final class TruncatableTablesListener
         }
     }
 
-    /**
-     * @return array
-     */
     public function getTables(): array
     {
         $tables = $this->tables;

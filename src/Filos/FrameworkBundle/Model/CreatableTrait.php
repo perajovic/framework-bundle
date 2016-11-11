@@ -24,33 +24,21 @@ trait CreatableTrait
      */
     private $createdAt;
 
-    /**
-     * @param ManagedBy $createdBy
-     */
     public function setCreatedBy(ManagedBy $createdBy)
     {
         $this->createdBy = $createdBy;
     }
 
-    /**
-     * @param DateTime $createdAt
-     */
     public function setCreatedAt(DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * @return ManagedBy|null
-     */
     public function getCreatedBy(): ?ManagedBy
     {
         return $this->createdBy;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;

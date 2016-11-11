@@ -15,9 +15,6 @@ use Filos\FrameworkBundle\Model\Uuid;
 
 class CurrentAccount implements CurrentAccountInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getId(): Uuid
     {
         return new Uuid('efg-abc-123');

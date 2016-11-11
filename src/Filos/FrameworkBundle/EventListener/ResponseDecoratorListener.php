@@ -24,17 +24,11 @@ final class ResponseDecoratorListener
      */
     private $escaper;
 
-    /**
-     * @param Escaper $escaper
-     */
     public function __construct(Escaper $escaper)
     {
         $this->escaper = $escaper;
     }
 
-    /**
-     * @param FilterResponseEvent $event
-     */
     public function onKernelResponse(FilterResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {
@@ -65,10 +59,6 @@ final class ResponseDecoratorListener
         $this->setActionData($app, $headers);
     }
 
-    /**
-     * @param array    $app
-     * @param Response $response
-     */
     private function setStatusCode(array $app, Response $response)
     {
         if (isset($app[ResponseHeaders::STATUS_CODE_KEY])) {
@@ -76,10 +66,6 @@ final class ResponseDecoratorListener
         }
     }
 
-    /**
-     * @param array             $app
-     * @param ResponseHeaderBag $headers
-     */
     private function setPageTitle(array $app, ResponseHeaderBag $headers)
     {
         if (isset($app[ResponseHeaders::PAGE_TITLE_KEY])) {
@@ -90,10 +76,6 @@ final class ResponseDecoratorListener
         }
     }
 
-    /**
-     * @param array             $app
-     * @param ResponseHeaderBag $headers
-     */
     private function setActionCallback(array $app, ResponseHeaderBag $headers)
     {
         if (isset($app[ResponseHeaders::ACTION_CALLBACK_KEY])) {
@@ -104,10 +86,6 @@ final class ResponseDecoratorListener
         }
     }
 
-    /**
-     * @param array             $app
-     * @param ResponseHeaderBag $headers
-     */
     private function setActionData(array $app, ResponseHeaderBag $headers)
     {
         if (isset($app[ResponseHeaders::ACTION_DATA_KEY])) {
@@ -118,9 +96,6 @@ final class ResponseDecoratorListener
         }
     }
 
-    /**
-     * @param HeaderBag $headers
-     */
     private function enforceNoCache(HeaderBag $headers)
     {
         $headers->add([

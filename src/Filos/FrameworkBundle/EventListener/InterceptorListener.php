@@ -20,17 +20,11 @@ final class InterceptorListener
      */
     private $manager;
 
-    /**
-     * @param InterceptorManager $manager
-     */
     public function __construct(InterceptorManager $manager)
     {
         $this->manager = $manager;
     }
 
-    /**
-     * @param FilterControllerEvent $event
-     */
     public function onKernelController(FilterControllerEvent $event)
     {
         if (!$event->isMasterRequest()) {

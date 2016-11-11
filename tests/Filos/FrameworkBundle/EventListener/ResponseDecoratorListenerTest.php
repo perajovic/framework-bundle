@@ -154,11 +154,6 @@ class ResponseDecoratorListenerTest extends TestCase
         $this->assertSame('{"foo":"bar"}', $this->response->headers->get('X-Action-Data'));
     }
 
-    /**
-     * @param int $requestType
-     *
-     * @return FilterResponseEvent
-     */
     private function createFilterResponseEvent(int $requestType): FilterResponseEvent
     {
         return new FilterResponseEvent($this->kernel, $this->request, $requestType, $this->response);

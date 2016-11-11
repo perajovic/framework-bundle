@@ -12,33 +12,16 @@ namespace Filos\FrameworkBundle\Utils;
 
 final class PasswordHelper
 {
-    /**
-     * @param string $password
-     * @param int    $algorithm
-     *
-     * @return string
-     */
     public function hash(string $password, int $algorithm = PASSWORD_DEFAULT): string
     {
         return password_hash($password, $algorithm);
     }
 
-    /**
-     * @param string $password
-     * @param string $hash
-     *
-     * @return bool
-     */
     public function verify(string $password, string $hash): bool
     {
         return password_verify($password, $hash);
     }
 
-    /**
-     * @param int $length
-     *
-     * @return string
-     */
     public function generate(int $length = 15): string
     {
         $password = '';

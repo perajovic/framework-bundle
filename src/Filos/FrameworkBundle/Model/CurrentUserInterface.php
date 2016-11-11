@@ -12,8 +12,5 @@ namespace Filos\FrameworkBundle\Model;
 
 interface CurrentUserInterface
 {
-    /**
-     * @return Uuid
-     */
     public function getId(): Uuid;
 }

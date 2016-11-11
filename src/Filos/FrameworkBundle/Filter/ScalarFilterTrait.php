@@ -14,13 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 trait ScalarFilterTrait
 {
-    /**
-     * @param Request $request
-     * @param string  $field
-     * @param string  $attribute
-     *
-     * @return string
-     */
     protected function filterScalar(Request $request, string $field, $attribute = 'request'): string
     {
         $filtered = $request->$attribute->filter($field);

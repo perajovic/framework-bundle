@@ -18,9 +18,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class FilosFrameworkExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -38,9 +35,6 @@ class FilosFrameworkExtension extends Extension
         $this->registerTruncatableTablesService($container);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     private function registerTruncatableTablesService(ContainerBuilder $container)
     {
         if (!$container->hasParameter('kernel.environment')) {

@@ -14,13 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 trait EmailFilterTrait
 {
-    /**
-     * @param Request $request
-     * @param string  $field
-     * @param string  $attribute
-     *
-     * @return string
-     */
     protected function filterEmail(Request $request, string $field, $attribute = 'request'): string
     {
         $filtered = $request->$attribute->filter(

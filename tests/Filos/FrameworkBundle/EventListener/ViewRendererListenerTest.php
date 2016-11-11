@@ -106,10 +106,8 @@ class ViewRendererListenerTest extends TestCase
     }
 
     /**
-     * @param string                 $requestType
+     * @param int                    $requestType
      * @param ControllerResult|mixed $controllerResult
-     *
-     * @return GetResponseForControllerResultEvent
      */
     private function createGetResponseForControllerResultEvent(
         int $requestType,

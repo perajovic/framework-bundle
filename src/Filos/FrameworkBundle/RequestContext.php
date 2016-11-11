@@ -25,25 +25,16 @@ final class RequestContext
      */
     private $user;
 
-    /**
-     * @param CurrentUserInterface $user
-     */
     public function setUser(CurrentUserInterface $user)
     {
         $this->user = $user;
     }
 
-    /**
-     * @return CurrentUserInterface|null
-     */
     public function getUser(): ?CurrentUserInterface
     {
         return $this->user;
     }
 
-    /**
-     * @return string|null
-     */
     public function resolveUserId(): ?string
     {
         $user = $this->getUser();
@@ -51,25 +42,16 @@ final class RequestContext
         return $user ? $user->getId()->get() : null;
     }
 
-    /**
-     * @param CurrentAccountInterface $account
-     */
     public function setAccount(CurrentAccountInterface $account)
     {
         $this->account = $account;
     }
 
-    /**
-     * @return CurrentAccountInterface|null
-     */
     public function getAccount(): ?CurrentAccountInterface
     {
         return $this->account;
     }
 
-    /**
-     * @return string|null
-     */
     public function resolveAccountId(): ?string
     {
         $account = $this->getAccount();

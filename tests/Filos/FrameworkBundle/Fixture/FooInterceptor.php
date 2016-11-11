@@ -20,9 +20,6 @@ class FooInterceptor implements InterceptorInterface
      */
     public $executed = false;
 
-    /**
-     * @param Request $request
-     */
     public function apply(Request $request)
     {
         $this->executed = true;

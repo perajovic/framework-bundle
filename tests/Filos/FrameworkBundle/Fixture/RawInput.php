@@ -30,9 +30,6 @@ class RawInput implements RawInputInterface
      */
     private $id;
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(Request $request)
     {
         $this->name = 'John Doe';

@@ -17,9 +17,6 @@ final class Hash
      */
     private $value;
 
-    /**
-     * @param string|null $salt
-     */
     public function __construct(?string $salt = null)
     {
         if (null === $salt) {
@@ -29,9 +26,6 @@ final class Hash
         $this->value = hash('sha256', $salt.microtime().$salt);
     }
 
-    /**
-     * @return string
-     */
     public function get(): string
     {
         return $this->value;

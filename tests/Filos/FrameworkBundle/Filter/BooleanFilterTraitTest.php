@@ -40,9 +40,6 @@ class BooleanFilterTraitTest extends FilterTraitTestCase
         $this->assertSame($expected, $actual);
     }
 
-    /**
-     * @return array
-     */
     public function provideValue(): array
     {
         return [
