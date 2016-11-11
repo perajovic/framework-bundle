@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Filos\FrameworkBundle\TestCase;
 
+use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
 abstract class TestCase extends PHPUnit_Framework_TestCase
@@ -23,10 +24,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function createMockFor(string $class, array $methods = [])
+    protected function createMockFor(string $class, array $methods = []): PHPUnit_Framework_MockObject_MockObject
     {
         return $this
             ->getMockBuilder($class)
