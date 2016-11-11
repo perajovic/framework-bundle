@@ -13,7 +13,7 @@ namespace Filos\FrameworkBundle;
 use Filos\FrameworkBundle\Model\CurrentAccountInterface;
 use Filos\FrameworkBundle\Model\CurrentUserInterface;
 
-class RequestContext
+final class RequestContext
 {
     /**
      * @var CurrentAccountInterface|null
