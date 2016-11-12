@@ -8,29 +8,26 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle;
-
-use Filos\FrameworkBundle\Model\CurrentAccountInterface;
-use Filos\FrameworkBundle\Model\CurrentUserInterface;
+namespace Filos\FrameworkBundle\RequestContext;
 
 final class RequestContext
 {
     /**
-     * @var CurrentAccountInterface|null
+     * @var AccountContextInterface|null
      */
     private $account;
 
     /**
-     * @var CurrentUserInterface|null
+     * @var UserContextInterface|null
      */
     private $user;
 
-    public function setUser(CurrentUserInterface $user)
+    public function setUser(UserContextInterface $user)
     {
         $this->user = $user;
     }
 
-    public function getUser(): ?CurrentUserInterface
+    public function getUser(): ?UserContextInterface
     {
         return $this->user;
     }
@@ -42,12 +39,12 @@ final class RequestContext
         return $user ? $user->getId()->get() : null;
     }
 
-    public function setAccount(CurrentAccountInterface $account)
+    public function setAccount(AccountContextInterface $account)
     {
         $this->account = $account;
     }
 
-    public function getAccount(): ?CurrentAccountInterface
+    public function getAccount(): ?AccountContextInterface
     {
         return $this->account;
     }

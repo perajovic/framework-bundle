@@ -8,9 +8,11 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle\Model;
+namespace Filos\FrameworkBundle\RequestContext;
 
-interface CurrentAccountInterface
+use Filos\FrameworkBundle\Model\Uuid;
+
+interface AccountContextInterface
 {
     public function getId(): Uuid;
 }

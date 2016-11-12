@@ -10,10 +10,10 @@ declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle;
 
-use Filos\FrameworkBundle\RequestContext;
+use Filos\FrameworkBundle\RequestContext\RequestContext;
 use Filos\FrameworkBundle\TestCase\TestCase;
-use Tests\Filos\FrameworkBundle\Fixture\CurrentAccount;
-use Tests\Filos\FrameworkBundle\Fixture\CurrentUser;
+use Tests\Filos\FrameworkBundle\Fixture\AccountContext;
+use Tests\Filos\FrameworkBundle\Fixture\UserContext;
 
 class RequestContextTest extends TestCase
 {
@@ -45,7 +45,7 @@ class RequestContextTest extends TestCase
      */
     public function currentAccountIsSettledAndRetrieved()
     {
-        $account = new CurrentAccount();
+        $account = new AccountContext();
 
         $this->requestContext->setAccount($account);
 
@@ -58,7 +58,7 @@ class RequestContextTest extends TestCase
      */
     public function currentUserIsSettledAndRetrieved()
     {
-        $user = new CurrentUser();
+        $user = new UserContext();
 
         $this->requestContext->setUser($user);
 

@@ -10,10 +10,10 @@ declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle\Fixture;
 
-use Filos\FrameworkBundle\Model\CurrentUserInterface;
 use Filos\FrameworkBundle\Model\Uuid;
+use Filos\FrameworkBundle\RequestContext\UserContextInterface;
 
-class CurrentUser implements CurrentUserInterface
+class UserContext implements UserContextInterface
 {
     /**
      * {@inheritdoc}
@@ -21,5 +21,20 @@ class CurrentUser implements CurrentUserInterface
     public function getId(): Uuid
     {
         return new Uuid('123-abc-efg');
+    }
+
+    public function getEmail(): string
+    {
+        return 'john@doe.com';
+    }
+
+    public function getFirstname(): ?string
+    {
+        return 'John';
+    }
+
+    public function getLastname(): ?string
+    {
+        return 'Doe';
     }
 }

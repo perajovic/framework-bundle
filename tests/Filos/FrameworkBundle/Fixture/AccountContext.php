@@ -10,10 +10,10 @@ declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle\Fixture;
 
-use Filos\FrameworkBundle\Model\CurrentAccountInterface;
 use Filos\FrameworkBundle\Model\Uuid;
+use Filos\FrameworkBundle\RequestContext\AccountContextInterface;
 
-class CurrentAccount implements CurrentAccountInterface
+class AccountContext implements AccountContextInterface
 {
     public function getId(): Uuid
     {
