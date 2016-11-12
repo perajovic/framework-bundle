@@ -39,6 +39,9 @@ services:
     filos_framework.interceptor.manager:
         class: 'Filos\FrameworkBundle\Interceptor\InterceptorManager'
 
+    filos_framework.request_context.request:
+        class: 'Filos\FrameworkBundle\RequestContext\RequestContext'
+
     filos_framework.utils.escaper:
         class: 'Filos\FrameworkBundle\Utils\Escaper'
 
