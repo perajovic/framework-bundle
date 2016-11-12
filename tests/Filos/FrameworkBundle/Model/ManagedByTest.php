@@ -79,7 +79,7 @@ class ManagedByTest extends TestCase
     {
         $managedBy = ManagedBy::create($this->uuid, 'Foo\Bar', 'john@doe.com');
 
-        $managedBy->notExists();
+        $managedBy->markAsNonExisting();
 
         $this->assertFalse($managedBy->isExists());
     }

@@ -84,7 +84,7 @@ class ManagedBy
         $this->lastname = $lastname;
     }
 
-    public function notExists()
+    public function markAsNonExisting()
     {
         $this->exists = false;
     }
