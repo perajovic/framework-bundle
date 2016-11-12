@@ -67,7 +67,17 @@ class ManagedBy
         return $managedBy;
     }
 
-    public function update(string $email, ?string $firstname, ?string $lastname)
+    /**
+     * @todo
+     *
+     * This method signature should be compatible with 7.1 nullable types `?string $firstname, ?string $lastname`.
+     * ATM (12.11.2016.) there are bugs in two projects:
+     * 1. https://github.com/zendframework/zend-code/issues/85
+     * 2. https://github.com/Ocramius/ProxyManager/pull/327
+     *
+     * They are blockers for 7.1 syntax.
+     */
+    public function update(string $email, string $firstname = null, string $lastname = null)
     {
         $this->email = $email;
         $this->firstname = $firstname;
