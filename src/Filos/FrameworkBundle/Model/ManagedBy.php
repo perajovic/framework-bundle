@@ -75,7 +75,7 @@ class ManagedBy
      * 1. https://github.com/zendframework/zend-code/issues/85
      * 2. https://github.com/Ocramius/ProxyManager/pull/327
      *
-     * They are blockers for 7.1 syntax.
+     * They are blockers for 7.1 syntax
      */
     public function update(string $email, string $firstname = null, string $lastname = null)
     {
