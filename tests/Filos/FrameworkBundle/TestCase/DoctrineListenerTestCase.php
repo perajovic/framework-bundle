@@ -64,7 +64,7 @@ abstract class DoctrineListenerTestCase extends TestCase
     {
         $this
             ->lifecycleEventArgs
-            ->expects($this->once())
+            ->expects($this->atLeastOnce())
             ->method('getObjectManager')
             ->will($this->returnValue($this->objectManager));
         $this
@@ -82,5 +82,13 @@ abstract class DoctrineListenerTestCase extends TestCase
                 'type' => get_class($entity),
             ])
             ->will($this->returnValue($managedBy ? [$managedBy] : null));
+    }
+
+    protected function ensureEntityManagerIsFlushed()
+    {
+        $this
+            ->objectManager
+            ->expects($this->once())
+            ->method('flush');
     }
 }
