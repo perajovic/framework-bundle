@@ -12,10 +12,16 @@ namespace Filos\FrameworkBundle\EventListener;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\Uuid;
 use Filos\FrameworkBundle\RequestContext\UserContextInterface;
 
 trait ManagedByTrait
 {
+    /**
+     * @var array
+     */
+    private $cache = [];
+
     private function createManagedByFromUserContext(LifecycleEventArgs $args, UserContextInterface $userContext): ManagedBy
     {
         $managedBy = ManagedBy::create(
@@ -28,11 +34,18 @@ trait ManagedByTrait
 
         $args->getObjectManager()->persist($managedBy);
 
+        $this->cache[$this->getCacheKey($managedBy->getId(), $managedBy->getType())] = $managedBy;
+
         return $managedBy;
     }
 
     private function findManagedBy(LifecycleEventArgs $args, UserContextInterface $userContext): ?ManagedBy
     {
+        $key = $this->getCacheKey($userContext->getId(), get_class($userContext));
+        if (isset($this->cache[$key])) {
+            return $this->cache[$key];
+        }
+
         $result = $args
             ->getObjectManager()
             ->getRepository(ManagedBy::class)
@@ -41,6 +54,20 @@ trait ManagedByTrait
                 'type' => get_class($userContext),
             ]);
 
-        return $result[0] ?? null;
+        if (!isset($result[0])) {
+            return null;
+        }
+
+        /** @var ManagedBy $managedBy */
+        $managedBy = $result[0];
+
+        $this->cache[$key] = $managedBy;
+
+        return $managedBy;
+    }
+
+    private function getCacheKey(Uuid $id, string $type): string
+    {
+        return (string) $id.'-'.$type;
     }
 }
