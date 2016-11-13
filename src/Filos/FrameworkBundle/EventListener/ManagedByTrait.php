@@ -14,7 +14,7 @@ use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Filos\FrameworkBundle\Model\ManagedBy;
 use Filos\FrameworkBundle\RequestContext\UserContextInterface;
 
-trait ManagedByFinderTrait
+trait ManagedByTrait
 {
     protected function findManagedBy(LifecycleEventArgs $args, UserContextInterface $userContext): ?ManagedBy
     {

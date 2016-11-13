@@ -23,7 +23,7 @@ use Filos\FrameworkBundle\RequestContext\UserContextInterface;
  */
 final class UpdateManagedByInfoListener
 {
-    use ManagedByFinderTrait;
+    use ManagedByTrait;
 
     public function postUpdate(LifecycleEventArgs $args)
     {

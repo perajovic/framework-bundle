@@ -23,7 +23,7 @@ use Filos\FrameworkBundle\RequestContext\UserContextInterface;
  */
 final class MakeManagedByNonExistingListener
 {
-    use ManagedByFinderTrait;
+    use ManagedByTrait;
 
     public function preRemove(LifecycleEventArgs $args)
     {
