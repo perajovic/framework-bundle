@@ -60,6 +60,14 @@ abstract class DoctrineListenerTestCase extends TestCase
             ->will($this->returnValue($object));
     }
 
+    protected function ensureObjectManagerIsNotCalled()
+    {
+        $this
+            ->lifecycleEventArgs
+            ->expects($this->never())
+            ->method('getObjectManager');
+    }
+
     protected function ensureManagedByResult(?ManagedBy $managedBy, UserContextInterface $entity)
     {
         $this
@@ -90,5 +98,18 @@ abstract class DoctrineListenerTestCase extends TestCase
             ->objectManager
             ->expects($this->once())
             ->method('flush');
+    }
+
+    protected function ensureManagedByIsPersisted()
+    {
+        $this
+            ->objectManager
+            ->expects($this->once())
+            ->method('persist')
+            ->with($this->callback(function ($arg) {
+                $this->assertInstanceOf(ManagedBy::class, $arg);
+
+                return $arg;
+            }));
     }
 }

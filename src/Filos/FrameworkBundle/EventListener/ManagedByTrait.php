@@ -16,7 +16,22 @@ use Filos\FrameworkBundle\RequestContext\UserContextInterface;
 
 trait ManagedByTrait
 {
-    protected function findManagedBy(LifecycleEventArgs $args, UserContextInterface $userContext): ?ManagedBy
+    private function createManagedByFromUserContext(LifecycleEventArgs $args, UserContextInterface $userContext): ManagedBy
+    {
+        $managedBy = ManagedBy::create(
+            $userContext->getId(),
+            get_class($userContext),
+            $userContext->getEmail(),
+            $userContext->getFirstname(),
+            $userContext->getLastname()
+        );
+
+        $args->getObjectManager()->persist($managedBy);
+
+        return $managedBy;
+    }
+
+    private function findManagedBy(LifecycleEventArgs $args, UserContextInterface $userContext): ?ManagedBy
     {
         $result = $args
             ->getObjectManager()
