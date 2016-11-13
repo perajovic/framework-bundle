@@ -17,7 +17,7 @@ use Filos\FrameworkBundle\RequestContext\UserContextInterface;
  * Configuration example.
  *
  *  listener.make_managed_by_non_existing:
- *      class: 'Filos\FrameworkBundle\EventListener\MakeManagedByNotExistingListener'
+ *      class: 'Filos\FrameworkBundle\EventListener\MakeManagedByNonExistingListener'
  *      tags:
  *          - { name: 'doctrine.event_listener', event: 'preRemove' }
  */
