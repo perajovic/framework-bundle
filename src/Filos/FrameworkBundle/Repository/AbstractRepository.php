@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Filos\FrameworkBundle\Repository;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 abstract class AbstractRepository
 {
@@ -58,5 +59,15 @@ abstract class AbstractRepository
     public function flush()
     {
         $this->entityManager->flush();
+    }
+
+    protected function getEntityRepository(): EntityRepository
+    {
+        $class = explode('\\', static::class);
+        $class[1] = 'Entity';
+        $class[2] = str_replace('Repository', '', $class[2]);
+        $class = implode('\\', $class);
+
+        return $this->entityManager->getRepository($class);
     }
 }
