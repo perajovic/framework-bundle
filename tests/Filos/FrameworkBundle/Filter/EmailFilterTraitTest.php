@@ -22,7 +22,7 @@ class EmailFilterTraitTest extends FilterTraitTestCase
      */
     private $filter;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

@@ -45,7 +45,7 @@ class InputInterceptorTest extends TestCase
      */
     private $interceptor;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

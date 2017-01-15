@@ -35,7 +35,7 @@ class ExceptionControllerTest extends TestCase
      */
     private $request;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

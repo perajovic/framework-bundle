@@ -23,7 +23,7 @@ class EscaperTest extends TestCase
      */
     private $escaper;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

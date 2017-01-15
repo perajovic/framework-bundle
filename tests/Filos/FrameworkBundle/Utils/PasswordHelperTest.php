@@ -22,7 +22,7 @@ class PasswordHelperTest extends TestCase
      */
     private $passwordHelper;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

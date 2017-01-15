@@ -42,7 +42,7 @@ class RouteAppListenerTest extends TestCase
      */
     private $controllerResult;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

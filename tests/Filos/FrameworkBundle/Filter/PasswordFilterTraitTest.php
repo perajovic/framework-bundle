@@ -22,7 +22,7 @@ class PasswordFilterTraitTest extends FilterTraitTestCase
      */
     private $filter;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

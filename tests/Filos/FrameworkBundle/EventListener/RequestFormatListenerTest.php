@@ -36,7 +36,7 @@ class RequestFormatListenerTest extends TestCase
      */
     private $kernel;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

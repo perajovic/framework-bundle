@@ -48,7 +48,7 @@ class ResponseDecoratorListenerTest extends TestCase
      */
     private $listener;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 

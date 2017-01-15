@@ -44,7 +44,7 @@ class ViewRendererListenerTest extends TestCase
      */
     private $listener;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
