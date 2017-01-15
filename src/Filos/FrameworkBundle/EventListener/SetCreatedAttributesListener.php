@@ -14,7 +14,7 @@ namespace Filos\FrameworkBundle\EventListener;
 
 use DateTime;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Filos\FrameworkBundle\Model\CreatableTrait;
+use Filos\FrameworkBundle\Model\Attribute\CreatableTrait;
 use Filos\FrameworkBundle\Model\ManagedBy;
 use Filos\FrameworkBundle\RequestContext\RequestContext;
 

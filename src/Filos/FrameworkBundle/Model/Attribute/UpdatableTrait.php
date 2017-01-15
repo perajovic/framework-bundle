@@ -10,9 +10,10 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle\Model;
+namespace Filos\FrameworkBundle\Model\Attribute;
 
 use DateTime;
+use Filos\FrameworkBundle\Model\ManagedBy;
 
 trait UpdatableTrait
 {

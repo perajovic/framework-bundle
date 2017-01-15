@@ -12,8 +12,8 @@ declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle\Model;
 
+use Filos\FrameworkBundle\Model\Attribute\Uuid;
 use Filos\FrameworkBundle\Model\ManagedBy;
-use Filos\FrameworkBundle\Model\Uuid;
 use Filos\FrameworkBundle\TestCase\TestCase;
 
 class ManagedByTest extends TestCase

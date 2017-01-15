@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Filos\FrameworkBundle\Model;
+namespace Tests\Filos\FrameworkBundle\Model\Attribute;
 
-use Filos\FrameworkBundle\Model\Uuid;
+use Filos\FrameworkBundle\Model\Attribute\Uuid;
 use Filos\FrameworkBundle\TestCase\TestCase;
 
 class UuidTest extends TestCase

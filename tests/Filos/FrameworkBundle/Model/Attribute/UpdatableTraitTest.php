@@ -10,12 +10,12 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle\Tests\Model;
+namespace Filos\FrameworkBundle\Tests\Model\Attribute;
 
 use DateTime;
+use Filos\FrameworkBundle\Model\Attribute\UpdatableTrait;
+use Filos\FrameworkBundle\Model\Attribute\Uuid;
 use Filos\FrameworkBundle\Model\ManagedBy;
-use Filos\FrameworkBundle\Model\UpdatableTrait;
-use Filos\FrameworkBundle\Model\Uuid;
 use Filos\FrameworkBundle\TestCase\TestCase;
 
 class UpdatableTraitTest extends TestCase
@@ -29,7 +29,7 @@ class UpdatableTraitTest extends TestCase
     {
         parent::setUp();
 
-        $this->creatable = $this->getObjectForTrait('Filos\FrameworkBundle\Model\UpdatableTrait');
+        $this->creatable = $this->getObjectForTrait(UpdatableTrait::class);
     }
 
     /**

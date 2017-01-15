@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle\Fixture;
 
-use Filos\FrameworkBundle\Model\Uuid;
+use Filos\FrameworkBundle\Model\Attribute\Uuid;
 use Filos\FrameworkBundle\RequestContext\AccountContextInterface;
 
 class AccountContext implements AccountContextInterface

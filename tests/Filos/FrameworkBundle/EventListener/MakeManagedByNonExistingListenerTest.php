@@ -14,8 +14,8 @@ namespace Tests\Filos\FrameworkBundle\EventListener;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Filos\FrameworkBundle\EventListener\MakeManagedByNonExistingListener;
+use Filos\FrameworkBundle\Model\Attribute\Uuid;
 use Filos\FrameworkBundle\Model\ManagedBy;
-use Filos\FrameworkBundle\Model\Uuid;
 use stdClass;
 use Tests\Filos\FrameworkBundle\Fixture\UserContext;
 use Tests\Filos\FrameworkBundle\TestCase\DoctrineListenerTestCase;

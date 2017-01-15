@@ -10,12 +10,12 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle\Tests\Model;
+namespace Filos\FrameworkBundle\Tests\Model\Attribute;
 
 use DateTime;
-use Filos\FrameworkBundle\Model\CreatableTrait;
+use Filos\FrameworkBundle\Model\Attribute\CreatableTrait;
+use Filos\FrameworkBundle\Model\Attribute\Uuid;
 use Filos\FrameworkBundle\Model\ManagedBy;
-use Filos\FrameworkBundle\Model\Uuid;
 use Filos\FrameworkBundle\TestCase\TestCase;
 
 class CreatableTraitTest extends TestCase
@@ -29,7 +29,7 @@ class CreatableTraitTest extends TestCase
     {
         parent::setUp();
 
-        $this->creatable = $this->getObjectForTrait('Filos\FrameworkBundle\Model\CreatableTrait');
+        $this->creatable = $this->getObjectForTrait(CreatableTrait::class);
     }
 
     /**

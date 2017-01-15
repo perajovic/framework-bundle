@@ -10,22 +10,20 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle\Model;
+namespace Filos\FrameworkBundle\Model\Attribute;
 
-final class Hash
+use Ramsey\Uuid\Uuid as UuidGenerator;
+
+final class Uuid
 {
     /**
      * @var string
      */
     private $value;
 
-    public function __construct(?string $salt = null)
+    public function __construct(?string $value = null)
     {
-        if (null === $salt) {
-            $salt = uniqid((string) mt_rand(), true);
-        }
-
-        $this->value = hash('sha256', $salt.microtime().$salt);
+        $this->value = $value === null ? UuidGenerator::uuid4()->toString() : $value;
     }
 
     /**

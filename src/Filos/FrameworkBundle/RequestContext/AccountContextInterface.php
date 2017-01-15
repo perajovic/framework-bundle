@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Filos\FrameworkBundle\RequestContext;
 
-use Filos\FrameworkBundle\Model\Uuid;
+use Filos\FrameworkBundle\Model\Attribute\Uuid;
 
 interface AccountContextInterface
 {

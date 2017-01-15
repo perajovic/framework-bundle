@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace Filos\FrameworkBundle\Model;
 
+use Filos\FrameworkBundle\Model\Attribute\Uuid;
+
 class ManagedBy
 {
     /**

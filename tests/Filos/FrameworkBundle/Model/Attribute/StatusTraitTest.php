@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle\Tests\Model;
+namespace Filos\FrameworkBundle\Tests\Model\Attribute;
 
 use Filos\FrameworkBundle\TestCase\TestCase;
 use Tests\Filos\FrameworkBundle\Fixture\Status;

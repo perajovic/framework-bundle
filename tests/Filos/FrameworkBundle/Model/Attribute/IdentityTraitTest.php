@@ -10,10 +10,10 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle\Tests\Model;
+namespace Filos\FrameworkBundle\Tests\Model\Attribute;
 
-use Filos\FrameworkBundle\Model\IdentityTrait;
-use Filos\FrameworkBundle\Model\Uuid;
+use Filos\FrameworkBundle\Model\Attribute\IdentityTrait;
+use Filos\FrameworkBundle\Model\Attribute\Uuid;
 use Filos\FrameworkBundle\TestCase\TestCase;
 
 class IdentityTraitTest extends TestCase
@@ -27,7 +27,7 @@ class IdentityTraitTest extends TestCase
     {
         parent::setUp();
 
-        $this->identity = $this->getObjectForTrait('Filos\FrameworkBundle\Model\IdentityTrait');
+        $this->identity = $this->getObjectForTrait(IdentityTrait::class);
     }
 
     /**

@@ -13,8 +13,8 @@ declare(strict_types=1);
 namespace Filos\FrameworkBundle\EventListener;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Filos\FrameworkBundle\Model\Attribute\Uuid;
 use Filos\FrameworkBundle\Model\ManagedBy;
-use Filos\FrameworkBundle\Model\Uuid;
 use Filos\FrameworkBundle\RequestContext\UserContextInterface;
 
 trait ManagedByTrait

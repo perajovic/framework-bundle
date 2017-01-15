@@ -14,8 +14,8 @@ namespace Filos\FrameworkBundle\EventListener;
 
 use DateTime;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Filos\FrameworkBundle\Model\Attribute\UpdatableTrait;
 use Filos\FrameworkBundle\Model\ManagedBy;
-use Filos\FrameworkBundle\Model\UpdatableTrait;
 use Filos\FrameworkBundle\RequestContext\RequestContext;
 
 /**

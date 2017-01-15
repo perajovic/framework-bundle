@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Tests\Filos\FrameworkBundle\Fixture;
 
-use Filos\FrameworkBundle\Model\StatusTrait;
+use Filos\FrameworkBundle\Model\Attribute\StatusTrait;
 
 class Status
 {

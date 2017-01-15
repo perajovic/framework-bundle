@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace Filos\FrameworkBundle\Model;
+namespace Filos\FrameworkBundle\Model\Attribute;
 
 use Filos\FrameworkBundle\Utils\ConstantsToArrayResolver;
 
