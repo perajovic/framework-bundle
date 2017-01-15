@@ -27,9 +27,6 @@ trait TestCaseTrait
             ->invokeArgs($obj, $arguments);
     }
 
-    /**
-     * @return mixed
-     */
     protected function setNonPublicPropertyValue($obj, string $property, $value)
     {
         $this

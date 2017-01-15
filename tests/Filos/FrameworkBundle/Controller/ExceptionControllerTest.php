@@ -20,6 +20,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
+/**
+ * @note A setUp method make PHPUnit complains about risky test.
+ */
 class ExceptionControllerTest extends TestCase
 {
     /**

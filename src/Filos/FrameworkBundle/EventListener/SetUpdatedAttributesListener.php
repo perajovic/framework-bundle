@@ -69,8 +69,6 @@ final class SetUpdatedAttributesListener
 
     /**
      * @param object $entity
-     *
-     * @return bool
      */
     private function isUpdatableInstance($entity): bool
     {

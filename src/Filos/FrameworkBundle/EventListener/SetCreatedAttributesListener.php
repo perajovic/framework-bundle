@@ -69,8 +69,6 @@ final class SetCreatedAttributesListener
 
     /**
      * @param object $entity
-     *
-     * @return bool
      */
     private function isCreatableInstance($entity): bool
     {
