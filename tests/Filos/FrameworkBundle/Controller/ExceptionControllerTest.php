@@ -3,6 +3,8 @@
 /*
  * This file is part of the Filos FrameworkBundle project.
  *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  * (c) Pera Jovic <perajovic@me.com>. All rights reserved.
  */
 
@@ -12,9 +14,9 @@ namespace Tests\Filos\FrameworkBundle\Controller;
 
 use Exception;
 use Filos\FrameworkBundle\Controller\ExceptionController;
+use Filos\FrameworkBundle\TestCase\TestCase;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
-use Filos\FrameworkBundle\TestCase\TestCase;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 

@@ -3,6 +3,8 @@
 /*
  * This file is part of the Filos FrameworkBundle project.
  *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  * (c) Pera Jovic <perajovic@me.com>. All rights reserved.
  */
 
@@ -12,12 +14,12 @@ namespace Tests\Filos\FrameworkBundle\EventListener;
 
 use Filos\FrameworkBundle\EventListener\InterceptorListener;
 use Filos\FrameworkBundle\Interceptor\InterceptorManager;
+use Filos\FrameworkBundle\TestCase\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
 use Tests\Filos\FrameworkBundle\Fixture\FooInterceptor;
-use Filos\FrameworkBundle\TestCase\TestCase;
 
 class InterceptorListenerTest extends TestCase
 {

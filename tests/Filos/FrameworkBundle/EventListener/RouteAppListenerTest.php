@@ -3,6 +3,8 @@
 /*
  * This file is part of the Filos FrameworkBundle project.
  *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  * (c) Pera Jovic <perajovic@me.com>. All rights reserved.
  */
 
@@ -12,11 +14,11 @@ namespace Tests\Filos\FrameworkBundle\EventListener;
 
 use Filos\FrameworkBundle\Controller\ControllerResult;
 use Filos\FrameworkBundle\EventListener\RouteAppListener;
+use Filos\FrameworkBundle\TestCase\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Tests\Filos\FrameworkBundle\Fixture\AppKernel;
-use Filos\FrameworkBundle\TestCase\TestCase;
 
 class RouteAppListenerTest extends TestCase
 {

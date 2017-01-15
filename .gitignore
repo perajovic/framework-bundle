@@ -1,3 +1,4 @@
 /vendor
 /phpunit.xml
 /var
+/.php_cs.cache

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 /*
  * This file is part of the Filos FrameworkBundle project.
@@ -7,14 +7,10 @@
  * file that was distributed with this source code.
  * (c) Pera Jovic <perajovic@me.com>. All rights reserved.
  */
-
 declare(strict_types=1);
 
-namespace Tests\Filos\FrameworkBundle\Fixture;
+namespace Filos\FrameworkBundle\Controller;
 
-use Filos\FrameworkBundle\Model\CreatableTrait;
-
-class CreatableEntity
+class Test
 {
-    use CreatableTrait;
 }
