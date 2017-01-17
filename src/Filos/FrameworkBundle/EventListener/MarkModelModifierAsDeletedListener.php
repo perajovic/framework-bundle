@@ -18,14 +18,14 @@ use Filos\FrameworkBundle\RequestContext\UserContextInterface;
 /**
  * Configuration example.
  *
- *  listener.make_managed_by_non_existing:
- *      class: 'Filos\FrameworkBundle\EventListener\MakeManagedByNonExistingListener'
+ *  listener.mark_model_modifier_as_deleted:
+ *      class: 'Filos\FrameworkBundle\EventListener\MarkModelModifierAsDeletedListener'
  *      tags:
  *          - { name: 'doctrine.event_listener', event: 'preRemove' }
  */
-final class MakeManagedByNonExistingListener
+final class MarkModelModifierAsDeletedListener
 {
-    use ManagedByTrait;
+    use ModelModifierTrait;
 
     public function preRemove(LifecycleEventArgs $args)
     {
@@ -36,10 +36,10 @@ final class MakeManagedByNonExistingListener
             return;
         }
 
-        $managedBy = $this->findManagedBy($args, $entity);
+        $modifier = $this->findModelModifier($args, $entity);
 
-        if ($managedBy) {
-            $managedBy->markAsNonExisting();
+        if ($modifier) {
+            $modifier->markAsDeleted();
         }
     }
 }

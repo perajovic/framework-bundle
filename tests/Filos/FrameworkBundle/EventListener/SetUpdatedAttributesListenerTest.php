@@ -16,7 +16,7 @@ use DateTime;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Filos\FrameworkBundle\EventListener\SetUpdatedAttributesListener;
 use Filos\FrameworkBundle\Model\Attribute\Uuid;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 use Filos\FrameworkBundle\RequestContext\RequestContext;
 use stdClass;
 use Tests\Filos\FrameworkBundle\Fixture\UpdatableEntity;
@@ -46,9 +46,9 @@ class SetUpdatedAttributesListenerTest extends DoctrineListenerTestCase
     private $updatableEntity;
 
     /**
-     * @var ManagedBy
+     * @var ModelModifier
      */
-    private $managedBy;
+    private $modifier;
 
     protected function setUp()
     {
@@ -58,7 +58,7 @@ class SetUpdatedAttributesListenerTest extends DoctrineListenerTestCase
         $this->requestContext = new RequestContext();
         $this->userContext = new UserContext();
         $this->updatableEntity = new UpdatableEntity();
-        $this->managedBy = ManagedBy::create(new Uuid('111-222-aaa'), 'Some\Type', 'j@doe.com');
+        $this->modifier = ModelModifier::create(new Uuid('111-222-aaa'), 'Some\Type', 'j@doe.com');
         $this->listener = new SetUpdatedAttributesListener($this->requestContext);
     }
 
@@ -139,30 +139,30 @@ class SetUpdatedAttributesListenerTest extends DoctrineListenerTestCase
     /**
      * @test
      */
-    public function existingManagedByIsSettled()
+    public function existingModelModifierIsSettled()
     {
         $this->requestContext->setUser($this->userContext);
 
         $this->ensureObject($this->updatableEntity);
-        $this->ensureManagedByResult($this->managedBy, $this->userContext);
+        $this->ensureModelModifierResult($this->modifier, $this->userContext);
         $this->ensureUpdatedByFieldChange(false);
 
         /* @var PreUpdateEventArgs $this->lifecycleEventArgs */
         $this->listener->preUpdate($this->lifecycleEventArgs);
 
-        $this->assertSame($this->managedBy, $this->updatableEntity->getUpdatedBy());
+        $this->assertSame($this->modifier, $this->updatableEntity->getUpdatedBy());
     }
 
     /**
      * @test
      */
-    public function newManagedByIsCreatedAndSettled()
+    public function newModelModifierIsCreatedAndSettled()
     {
         $this->requestContext->setUser($this->userContext);
 
         $this->ensureObject($this->updatableEntity);
-        $this->ensureManagedByResult(null, $this->userContext);
-        $this->ensureManagedByIsPersisted();
+        $this->ensureModelModifierResult(null, $this->userContext);
+        $this->ensureModelModifierIsPersisted();
         $this->ensureUpdatedByFieldChange(false);
 
         /* @var PreUpdateEventArgs $this->lifecycleEventArgs */

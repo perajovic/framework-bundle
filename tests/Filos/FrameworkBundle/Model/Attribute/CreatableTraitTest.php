@@ -15,7 +15,7 @@ namespace Filos\FrameworkBundle\Tests\Model\Attribute;
 use DateTime;
 use Filos\FrameworkBundle\Model\Attribute\CreatableTrait;
 use Filos\FrameworkBundle\Model\Attribute\Uuid;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 use Filos\FrameworkBundle\TestCase\TestCase;
 
 class CreatableTraitTest extends TestCase
@@ -46,7 +46,7 @@ class CreatableTraitTest extends TestCase
      */
     public function fieldValuesAreRetrieved()
     {
-        $createdBy = ManagedBy::create(new Uuid(), 'stdClass', 'john@doe.com');
+        $createdBy = ModelModifier::create(new Uuid(), 'stdClass', 'john@doe.com');
         $createdAt = new DateTime('now');
 
         $this->creatable->setCreatedBy($createdBy);

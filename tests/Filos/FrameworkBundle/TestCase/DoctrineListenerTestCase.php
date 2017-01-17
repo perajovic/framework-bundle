@@ -15,7 +15,7 @@ namespace Tests\Filos\FrameworkBundle\TestCase;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 use Filos\FrameworkBundle\RequestContext\UserContextInterface;
 use Filos\FrameworkBundle\TestCase\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
@@ -70,7 +70,7 @@ abstract class DoctrineListenerTestCase extends TestCase
             ->method('getObjectManager');
     }
 
-    protected function ensureManagedByResult(?ManagedBy $managedBy, UserContextInterface $entity)
+    protected function ensureModelModifierResult(?ModelModifier $modifier, UserContextInterface $entity)
     {
         $this
             ->lifecycleEventArgs
@@ -81,7 +81,7 @@ abstract class DoctrineListenerTestCase extends TestCase
             ->objectManager
             ->expects($this->once())
             ->method('getRepository')
-            ->with(ManagedBy::class)
+            ->with(ModelModifier::class)
             ->will($this->returnValue($this->entityRepository));
         $this
             ->entityRepository
@@ -91,7 +91,7 @@ abstract class DoctrineListenerTestCase extends TestCase
                 'id' => $entity->getId(),
                 'type' => get_class($entity),
             ])
-            ->will($this->returnValue($managedBy ? [$managedBy] : null));
+            ->will($this->returnValue($modifier ? [$modifier] : null));
     }
 
     protected function ensureEntityManagerIsFlushed()
@@ -102,14 +102,14 @@ abstract class DoctrineListenerTestCase extends TestCase
             ->method('flush');
     }
 
-    protected function ensureManagedByIsPersisted()
+    protected function ensureModelModifierIsPersisted()
     {
         $this
             ->objectManager
             ->expects($this->once())
             ->method('persist')
             ->with($this->callback(function ($arg) {
-                $this->assertInstanceOf(ManagedBy::class, $arg);
+                $this->assertInstanceOf(ModelModifier::class, $arg);
 
                 return $arg;
             }));

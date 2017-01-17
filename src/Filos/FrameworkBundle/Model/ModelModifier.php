@@ -14,7 +14,7 @@ namespace Filos\FrameworkBundle\Model;
 
 use Filos\FrameworkBundle\Model\Attribute\Uuid;
 
-class ManagedBy
+class ModelModifier
 {
     /**
      * @var Uuid
@@ -29,7 +29,7 @@ class ManagedBy
     /**
      * @var bool
      */
-    protected $exists;
+    protected $deleted;
 
     /**
      * @var string|null
@@ -60,15 +60,15 @@ class ManagedBy
         ?string $firstname = null,
         ?string $lastname = null
     ) {
-        $managedBy = new static();
-        $managedBy->id = $id;
-        $managedBy->type = $type;
-        $managedBy->email = $email;
-        $managedBy->firstname = $firstname;
-        $managedBy->lastname = $lastname;
-        $managedBy->exists = true;
+        $modifier = new static();
+        $modifier->id = $id;
+        $modifier->type = $type;
+        $modifier->email = $email;
+        $modifier->firstname = $firstname;
+        $modifier->lastname = $lastname;
+        $modifier->deleted = true;
 
-        return $managedBy;
+        return $modifier;
     }
 
     /**
@@ -88,9 +88,9 @@ class ManagedBy
         $this->lastname = $lastname;
     }
 
-    public function markAsNonExisting()
+    public function markAsDeleted()
     {
-        $this->exists = false;
+        $this->deleted = false;
     }
 
     public function getId(): Uuid
@@ -103,9 +103,9 @@ class ManagedBy
         return $this->type;
     }
 
-    public function isExists(): bool
+    public function isDeleted(): bool
     {
-        return $this->exists;
+        return $this->deleted;
     }
 
     public function getFirstname(): ?string

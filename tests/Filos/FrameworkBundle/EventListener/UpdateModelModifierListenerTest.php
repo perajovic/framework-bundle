@@ -13,17 +13,17 @@ declare(strict_types=1);
 namespace Tests\Filos\FrameworkBundle\EventListener;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Filos\FrameworkBundle\EventListener\MakeManagedByNonExistingListener;
+use Filos\FrameworkBundle\EventListener\UpdateModelModifierListener;
 use Filos\FrameworkBundle\Model\Attribute\Uuid;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 use stdClass;
 use Tests\Filos\FrameworkBundle\Fixture\UserContext;
 use Tests\Filos\FrameworkBundle\TestCase\DoctrineListenerTestCase;
 
-class MakeManagedByNonExistingListenerTest extends DoctrineListenerTestCase
+class UpdateModelModifierListenerTest extends DoctrineListenerTestCase
 {
     /**
-     * @var MakeManagedByNonExistingListener
+     * @var UpdateModelModifierListener
      */
     private $listener;
 
@@ -33,17 +33,17 @@ class MakeManagedByNonExistingListenerTest extends DoctrineListenerTestCase
     private $userContext;
 
     /**
-     * @var ManagedBy
+     * @var ModelModifier
      */
-    private $managedBy;
+    private $modifier;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->listener = new MakeManagedByNonExistingListener();
+        $this->listener = new UpdateModelModifierListener();
         $this->userContext = new UserContext();
-        $this->managedBy = ManagedBy::create(new Uuid(), 'Some\Type', 'john@doe.com');
+        $this->modifier = ModelModifier::create(new Uuid(), 'Some\Type', 'john@doe.com');
     }
 
     /**
@@ -54,32 +54,35 @@ class MakeManagedByNonExistingListenerTest extends DoctrineListenerTestCase
         $this->ensureObject(new stdClass());
 
         /* @var LifecycleEventArgs $this->lifecycleEventArgs */
-        $this->listener->preRemove($this->lifecycleEventArgs);
+        $this->listener->postUpdate($this->lifecycleEventArgs);
     }
 
     /**
      * @test
      */
-    public function managedByIsNotMarkedAsNonExistingWhenItIsNotFound()
+    public function modifierIsNotUpdatedWhenItIsNotFound()
     {
         $this->ensureObject($this->userContext);
-        $this->ensureManagedByResult(null, $this->userContext);
+        $this->ensureModelModifierResult(null, $this->userContext);
 
         /* @var LifecycleEventArgs $this->lifecycleEventArgs */
-        $this->listener->preRemove($this->lifecycleEventArgs);
+        $this->listener->postUpdate($this->lifecycleEventArgs);
     }
 
     /**
      * @test
      */
-    public function managedByIsMarkedAsNonExistingWhenItIsFound()
+    public function modifierIsUpdatedWhenItIsFound()
     {
         $this->ensureObject($this->userContext);
-        $this->ensureManagedByResult($this->managedBy, $this->userContext);
+        $this->ensureModelModifierResult($this->modifier, $this->userContext);
+        $this->ensureEntityManagerIsFlushed();
 
         /* @var LifecycleEventArgs $this->lifecycleEventArgs */
-        $this->listener->preRemove($this->lifecycleEventArgs);
+        $this->listener->postUpdate($this->lifecycleEventArgs);
 
-        $this->assertFalse($this->managedBy->isExists());
+        $this->assertSame('john@doe.com', $this->modifier->getEmail());
+        $this->assertSame('John', $this->modifier->getFirstname());
+        $this->assertSame('Doe', $this->modifier->getLastname());
     }
 }

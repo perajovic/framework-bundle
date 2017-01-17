@@ -16,7 +16,7 @@ use DateTime;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Filos\FrameworkBundle\EventListener\SetCreatedAttributesListener;
 use Filos\FrameworkBundle\Model\Attribute\Uuid;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 use Filos\FrameworkBundle\RequestContext\RequestContext;
 use stdClass;
 use Tests\Filos\FrameworkBundle\Fixture\CreatableEntity;
@@ -46,9 +46,9 @@ class SetCreatedAttributesListenerTest extends DoctrineListenerTestCase
     private $creatableEntity;
 
     /**
-     * @var ManagedBy
+     * @var ModelModifier
      */
-    private $managedBy;
+    private $modifier;
 
     protected function setUp()
     {
@@ -57,7 +57,7 @@ class SetCreatedAttributesListenerTest extends DoctrineListenerTestCase
         $this->requestContext = new RequestContext();
         $this->userContext = new UserContext();
         $this->creatableEntity = new CreatableEntity();
-        $this->managedBy = ManagedBy::create(new Uuid('111-222-aaa'), 'Some\Type', 'j@doe.com');
+        $this->modifier = ModelModifier::create(new Uuid('111-222-aaa'), 'Some\Type', 'j@doe.com');
         $this->listener = new SetCreatedAttributesListener($this->requestContext);
     }
 
@@ -111,7 +111,7 @@ class SetCreatedAttributesListenerTest extends DoctrineListenerTestCase
      */
     public function ifCreatedByIsSettledNewCreatedByWillNotBeSet()
     {
-        $this->creatableEntity->setCreatedBy($this->managedBy);
+        $this->creatableEntity->setCreatedBy($this->modifier);
         $this->requestContext->setUser($this->userContext);
 
         $this->ensureObject($this->creatableEntity);
@@ -120,7 +120,7 @@ class SetCreatedAttributesListenerTest extends DoctrineListenerTestCase
         /* @var LifecycleEventArgs $this->lifecycleEventArgs */
         $this->listener->prePersist($this->lifecycleEventArgs);
 
-        $this->assertSame($this->managedBy, $this->creatableEntity->getCreatedBy());
+        $this->assertSame($this->modifier, $this->creatableEntity->getCreatedBy());
     }
 
     /**
@@ -140,29 +140,29 @@ class SetCreatedAttributesListenerTest extends DoctrineListenerTestCase
     /**
      * @test
      */
-    public function existingManagedByIsSettled()
+    public function existingModelModifierIsSettled()
     {
         $this->requestContext->setUser($this->userContext);
 
         $this->ensureObject($this->creatableEntity);
-        $this->ensureManagedByResult($this->managedBy, $this->userContext);
+        $this->ensureModelModifierResult($this->modifier, $this->userContext);
 
         /* @var LifecycleEventArgs $this->lifecycleEventArgs */
         $this->listener->prePersist($this->lifecycleEventArgs);
 
-        $this->assertSame($this->managedBy, $this->creatableEntity->getCreatedBy());
+        $this->assertSame($this->modifier, $this->creatableEntity->getCreatedBy());
     }
 
     /**
      * @test
      */
-    public function newManagedByIsCreatedAndSettled()
+    public function newModelModifierIsCreatedAndSettled()
     {
         $this->requestContext->setUser($this->userContext);
 
         $this->ensureObject($this->creatableEntity);
-        $this->ensureManagedByResult(null, $this->userContext);
-        $this->ensureManagedByIsPersisted();
+        $this->ensureModelModifierResult(null, $this->userContext);
+        $this->ensureModelModifierIsPersisted();
 
         /* @var LifecycleEventArgs $this->lifecycleEventArgs */
         $this->listener->prePersist($this->lifecycleEventArgs);

@@ -13,12 +13,12 @@ declare(strict_types=1);
 namespace Filos\FrameworkBundle\Model\Attribute;
 
 use DateTime;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 
 trait CreatableTrait
 {
     /**
-     * @var ManagedBy|null
+     * @var ModelModifier|null
      */
     private $createdBy;
 
@@ -27,7 +27,7 @@ trait CreatableTrait
      */
     private $createdAt;
 
-    public function setCreatedBy(ManagedBy $createdBy)
+    public function setCreatedBy(ModelModifier $createdBy)
     {
         $this->createdBy = $createdBy;
     }
@@ -37,7 +37,7 @@ trait CreatableTrait
         $this->createdAt = $createdAt;
     }
 
-    public function getCreatedBy(): ?ManagedBy
+    public function getCreatedBy(): ?ModelModifier
     {
         return $this->createdBy;
     }

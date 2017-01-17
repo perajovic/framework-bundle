@@ -13,17 +13,17 @@ declare(strict_types=1);
 namespace Tests\Filos\FrameworkBundle\EventListener;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Filos\FrameworkBundle\EventListener\UpdateManagedByInfoListener;
+use Filos\FrameworkBundle\EventListener\MarkModelModifierAsDeletedListener;
 use Filos\FrameworkBundle\Model\Attribute\Uuid;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 use stdClass;
 use Tests\Filos\FrameworkBundle\Fixture\UserContext;
 use Tests\Filos\FrameworkBundle\TestCase\DoctrineListenerTestCase;
 
-class UpdateManagedByInfoListenerTest extends DoctrineListenerTestCase
+class MarkModelModifierAsDeletedListenerTest extends DoctrineListenerTestCase
 {
     /**
-     * @var UpdateManagedByInfoListener
+     * @var MarkModelModifierAsDeletedListener
      */
     private $listener;
 
@@ -33,17 +33,17 @@ class UpdateManagedByInfoListenerTest extends DoctrineListenerTestCase
     private $userContext;
 
     /**
-     * @var ManagedBy
+     * @var ModelModifier
      */
-    private $managedBy;
+    private $modifier;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->listener = new UpdateManagedByInfoListener();
+        $this->listener = new MarkModelModifierAsDeletedListener();
         $this->userContext = new UserContext();
-        $this->managedBy = ManagedBy::create(new Uuid(), 'Some\Type', 'john@doe.com');
+        $this->modifier = ModelModifier::create(new Uuid(), 'Some\Type', 'john@doe.com');
     }
 
     /**
@@ -54,35 +54,32 @@ class UpdateManagedByInfoListenerTest extends DoctrineListenerTestCase
         $this->ensureObject(new stdClass());
 
         /* @var LifecycleEventArgs $this->lifecycleEventArgs */
-        $this->listener->postUpdate($this->lifecycleEventArgs);
+        $this->listener->preRemove($this->lifecycleEventArgs);
     }
 
     /**
      * @test
      */
-    public function managedByIsNotUpdatedWhenItIsNotFound()
+    public function modifierIsNotMarkedAsDeletedWhenItIsNotFound()
     {
         $this->ensureObject($this->userContext);
-        $this->ensureManagedByResult(null, $this->userContext);
+        $this->ensureModelModifierResult(null, $this->userContext);
 
         /* @var LifecycleEventArgs $this->lifecycleEventArgs */
-        $this->listener->postUpdate($this->lifecycleEventArgs);
+        $this->listener->preRemove($this->lifecycleEventArgs);
     }
 
     /**
      * @test
      */
-    public function managedByInfoIsUpdatedWhenItIsFound()
+    public function modifierIsMarkedAsDeletedWhenItIsFound()
     {
         $this->ensureObject($this->userContext);
-        $this->ensureManagedByResult($this->managedBy, $this->userContext);
-        $this->ensureEntityManagerIsFlushed();
+        $this->ensureModelModifierResult($this->modifier, $this->userContext);
 
         /* @var LifecycleEventArgs $this->lifecycleEventArgs */
-        $this->listener->postUpdate($this->lifecycleEventArgs);
+        $this->listener->preRemove($this->lifecycleEventArgs);
 
-        $this->assertSame('john@doe.com', $this->managedBy->getEmail());
-        $this->assertSame('John', $this->managedBy->getFirstname());
-        $this->assertSame('Doe', $this->managedBy->getLastname());
+        $this->assertFalse($this->modifier->isDeleted());
     }
 }

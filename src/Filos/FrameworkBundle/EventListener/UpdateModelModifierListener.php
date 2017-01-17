@@ -18,14 +18,14 @@ use Filos\FrameworkBundle\RequestContext\UserContextInterface;
 /**
  * Configuration example.
  *
- *  listener.update_managed_by_info:
- *      class: 'Filos\FrameworkBundle\EventListener\UpdateManagedByInfoListener'
+ *  listener.update_model_modifier:
+ *      class: 'Filos\FrameworkBundle\EventListener\UpdateModelModifierListener'
  *      tags:
  *          - { name: 'doctrine.event_listener', event: 'postUpdate' }
  */
-final class UpdateManagedByInfoListener
+final class UpdateModelModifierListener
 {
-    use ManagedByTrait;
+    use ModelModifierTrait;
 
     public function postUpdate(LifecycleEventArgs $args)
     {
@@ -36,10 +36,10 @@ final class UpdateManagedByInfoListener
             return;
         }
 
-        $managedBy = $this->findManagedBy($args, $entity);
+        $modifier = $this->findModelModifier($args, $entity);
 
-        if ($managedBy) {
-            $managedBy->update($entity->getEmail(), $entity->getFirstname(), $entity->getLastname());
+        if ($modifier) {
+            $modifier->update($entity->getEmail(), $entity->getFirstname(), $entity->getLastname());
             $args->getObjectManager()->flush();
         }
     }

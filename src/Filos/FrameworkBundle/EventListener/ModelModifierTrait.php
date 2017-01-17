@@ -14,19 +14,19 @@ namespace Filos\FrameworkBundle\EventListener;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Filos\FrameworkBundle\Model\Attribute\Uuid;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 use Filos\FrameworkBundle\RequestContext\UserContextInterface;
 
-trait ManagedByTrait
+trait ModelModifierTrait
 {
     /**
      * @var array
      */
     private $cache = [];
 
-    private function createManagedByFromUserContext(LifecycleEventArgs $args, UserContextInterface $userContext): ManagedBy
+    private function createModelModifierFromUserContext(LifecycleEventArgs $args, UserContextInterface $userContext): ModelModifier
     {
-        $managedBy = ManagedBy::create(
+        $modifier = ModelModifier::create(
             $userContext->getId(),
             get_class($userContext),
             $userContext->getEmail(),
@@ -34,14 +34,14 @@ trait ManagedByTrait
             $userContext->getLastname()
         );
 
-        $args->getObjectManager()->persist($managedBy);
+        $args->getObjectManager()->persist($modifier);
 
-        $this->cache[$this->getCacheKey($managedBy->getId(), $managedBy->getType())] = $managedBy;
+        $this->cache[$this->getCacheKey($modifier->getId(), $modifier->getType())] = $modifier;
 
-        return $managedBy;
+        return $modifier;
     }
 
-    private function findManagedBy(LifecycleEventArgs $args, UserContextInterface $userContext): ?ManagedBy
+    private function findModelModifier(LifecycleEventArgs $args, UserContextInterface $userContext): ?ModelModifier
     {
         $key = $this->getCacheKey($userContext->getId(), get_class($userContext));
         if (isset($this->cache[$key])) {
@@ -50,7 +50,7 @@ trait ManagedByTrait
 
         $result = $args
             ->getObjectManager()
-            ->getRepository(ManagedBy::class)
+            ->getRepository(ModelModifier::class)
             ->findBy([
                 'id' => $userContext->getId(),
                 'type' => get_class($userContext),
@@ -60,12 +60,12 @@ trait ManagedByTrait
             return null;
         }
 
-        /** @var ManagedBy $managedBy */
-        $managedBy = $result[0];
+        /** @var ModelModifier $modifier */
+        $modifier = $result[0];
 
-        $this->cache[$key] = $managedBy;
+        $this->cache[$key] = $modifier;
 
-        return $managedBy;
+        return $modifier;
     }
 
     private function getCacheKey(Uuid $id, string $type): string

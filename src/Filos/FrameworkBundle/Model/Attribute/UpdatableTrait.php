@@ -13,12 +13,12 @@ declare(strict_types=1);
 namespace Filos\FrameworkBundle\Model\Attribute;
 
 use DateTime;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 
 trait UpdatableTrait
 {
     /**
-     * @var ManagedBy|null
+     * @var ModelModifier|null
      */
     private $updatedBy;
 
@@ -27,7 +27,7 @@ trait UpdatableTrait
      */
     private $updatedAt;
 
-    public function setUpdatedBy(ManagedBy $updatedBy)
+    public function setUpdatedBy(ModelModifier $updatedBy)
     {
         $this->updatedBy = $updatedBy;
     }
@@ -37,7 +37,7 @@ trait UpdatableTrait
         $this->updatedAt = $updatedAt;
     }
 
-    public function getUpdatedBy(): ?ManagedBy
+    public function getUpdatedBy(): ?ModelModifier
     {
         return $this->updatedBy;
     }

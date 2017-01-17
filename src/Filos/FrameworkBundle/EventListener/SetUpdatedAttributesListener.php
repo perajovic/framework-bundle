@@ -15,7 +15,7 @@ namespace Filos\FrameworkBundle\EventListener;
 use DateTime;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Filos\FrameworkBundle\Model\Attribute\UpdatableTrait;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 use Filos\FrameworkBundle\RequestContext\RequestContext;
 
 /**
@@ -28,7 +28,7 @@ use Filos\FrameworkBundle\RequestContext\RequestContext;
  */
 final class SetUpdatedAttributesListener
 {
-    use ManagedByTrait;
+    use ModelModifierTrait;
 
     /**
      * @var RequestContext
@@ -56,14 +56,14 @@ final class SetUpdatedAttributesListener
         $user = $this->requestContext->getUser();
 
         if ($user && !$args->hasChangedField('updatedBy')) {
-            /** @var ManagedBy $managedBy */
-            $managedBy = $this->findManagedBy($args, $user);
+            /** @var ModelModifier $modifier */
+            $modifier = $this->findModelModifier($args, $user);
 
-            if (!$managedBy) {
-                $managedBy = $this->createManagedByFromUserContext($args, $user);
+            if (!$modifier) {
+                $modifier = $this->createModelModifierFromUserContext($args, $user);
             }
 
-            $entity->setUpdatedBy($managedBy);
+            $entity->setUpdatedBy($modifier);
         }
     }
 

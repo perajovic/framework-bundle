@@ -15,7 +15,7 @@ namespace Filos\FrameworkBundle\Tests\Model\Attribute;
 use DateTime;
 use Filos\FrameworkBundle\Model\Attribute\UpdatableTrait;
 use Filos\FrameworkBundle\Model\Attribute\Uuid;
-use Filos\FrameworkBundle\Model\ManagedBy;
+use Filos\FrameworkBundle\Model\ModelModifier;
 use Filos\FrameworkBundle\TestCase\TestCase;
 
 class UpdatableTraitTest extends TestCase
@@ -46,7 +46,7 @@ class UpdatableTraitTest extends TestCase
      */
     public function fieldValuesAreRetrieved()
     {
-        $updatedBy = ManagedBy::create(new Uuid(), 'stdClass', 'john@doe.com');
+        $updatedBy = ModelModifier::create(new Uuid(), 'stdClass', 'john@doe.com');
         $updatedAt = new DateTime('now');
 
         $this->creatable->setUpdatedBy($updatedBy);
