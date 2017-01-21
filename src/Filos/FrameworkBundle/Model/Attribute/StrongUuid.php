@@ -14,13 +14,8 @@ namespace Filos\FrameworkBundle\Model\Attribute;
 
 use Ramsey\Uuid\Uuid as UuidGenerator;
 
-final class StrongUuid
+final class StrongUuid extends Uuid
 {
-    /**
-     * @var string
-     */
-    private $value;
-
     public function __construct(?string $value = null)
     {
         if (null === $value) {
@@ -31,19 +26,6 @@ final class StrongUuid
             $value = str_replace('-', '', implode('', $value));
         }
 
-        $this->value = $value;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->value;
-    }
-
-    public function get(): string
-    {
-        return $this->value;
+        parent::__construct($value);
     }
 }

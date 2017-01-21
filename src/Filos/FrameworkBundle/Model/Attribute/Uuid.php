@@ -14,7 +14,7 @@ namespace Filos\FrameworkBundle\Model\Attribute;
 
 use Ramsey\Uuid\Uuid as UuidGenerator;
 
-final class Uuid
+class Uuid
 {
     /**
      * @var string
