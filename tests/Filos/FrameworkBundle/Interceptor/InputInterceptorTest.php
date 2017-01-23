@@ -67,7 +67,7 @@ class InputInterceptorTest extends TestCase
 
         $this->interceptor->apply($this->request);
 
-        $filteredInput = $this->request->attributes->get('filtered_input');
+        $filteredInput = $this->request->attributes->get('filteredInput');
 
         $this->assertSame('John Doe', $filteredInput->name);
         $this->assertSame('john@doe.com', $filteredInput->email);

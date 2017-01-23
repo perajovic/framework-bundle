@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class InputInterceptor implements InterceptorInterface
+class InputInterceptor implements InterceptorInterface
 {
     /**
      * @var ValidatorInterface
@@ -73,6 +73,6 @@ final class InputInterceptor implements InterceptorInterface
             $filteredInput->$property = $this->rawInput->$property;
         }
 
-        $request->attributes->set('filtered_input', $filteredInput);
+        $request->attributes->set('filteredInput', $filteredInput);
     }
 }
