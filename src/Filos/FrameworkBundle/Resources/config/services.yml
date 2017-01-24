@@ -10,6 +10,11 @@ services:
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.controller', priority: 150 }
 
+    filos_framework.listener.json_request:
+        class: 'Filos\FrameworkBundle\EventListener\JsonRequestListener'
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.request', priority: 149 }
+
     filos_framework.listener.request_format:
         class: 'Filos\FrameworkBundle\EventListener\RequestFormatListener'
         tags:
