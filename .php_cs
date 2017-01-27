@@ -29,7 +29,8 @@ return PhpCsFixer\Config::create()
         'strict_param' => true,
         'psr0' => false,
         'header_comment' => ['header' => $header, 'location' => 'after_open', 'separate' => 'top'],
-        'declare_strict_types' => true
+        'declare_strict_types' => true,
+        'blank_line_after_opening_tag' => false,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
