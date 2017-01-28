@@ -62,7 +62,7 @@ class RequestFormatListenerTest extends TestCase
      */
     public function formatIsSettled()
     {
-        $event = $this->createGetResponseEvent(HttpKernelInterface::SUB_REQUEST);
+        $event = $this->createGetResponseEvent(HttpKernelInterface::MASTER_REQUEST);
         $this->request->headers->set('Accept', 'application/json');
         $this->request->setRequestFormat('json');
 
