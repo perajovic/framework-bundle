@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Filos\FrameworkBundle\TestCase;
 
+use PHPUnit_Framework_MockObject_MockObject;
 use ReflectionClass;
 use ReflectionObject;
 
@@ -72,5 +73,14 @@ trait TestCaseTrait
                 $property->setValue($this, null);
             }
         }
+    }
+
+    protected function createMockFor(string $class, array $methods = []): PHPUnit_Framework_MockObject_MockObject
+    {
+        return $this
+            ->getMockBuilder($class)
+            ->disableOriginalConstructor()
+            ->setMethods($methods)
+            ->getMock();
     }
 }
