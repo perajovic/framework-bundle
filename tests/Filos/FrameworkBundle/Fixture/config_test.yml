@@ -5,3 +5,5 @@ framework:
     secret: '123abcllsk'
     templating:
         engines: ['twig']
+    router:
+        resource: '%kernel.root_dir%/routing_test.yml'

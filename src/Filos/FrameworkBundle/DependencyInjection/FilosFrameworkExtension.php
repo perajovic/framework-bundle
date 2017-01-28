@@ -28,6 +28,10 @@ class FilosFrameworkExtension extends Extension
 
         $processedConfig = $this->processConfiguration(new Configuration(), $configs);
 
+        $container->setParameter(
+            'filos_framework.default_url_catcher_route',
+            $processedConfig['app']['default_url_catcher_route']
+        );
         $container->setParameter('filos_framework.app', $processedConfig['app']);
         $container->setParameter(
             'filos_framework.truncate_tables_between_tests',

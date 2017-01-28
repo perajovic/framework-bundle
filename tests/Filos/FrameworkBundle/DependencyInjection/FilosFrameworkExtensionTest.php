@@ -57,6 +57,16 @@ class FilosFrameworkExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function defaultUrlCatcherRouteParameterIsSettled()
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter('filos_framework.default_url_catcher_route', '');
+    }
+
     protected function getMinimalConfiguration(): array
     {
         return ['app' => []];

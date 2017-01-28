@@ -3,6 +3,12 @@ services:
         class: 'Filos\FrameworkBundle\Controller\ExceptionController'
         parent: 'twig.controller.exception'
 
+    filos_framework.controller.url_catcher:
+        class: 'Filos\FrameworkBundle\Controller\UrlCatcherController'
+        arguments:
+            - '@router'
+            - '%filos_framework.default_url_catcher_route%'
+
     filos_framework.listener.interceptor:
         class: 'Filos\FrameworkBundle\EventListener\InterceptorListener'
         arguments:

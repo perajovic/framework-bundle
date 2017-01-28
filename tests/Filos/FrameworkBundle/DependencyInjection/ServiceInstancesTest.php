@@ -30,6 +30,7 @@ class ServiceInstancesTest extends FunctionalTestCase
     {
         return [
             ['Filos\FrameworkBundle\Controller\ExceptionController', 'filos_framework.controller.exception'],
+            ['Filos\FrameworkBundle\Controller\UrlCatcherController', 'filos_framework.controller.url_catcher'],
             ['Filos\FrameworkBundle\EventListener\InterceptorListener', 'filos_framework.listener.interceptor'],
             ['Filos\FrameworkBundle\EventListener\JsonRequestListener', 'filos_framework.listener.json_request'],
             ['Filos\FrameworkBundle\EventListener\RequestFormatListener', 'filos_framework.listener.request_format'],
