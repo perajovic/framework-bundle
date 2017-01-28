@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class FunctionalTestCase extends WebTestCase
 {
-    use TestCaseTrait;
+    use TestCaseHelperTrait;
 
     protected function setUp()
     {

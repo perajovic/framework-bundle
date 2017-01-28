@@ -16,7 +16,7 @@ use PHPUnit_Framework_MockObject_MockObject;
 use ReflectionClass;
 use ReflectionObject;
 
-trait TestCaseTrait
+trait TestCaseHelperTrait
 {
     /**
      * @return mixed
