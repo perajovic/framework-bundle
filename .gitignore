@@ -2,3 +2,4 @@
 /phpunit.xml
 /var
 /.php_cs.cache
+/tests/_reports
